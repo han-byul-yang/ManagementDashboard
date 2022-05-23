@@ -34,11 +34,11 @@ const AdItem = ({ ad }: { ad: IAdCard }) => {
         if (targetId !== item.id) return item
 
         if (item.status === 'active') {
-          return { ...item, status: 'ended' }
+          return { ...item, status: 'ended', endDate: String(new Date()) }
         }
 
         if (item.status === 'ended') {
-          return { ...item, status: 'active' }
+          return { ...item, status: 'active', endDate: '' }
         }
 
         return item
