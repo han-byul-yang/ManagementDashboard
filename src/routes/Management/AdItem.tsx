@@ -2,28 +2,10 @@ import { Dispatch, SetStateAction } from 'react'
 import cx from 'classnames'
 import dayjs from 'dayjs'
 
+import { IAdCard } from 'types/ad'
 import EditableBox from './EditableBox'
 
 import styles from './Management.module.scss'
-
-interface IAd {
-  id: number
-  adType: string
-  title: string
-  budget: number
-  status: string
-  startDate: string
-  endDate: string | null
-  report: {
-    cost: number
-    convValue: number
-    roas: number
-  }
-}
-
-interface IAdCard extends IAd {
-  isEditting: boolean
-}
 
 const AdItem = ({
   ad,

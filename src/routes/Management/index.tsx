@@ -1,28 +1,10 @@
 import { useState, useEffect, ChangeEvent } from 'react'
 
 import { getAds } from 'services/getData'
+import { IAdCard } from 'types/ad'
 
 import styles from './Management.module.scss'
 import AdItem from './AdItem'
-
-interface IAd {
-  id: number
-  adType: string
-  title: string
-  budget: number
-  status: string
-  startDate: string
-  endDate: string | null
-  report: {
-    cost: number
-    convValue: number
-    roas: number
-  }
-}
-
-interface IAdCard extends IAd {
-  isEditting: boolean
-}
 
 const Management = () => {
   const [adList, setAdList] = useState<IAdCard[]>([])
