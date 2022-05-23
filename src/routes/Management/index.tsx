@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react'
+import cx from 'classnames'
 import dayjs from 'dayjs'
 
 import { getAds } from 'services/getData'
+import EditableBox from './EditableBox'
 
 import styles from './Management.module.scss'
 
@@ -26,8 +28,12 @@ interface IAd {
   }
 }
 
+interface IAdCard extends IAd {
+  isEditting: boolean
+}
+
 const Management = () => {
-  const [adList, setAdList] = useState<IAd[]>([])
+  const [adList, setAdList] = useState<IAdCard[]>([])
 
   useEffect(() => {
     ;(async () => {
@@ -50,8 +56,13 @@ const Management = () => {
         convValue: 0,
         roas: 0,
       },
+      isEditting: false,
     }
     setAdList((prev) => [...prev, newAd])
+  }
+
+  const handleEditBtnClick = (id: number) => {
+    setAdList(adList.map((ad) => (id === ad.id ? { ...ad, isEditting: !ad.isEditting } : ad)))
   }
 
   return (
@@ -77,10 +88,11 @@ const Management = () => {
             startDate,
             endDate,
             report: { cost, convValue, roas },
+            isEditting,
           } = ad
 
           return (
-            <div key={id} className={styles.card}>
+            <div key={id} className={cx(styles.card, isEditting && styles.isEditting)}>
               <h4>{`${adType === 'web' ? '웹광고' : '앱광고'}_${title}`}</h4>
               <ul>
                 <li>
@@ -96,7 +108,7 @@ const Management = () => {
                 </li>
                 <li>
                   <div>일 희망 예산</div>
-                  <div>{budget.toLocaleString()}</div>
+                  <EditableBox defaultText={`${budget}만원`} isEditting={isEditting} />
                 </li>
                 <li>
                   <div>광고 수익률</div>
@@ -111,8 +123,8 @@ const Management = () => {
                   <div>{cost.toLocaleString()}원</div>
                 </li>
               </ul>
-              <button type='button' className={styles.editBtn}>
-                수정하기
+              <button type='button' onClick={() => handleEditBtnClick(id)} className={styles.editBtn}>
+                {isEditting ? '저장하기' : '수정하기'}
               </button>
             </div>
           )
