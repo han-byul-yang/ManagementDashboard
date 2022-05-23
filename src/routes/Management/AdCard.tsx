@@ -1,4 +1,7 @@
-import { useRecoilState } from 'recoil'
+// TODO: 린트 룰 준수, 알아보기
+/* eslint-disable react/display-name */
+import { memo, useCallback } from 'react'
+import { useSetRecoilState } from 'recoil'
 import cx from 'classnames'
 import dayjs from 'dayjs'
 
@@ -10,8 +13,9 @@ import { EditIcon } from 'assets/svgs'
 
 import styles from './Management.module.scss'
 
-const AdCard = ({ ad }: { ad: IAdCard }) => {
-  const [adList, setAdList] = useRecoilState<IAdCard[]>(adListState)
+const AdCard = memo(({ ad }: { ad: IAdCard }) => {
+  // console.log('card')
+  const setAdList = useSetRecoilState<IAdCard[]>(adListState)
   const {
     id,
     adType,
@@ -28,35 +32,46 @@ const AdCard = ({ ad }: { ad: IAdCard }) => {
   const processedBudget = processBudget(budget)
 
   // 어떤 요소까지 수정이 가능한지 주어진 데이터만으로는 알기 어려워 임의적으로 제목과 예산만 수정 가능한 요소라고 판단
-  const handleEditBtnClick = (targetId: number) => {
-    setAdList(adList.map((item: IAdCard) => (targetId === item.id ? { ...item, isEditting: !ad.isEditting } : item)))
-  }
+  const handleEditBtnClick = useCallback(
+    (targetId: number) => {
+      setAdList((prev) =>
+        prev.map((item: IAdCard) => (targetId === item.id ? { ...item, isEditting: !ad.isEditting } : item))
+      )
+    },
+    [ad.isEditting, setAdList]
+  )
 
-  const handleToggleStatus = (targetIsEditting: boolean, targetId: number) => {
-    if (!targetIsEditting) return
+  const handleToggleStatus = useCallback(
+    (targetIsEditting: boolean, targetId: number) => {
+      if (!targetIsEditting) return
 
-    setAdList(
-      adList.map((item: IAdCard) => {
-        if (targetId !== item.id) return item
-        if (item.status === 'active') return { ...item, status: 'ended', endDate: String(new Date()) }
-        if (item.status === 'ended') return { ...item, status: 'active', endDate: '' }
+      setAdList((prev) =>
+        prev.map((item: IAdCard) => {
+          if (targetId !== item.id) return item
+          if (item.status === 'active') return { ...item, status: 'ended', endDate: String(new Date()) }
+          if (item.status === 'ended') return { ...item, status: 'active', endDate: '' }
 
-        return item
-      })
-    )
-  }
+          return item
+        })
+      )
+    },
+    [setAdList]
+  )
 
-  const handleToggleAdType = (targetId: number) => {
-    setAdList(
-      adList.map((item: IAdCard) => {
-        if (targetId !== item.id) return item
-        if (item.adType === 'web') return { ...item, adType: 'app' }
-        if (item.adType === 'app') return { ...item, adType: 'web' }
+  const handleToggleAdType = useCallback(
+    (targetId: number) => {
+      setAdList((prev) =>
+        prev.map((item: IAdCard) => {
+          if (targetId !== item.id) return item
+          if (item.adType === 'web') return { ...item, adType: 'app' }
+          if (item.adType === 'app') return { ...item, adType: 'web' }
 
-        return item
-      })
-    )
-  }
+          return item
+        })
+      )
+    },
+    [setAdList]
+  )
 
   return (
     <div className={cx(styles.card, isEditting && styles.isEditting)}>
@@ -113,6 +128,6 @@ const AdCard = ({ ad }: { ad: IAdCard }) => {
       </button>
     </div>
   )
-}
+})
 
 export default AdCard

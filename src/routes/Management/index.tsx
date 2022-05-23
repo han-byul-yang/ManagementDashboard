@@ -1,6 +1,5 @@
-/* eslint-disable react/display-name */
-import { useState, memo, ChangeEvent } from 'react'
-import { useRecoilState, useSetRecoilState } from 'recoil'
+import { useState, ChangeEvent, SetStateAction, Dispatch } from 'react'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 import { useQuery } from 'react-query'
 
 import { adListState } from 'store/atoms'
@@ -12,9 +11,8 @@ import { DownIcon } from 'assets/svgs'
 import styles from './Management.module.scss'
 import SkeletonUICards from './CardsSkeleton'
 
-const AdsTop = memo(() => {
+const AdsTop = ({ setFilter }: { setFilter: Dispatch<SetStateAction<string>> }) => {
   const setAdList = useSetRecoilState<IAdCard[]>(adListState)
-  const [, setFilter] = useState('')
 
   const handleSelectChange = (e: ChangeEvent<HTMLSelectElement>) => {
     setFilter(e.target.value)
@@ -54,11 +52,25 @@ const AdsTop = memo(() => {
       </button>
     </div>
   )
-})
+}
+
+const AdCards = ({ filter }: { filter: string }) => {
+  const adList = useRecoilValue<IAdCard[]>(adListState)
+
+  return (
+    <div className={styles.cards}>
+      {adList
+        .filter((ad) => (filter !== 'all' ? ad.status === filter : ad))
+        .map((ad) => (
+          <AdCard key={ad.id} ad={ad} />
+        ))}
+    </div>
+  )
+}
 
 const Management = () => {
-  const [adList, setAdList] = useRecoilState<IAdCard[]>(adListState)
-  const [filter] = useState('')
+  const [filter, setFilter] = useState('all')
+  const setAdList = useSetRecoilState<IAdCard[]>(adListState)
   const { isLoading } = useQuery<IAdCard[], Error>('ads', getAds, {
     retry: 1,
     staleTime: 60 * 60 * 1000,
@@ -71,7 +83,7 @@ const Management = () => {
   if (isLoading) {
     return (
       <div className={styles.container}>
-        <AdsTop />
+        <AdsTop setFilter={setFilter} />
         <SkeletonUICards />
       </div>
     )
@@ -79,24 +91,8 @@ const Management = () => {
 
   return (
     <div className={styles.container}>
-      <AdsTop />
-      <div className={styles.cards}>
-        {/* TODO: 메모이제이션, 가독성 */}
-        {adList
-          ?.filter((ad) => {
-            if (filter === 'active') {
-              return ad.status === 'active'
-            }
-            if (filter === 'ended') {
-              return ad.status === 'ended'
-            }
-
-            return ad
-          })
-          .map((ad) => (
-            <AdCard key={ad.id} ad={ad} />
-          ))}
-      </div>
+      <AdsTop setFilter={setFilter} />
+      <AdCards filter={filter} />
     </div>
   )
 }
