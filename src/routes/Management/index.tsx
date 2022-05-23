@@ -5,7 +5,7 @@ import { getAds } from 'services/getData'
 import { IAdCard } from 'types/ad'
 
 import styles from './Management.module.scss'
-import AdItem from './AdItem'
+import AdItem from './AdCard'
 import { adListState } from 'store/atoms'
 
 const Management = () => {

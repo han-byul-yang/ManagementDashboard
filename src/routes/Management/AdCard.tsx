@@ -10,7 +10,7 @@ import { EditIcon } from 'assets/svgs'
 
 import styles from './Management.module.scss'
 
-const AdItem = ({ ad }: { ad: IAdCard }) => {
+const AdCard = ({ ad }: { ad: IAdCard }) => {
   const [adList, setAdList] = useRecoilState<IAdCard[]>(adListState)
   const {
     id,
@@ -97,4 +97,4 @@ const AdItem = ({ ad }: { ad: IAdCard }) => {
   )
 }
 
-export default AdItem
+export default AdCard
