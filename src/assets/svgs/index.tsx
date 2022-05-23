@@ -1,1 +1,1 @@
-export { ReactComponent as MagnifyingGlassIcon } from './search.svg'
+export { ReactComponent as EditIcon } from './editting.svg'
