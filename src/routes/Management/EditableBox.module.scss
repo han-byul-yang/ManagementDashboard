@@ -1,0 +1,16 @@
+.container {
+  display: flex;
+  align-items: center;
+}
+
+.editBox {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+input {
+  display: block;
+  padding: 4px;
+  border: 1px red solid;
+}
