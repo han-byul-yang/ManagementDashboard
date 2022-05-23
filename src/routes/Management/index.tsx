@@ -36,6 +36,24 @@ const Management = () => {
     })()
   }, [])
 
+  const handleAddBtnClick = () => {
+    const newAd = {
+      id: Math.random(),
+      adType: 'web',
+      title: '새로운 광고',
+      budget: 0,
+      status: 'active',
+      startDate: String(new Date()),
+      endDate: null,
+      report: {
+        cost: 0,
+        convValue: 0,
+        roas: 0,
+      },
+    }
+    setAdList((prev) => [...prev, newAd])
+  }
+
   return (
     <div className={styles.container}>
       <div className={styles.top}>
@@ -44,7 +62,7 @@ const Management = () => {
           <option value='process'>진행중인 광고</option>
           <option value='stop'>중단된 광고</option>
         </select>
-        <button type='button' className={styles.addBtn}>
+        <button type='button' onClick={handleAddBtnClick} className={styles.addBtn}>
           광고 만들기
         </button>
       </div>
