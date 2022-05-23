@@ -1,44 +1,43 @@
-import axios from 'axios'
-import { useEffect, useState } from 'react'
-import { VictoryAxis, VictoryBar, VictoryChart, VictoryStack, VictoryTheme } from 'victory'
-import CHART_STYLE from './chartStyle' // CHART_STYLE 이름 설정
+import { VictoryAxis, VictoryBar, VictoryChart, VictoryStack, VictoryTheme, VictoryLegend } from 'victory'
 
-import styles from './media.module.scss'
+import { sumMediaCategory } from './sumMediaCategory'
 
-// types에 넣어주기
-export interface IMediaChannelData {
-  channel: string
-  date: string
-  imp: number
-  click: number
-  cost: number
-  convValue: number
-  ctr: number
-  cvr: number
-  cpc: number
-  cpa: number
-  roas: number
-}
+import chartStyle from './chartStyle'
 
 const MediaStatusBoard = () => {
-  return <div>MediaStatusBoard</div>
+  const { google, facebook, naver, kakao } = sumMediaCategory('2022-02-05', '2022-04-01')
+
+  const tickFormat = ['광고비', '매출', '노출 수', '클릭 수', '전환 수']
+
+  return (
+    <div>
+      <div>
+        <VictoryChart theme={VictoryTheme.material} domainPadding={{ x: 100 }} width={1100} height={300}>
+          <VictoryAxis tickValues={tickFormat} scale={{ x: 'time' }} />
+          <VictoryAxis dependentAxis tickFormat={(y) => `${y}%`} />
+          <VictoryStack colorScale={['#AC8AF8', '#85DA47', '#4FADF7', '#FFEB00']}>
+            <VictoryBar data={google} {...chartStyle.bar} />
+            <VictoryBar data={facebook} {...chartStyle.bar} />
+            <VictoryBar data={naver} {...chartStyle.bar} />
+            <VictoryBar data={kakao} {...chartStyle.bar} cornerRadius={{ top: 6 }} />
+          </VictoryStack>
+          <VictoryLegend
+            x={700}
+            y={283}
+            orientation='horizontal'
+            gutter={50}
+            style={{ title: { fontSize: 20 } }}
+            data={[
+              { name: '카카오', symbol: { fill: '#FFEB00' } },
+              { name: '페이스북', symbol: { fill: '#4FADF7' } },
+              { name: '네이버', symbol: { fill: '#85DA47' } },
+              { name: '구글', symbol: { fill: '#AC8AF8' } },
+            ]}
+          />
+        </VictoryChart>
+      </div>
+    </div>
+  )
 }
 
 export default MediaStatusBoard
-
-// {
-//   "channel": "google",
-//   "date": "2022-02-01",
-//   "imp": 50, // 노출
-//   "click": 7, // 클릭
-//   "cost": 2098, // 광고비
-//   "convValue": 0, // 전환비용?
-//   "ctr": 14.0000, // 클릭률
-//   "cvr": 0.0000, // 전환률
-//   "cpc": 299.7143, // click per click
-//   "cpa": 0.0000, // click per action
-//   "roas": 0.0000 // 광고 지출 대비 수익률
-// },
-
-// convValue / cost * 100 = roas
-// ['cost', 'const x roas', 'imp', 'click', 'imp * cvr']
