@@ -12,7 +12,7 @@ import styles from './Management.module.scss'
 const Management = () => {
   const [adList, setAdList] = useRecoilState<IAdCard[]>(adListState)
   const [filter, setFilter] = useState('all')
-  useQuery<IAdCard[], Error>('ads', getAds, {
+  const { isLoading } = useQuery<IAdCard[], Error>('ads', getAds, {
     retry: 1,
     staleTime: 60 * 60 * 1000,
     cacheTime: 60 * 60 * 1000,
@@ -42,6 +42,27 @@ const Management = () => {
 
   const handleSelectChange = (e: ChangeEvent<HTMLSelectElement>) => {
     setFilter(e.target.value)
+  }
+
+  // TODO: Skeleton UI
+  if (isLoading) {
+    return (
+      <div className={styles.container}>
+        <div className={styles.top}>
+          <select className={styles.options} onChange={handleSelectChange}>
+            <option value='all'>전체 광고</option>
+            <option value='active'>진행중인 광고</option>
+            <option value='ended'>중단된 광고</option>
+          </select>
+          <button type='button' onClick={handleAddBtnClick} className={styles.addBtn}>
+            광고 만들기
+          </button>
+        </div>
+        <div className={styles.cards}>
+          <div>loading...</div>
+        </div>
+      </div>
+    )
   }
 
   return (
