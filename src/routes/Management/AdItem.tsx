@@ -28,7 +28,9 @@ const AdItem = ({ ad }: { ad: IAdCard }) => {
     setAdList(adList.map((item: IAdCard) => (targetId === item.id ? { ...item, isEditting: !ad.isEditting } : item)))
   }
 
-  const handleToggleStatus = (targetId: number) => {
+  const handleToggleStatus = (targetIsEditting: boolean, targetId: number) => {
+    if (!targetIsEditting) return
+
     setAdList(
       adList.map((item: IAdCard) => {
         if (targetId !== item.id) return item
@@ -54,7 +56,7 @@ const AdItem = ({ ad }: { ad: IAdCard }) => {
       <ul>
         <li>
           <div>상태</div>
-          <div role='button' tabIndex={0} onClick={() => handleToggleStatus(id)}>
+          <div role='button' tabIndex={0} onClick={() => handleToggleStatus(isEditting, id)}>
             {status === 'active' ? '진행중' : '종료'}
           </div>
         </li>
