@@ -6,6 +6,7 @@ import { adListState } from 'store/atoms'
 import { getAds } from 'services/getData'
 import { IAdCard } from 'types/ad'
 import AdCard from './AdCard'
+import { DownIcon } from 'assets/svgs'
 
 import styles from './Management.module.scss'
 import SkeletonUICards from './CardsSkeleton'
@@ -49,11 +50,11 @@ const Management = () => {
     return (
       <div className={styles.container}>
         <div className={styles.top}>
-          <select className={styles.options} onChange={handleSelectChange}>
-            <option value='all'>전체 광고</option>
-            <option value='active'>진행중인 광고</option>
-            <option value='ended'>중단된 광고</option>
-          </select>
+          <div className={styles.options}>
+            <select>
+              <option value=''>전체 광고</option>
+            </select>
+          </div>
           <button type='button' onClick={handleAddBtnClick} className={styles.addBtn}>
             광고 만들기
           </button>
@@ -66,17 +67,21 @@ const Management = () => {
   return (
     <div className={styles.container}>
       <div className={styles.top}>
-        <select className={styles.options} onChange={handleSelectChange}>
-          <option value='all'>전체 광고</option>
-          <option value='active'>진행중인 광고</option>
-          <option value='ended'>중단된 광고</option>
-        </select>
+        <div className={styles.options}>
+          <select onChange={handleSelectChange}>
+            <option value='all'>전체 광고</option>
+            <option value='active'>진행중인 광고</option>
+            <option value='ended'>중단된 광고</option>
+          </select>
+          <DownIcon />
+        </div>
         <button type='button' onClick={handleAddBtnClick} className={styles.addBtn}>
           광고 만들기
         </button>
       </div>
       {/* TODO: 메모이제이션 */}
       <div className={styles.cards}>
+        {/* TODO: 가독성 */}
         {adList
           ?.filter((ad) => {
             if (filter === 'active') {
