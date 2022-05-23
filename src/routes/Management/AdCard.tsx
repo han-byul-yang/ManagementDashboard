@@ -61,7 +61,7 @@ const AdCard = ({ ad }: { ad: IAdCard }) => {
   return (
     <div className={cx(styles.card, isEditting && styles.isEditting)}>
       {isEditting && (
-        <button type='button' onClick={() => handleToggleAdType(id)}>
+        <button type='button' onClick={() => handleToggleAdType(id)} className={styles.adTypeBtn}>
           광고 타입 변경
         </button>
       )}
@@ -71,36 +71,41 @@ const AdCard = ({ ad }: { ad: IAdCard }) => {
       </h4>
       <ul>
         <li>
-          <div>상태</div>
-          <div role='button' tabIndex={0} onClick={() => handleToggleStatus(isEditting, id)}>
+          <div className={styles.itemName}>상태</div>
+          <div
+            role='button'
+            tabIndex={0}
+            onClick={() => handleToggleStatus(isEditting, id)}
+            className={styles.itemContent}
+          >
             {isEditting && <EditIcon />}
             {status === 'active' ? '진행중' : '종료'}
           </div>
         </li>
         <li>
-          <div>광고 생성일</div>
-          <div>
+          <div className={styles.itemName}>광고 생성일</div>
+          <div className={styles.itemContent}>
             {dayjs(startDate).format('YYYY-MM-DD')}
             {endDate && `(${dayjs(endDate).format('YYYY-MM-DD')})`}
           </div>
         </li>
         <li>
-          <div>일 희망 예산</div>
-          <div>
+          <div className={styles.itemName}>일 희망 예산</div>
+          <div className={styles.itemContent}>
             <EditableBox defaultText={processedBudget} isEditting={isEditting} />
           </div>
         </li>
         <li>
-          <div>광고 수익률</div>
-          <div>{roas.toLocaleString()}%</div>
+          <div className={styles.itemName}>광고 수익률</div>
+          <div className={styles.itemContent}>{roas.toLocaleString()}%</div>
         </li>
         <li>
-          <div>매출</div>
-          <div>{processedConvValue}</div>
+          <div className={styles.itemName}>매출</div>
+          <div className={styles.itemContent}>{processedConvValue}</div>
         </li>
         <li>
-          <div>광고 비용</div>
-          <div>{processedCost}</div>
+          <div className={styles.itemName}>광고 비용</div>
+          <div className={styles.itemContent}>{processedCost}</div>
         </li>
       </ul>
       <button type='button' onClick={() => handleEditBtnClick(id)} className={styles.editBtn}>
