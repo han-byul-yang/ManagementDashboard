@@ -1,21 +1,14 @@
-import { Dispatch, SetStateAction } from 'react'
+import { useRecoilState } from 'recoil'
 import cx from 'classnames'
 import dayjs from 'dayjs'
 
+import { adListState } from 'store/atoms'
 import { IAdCard } from 'types/ad'
 import EditableBox from './EditableBox'
 
 import styles from './Management.module.scss'
 
-const AdItem = ({
-  ad,
-  adList,
-  setAdList,
-}: {
-  ad: IAdCard
-  adList: IAdCard[]
-  setAdList: Dispatch<SetStateAction<IAdCard[]>>
-}) => {
+const AdItem = ({ ad }: { ad: IAdCard }) => {
   const {
     id,
     adType,
@@ -27,6 +20,8 @@ const AdItem = ({
     report: { cost, convValue, roas },
     isEditting,
   } = ad
+
+  const [adList, setAdList] = useRecoilState<IAdCard[]>(adListState)
 
   const handleEditBtnClick = (targetId: number) => {
     setAdList(adList.map((item: any) => (targetId === item.id ? { ...item, isEditting: !ad.isEditting } : item)))

@@ -1,13 +1,15 @@
 import { useState, useEffect, ChangeEvent } from 'react'
+import { useRecoilState } from 'recoil'
 
 import { getAds } from 'services/getData'
 import { IAdCard } from 'types/ad'
 
 import styles from './Management.module.scss'
 import AdItem from './AdItem'
+import { adListState } from 'store/atoms'
 
 const Management = () => {
-  const [adList, setAdList] = useState<IAdCard[]>([])
+  const [adList, setAdList] = useRecoilState<IAdCard[]>(adListState)
   const [filter, setFilter] = useState('all')
 
   useEffect(() => {
@@ -15,7 +17,7 @@ const Management = () => {
       const ads = await getAds()
       setAdList(ads)
     })()
-  }, [])
+  }, [setAdList])
 
   const handleAddBtnClick = () => {
     const newAd = {
@@ -65,7 +67,7 @@ const Management = () => {
             return ad
           })
           .map((ad) => (
-            <AdItem key={ad.id} ad={ad} adList={adList} setAdList={setAdList} />
+            <AdItem key={ad.id} ad={ad} />
           ))}
       </div>
     </div>
