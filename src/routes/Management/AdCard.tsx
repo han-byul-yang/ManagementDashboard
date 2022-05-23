@@ -1,5 +1,3 @@
-// TODO: 린트 룰 준수, 알아보기
-/* eslint-disable react/display-name */
 import { memo, useCallback } from 'react'
 import { useSetRecoilState } from 'recoil'
 import cx from 'classnames'
@@ -13,8 +11,7 @@ import { EditIcon } from 'assets/svgs'
 
 import styles from './Management.module.scss'
 
-const AdCard = memo(({ ad }: { ad: IAdCard }) => {
-  // console.log('card')
+const AdCard = ({ ad }: { ad: IAdCard }) => {
   const setAdList = useSetRecoilState<IAdCard[]>(adListState)
   const {
     id,
@@ -128,6 +125,6 @@ const AdCard = memo(({ ad }: { ad: IAdCard }) => {
       </button>
     </div>
   )
-})
+}
 
-export default AdCard
+export default memo(AdCard)
