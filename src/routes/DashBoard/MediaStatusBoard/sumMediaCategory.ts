@@ -2,6 +2,14 @@ import { mediaDataByDate } from './mediaDataByDate'
 
 export const sumMediaCategory = (startDate: string, endDate: string) => {
   const selectedMediaData = mediaDataByDate(startDate, endDate)
+  const { google, facebook, naver, kakao } = selectedMediaData
+  const selectedAllData = [...google, ...facebook, ...naver, ...kakao]
+
+  let allCost: number
+  let allRoas: number
+  let allImp: number
+  let allCtr: number
+  let allCvr: number
 
   const sumMediaValueData: Record<string, { value: number; category: string }[]> = {
     google: [],
@@ -10,7 +18,15 @@ export const sumMediaCategory = (startDate: string, endDate: string) => {
     kakao: [],
   }
 
-  const sumCategoryData = (media: string) => {
+  selectedAllData.forEach((media) => {
+    allCost += media.cost
+    allRoas += media.roas
+    allImp += media.imp
+    allCtr += media.ctr
+    allCvr += media.cvr
+  })
+
+  const sumMediaCategoryData = (media: string) => {
     const cost = selectedMediaData[media].reduce((acc, cur) => {
       return cur.cost + acc
     }, 0)
@@ -28,16 +44,18 @@ export const sumMediaCategory = (startDate: string, endDate: string) => {
     }, 0)
 
     return [
-      { value: cost, category: '광고비' },
-      { value: roas, category: '매출' },
-      { value: imp, category: '노출 수' },
-      { value: ctr, category: '클릭 수' },
-      { value: cvr, category: '전환 수' },
+      { value: (cost / allCost) * 100, category: '광고비' },
+      { value: (roas / allRoas) * 100, category: '매출' },
+      { value: (imp / allImp) * 100, category: '노출 수' },
+      { value: (ctr / allCtr) * 100, category: '클릭 수' },
+      { value: (cvr / allCvr) * 100, category: '전환 수' },
     ]
   }
 
-  sumMediaValueData.google = sumCategoryData('google')
-  sumMediaValueData.facebook = sumCategoryData('facebook')
-  sumMediaValueData.naver = sumCategoryData('naver')
-  sumMediaValueData.kakao = sumCategoryData('kakao')
+  sumMediaValueData.google = sumMediaCategoryData('google')
+  sumMediaValueData.facebook = sumMediaCategoryData('facebook')
+  sumMediaValueData.naver = sumMediaCategoryData('naver')
+  sumMediaValueData.kakao = sumMediaCategoryData('kakao')
+
+  return sumMediaValueData
 }
