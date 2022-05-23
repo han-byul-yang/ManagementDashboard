@@ -5,9 +5,10 @@ import { useQuery } from 'react-query'
 import { adListState } from 'store/atoms'
 import { getAds } from 'services/getData'
 import { IAdCard } from 'types/ad'
-import AdItem from './AdCard'
+import AdCard from './AdCard'
 
 import styles from './Management.module.scss'
+import SkeletonUICards from './CardsSkeleton'
 
 const Management = () => {
   const [adList, setAdList] = useRecoilState<IAdCard[]>(adListState)
@@ -44,7 +45,6 @@ const Management = () => {
     setFilter(e.target.value)
   }
 
-  // TODO: Skeleton UI
   if (isLoading) {
     return (
       <div className={styles.container}>
@@ -58,9 +58,7 @@ const Management = () => {
             광고 만들기
           </button>
         </div>
-        <div className={styles.cards}>
-          <div>loading...</div>
-        </div>
+        <SkeletonUICards />
       </div>
     )
   }
@@ -91,7 +89,7 @@ const Management = () => {
             return ad
           })
           .map((ad) => (
-            <AdItem key={ad.id} ad={ad} />
+            <AdCard key={ad.id} ad={ad} />
           ))}
       </div>
     </div>
