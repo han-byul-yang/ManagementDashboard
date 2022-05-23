@@ -25,6 +25,7 @@ const AdCard = ({ ad }: { ad: IAdCard }) => {
   } = ad
   const processedConvValue = `${Math.round(convValue / 10000).toLocaleString()}만원`
   const processedCost = `${Math.round(cost / 10000).toLocaleString()}만원`
+  const processedBudget = processBudget(budget)
 
   // 어떤 요소까지 수정이 가능한지 주어진 데이터만으로는 알기 어려워 임의적으로 제목과 예산만 수정 가능한 요소라고 판단
   const handleEditBtnClick = (targetId: number) => {
@@ -37,14 +38,20 @@ const AdCard = ({ ad }: { ad: IAdCard }) => {
     setAdList(
       adList.map((item: IAdCard) => {
         if (targetId !== item.id) return item
+        if (item.status === 'active') return { ...item, status: 'ended', endDate: String(new Date()) }
+        if (item.status === 'ended') return { ...item, status: 'active', endDate: '' }
 
-        if (item.status === 'active') {
-          return { ...item, status: 'ended', endDate: String(new Date()) }
-        }
+        return item
+      })
+    )
+  }
 
-        if (item.status === 'ended') {
-          return { ...item, status: 'active', endDate: '' }
-        }
+  const handleToggleAdType = (targetId: number) => {
+    setAdList(
+      adList.map((item: IAdCard) => {
+        if (targetId !== item.id) return item
+        if (item.adType === 'web') return { ...item, adType: 'app' }
+        if (item.adType === 'app') return { ...item, adType: 'web' }
 
         return item
       })
@@ -53,8 +60,14 @@ const AdCard = ({ ad }: { ad: IAdCard }) => {
 
   return (
     <div className={cx(styles.card, isEditting && styles.isEditting)}>
-      <h4>
-        <EditableBox defaultText={`${adType === 'web' ? '웹광고' : '앱광고'}_${title}`} isEditting={isEditting} />
+      {isEditting && (
+        <button type='button' onClick={() => handleToggleAdType(id)}>
+          광고 타입 변경
+        </button>
+      )}
+      <h4 style={{ display: 'flex' }}>
+        <div>{adType === 'web' ? '웹광고' : '앱광고'}_</div>
+        <EditableBox defaultText={title} isEditting={isEditting} />
       </h4>
       <ul>
         <li>
@@ -74,7 +87,7 @@ const AdCard = ({ ad }: { ad: IAdCard }) => {
         <li>
           <div>일 희망 예산</div>
           <div>
-            <EditableBox defaultText={`${processBudget(budget)}`} isEditting={isEditting} />
+            <EditableBox defaultText={processedBudget} isEditting={isEditting} />
           </div>
         </li>
         <li>
