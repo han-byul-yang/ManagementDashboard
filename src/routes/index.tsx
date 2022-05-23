@@ -1,4 +1,5 @@
 import { Routes, Route } from 'react-router-dom'
+import { RecoilRoot } from 'recoil'
 
 import NavBar from 'components/NavBar'
 import ConsoleBar from 'components/ConsoleBar'
@@ -14,10 +15,12 @@ const App = () => {
       <div className={styles.section}>
         <ConsoleBar />
         <main className={styles.main}>
-          <Routes>
-            <Route path='/' element={<DashBoard />} />
-            <Route path='management' element={<Management />} />
-          </Routes>
+          <RecoilRoot>
+            <Routes>
+              <Route path='/' element={<DashBoard />} />
+              <Route path='management' element={<Management />} />
+            </Routes>
+          </RecoilRoot>
         </main>
       </div>
     </div>
