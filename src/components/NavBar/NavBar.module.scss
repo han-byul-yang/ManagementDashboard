@@ -1,15 +1,20 @@
+@use '../../styles/constants/colors';
+
 .navBar {
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 20rem;
+  width: 320px;
   height: 100%;
-  padding: 2.5rem;
+  padding: 40px;
   overflow: hidden;
   @media screen and (max-width: 1050px) {
+    padding: 20px;
+
     &.closeBar {
-      width: 1.5rem;
+      width: 48px;
+      padding: 16px;
     }
   }
 }
@@ -26,12 +31,92 @@
   }
 }
 
-.nav {
-  border: 1px solid red;
+.logo90 {
+  margin-top: 20px;
+
+  svg {
+    width: 30px;
+    height: 124px;
+  }
 }
 
 .service {
-  border: 1px solid red;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  height: 100px;
+  margin: 40px 0;
+
+  div:first-child {
+    padding: 13px;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 14px;
+    color: colors.$LIGHTGRAYFONT;
+  }
+
+  div:last-child {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 60px;
+    border: 1px solid colors.$GRAYBORDER;
+    border-radius: 10px;
+  }
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  height: 100px;
+
+  div:first-child {
+    padding: 13px;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 14px;
+    color: colors.$LIGHTGRAYFONT;
+  }
+}
+
+.navLink {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 60px;
+  padding: 22px;
+  background-color: transparent;
+  border-radius: 10px;
+
+  span {
+    color: colors.$LINK;
+  }
+
+  svg {
+    margin-right: 10px;
+
+    path {
+      fill: #3a474e;
+    }
+  }
+
+  &.active {
+    color: colors.$ACTIVELINK;
+    background-color: #edeff1;
+
+    svg {
+      path {
+        fill: #586cf5;
+      }
+    }
+
+    span {
+      color: colors.$ACTIVELINK;
+    }
+  }
 }
 
 .footer {
@@ -43,25 +128,73 @@
   align-items: center;
   justify-content: center;
   width: 100%;
+  padding: 0 40px;
+  @media screen and (max-width: 1050px) {
+    padding: 0 20px;
+  }
 }
 
 .guide {
-  width: 240px;
+  display: flex;
+  align-items: center;
+  width: 100%;
   height: 100px;
-  padding: 30px 20px;
+  padding: 0 20px;
+  cursor: pointer;
   background-color: #e5f4fd;
   border-radius: 10px;
+  @media screen and (max-width: 1050px) {
+    padding: 0 10px;
+  }
+}
+
+.guideText {
+  margin-left: 8px;
+
+  div:first-child {
+    margin-bottom: 7px;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 19px;
+    color: colors.$SOFTBLACK;
+  }
+
+  div:last-child {
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 14px;
+    color: colors.$LIGHTGRAYFONT;
+  }
+}
+
+.lightIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background-color: #586cf5;
+  border-radius: 50%;
 }
 
 .terms {
   display: flex;
   flex-direction: column;
-  width: 240px;
+  width: 100%;
   height: 100px;
   padding: 30px 20px;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 14px;
+  color: colors.$LIGHTGRAYFONT;
   background-color: transparent;
-}
 
-.hidden {
-  display: none;
+  a {
+    margin-top: 10px;
+    color: colors.$LIGHTGRAYFONT;
+    text-decoration: underline;
+  }
+  @media screen and (max-width: 1050px) {
+    padding: 15px 20px;
+  }
 }
