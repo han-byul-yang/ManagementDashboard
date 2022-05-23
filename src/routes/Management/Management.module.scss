@@ -97,7 +97,7 @@ $GRAY_50: #edeff1;
   }
 
   &.isEditting {
-    border: 1px gray solid;
+    border: 1px $PRIMARY solid;
     animation: blink 1s step-end 1;
   }
 }

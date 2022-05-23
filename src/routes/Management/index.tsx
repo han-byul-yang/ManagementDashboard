@@ -77,6 +77,7 @@ const Management = () => {
           광고 만들기
         </button>
       </div>
+      {/* TODO: 메모이제이션 */}
       <div className={styles.cards}>
         {adList
           ?.filter((ad) => {

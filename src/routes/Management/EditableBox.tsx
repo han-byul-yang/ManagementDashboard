@@ -12,7 +12,6 @@ interface IEditableBox {
 
 const EditableBox = ({ defaultText, isEditting }: IEditableBox) => {
   const ref = useRef<HTMLDivElement>(null)
-  const inputRef = useRef<HTMLInputElement>(null)
   const [text, setText] = useState(defaultText)
   const [editable, setEditable] = useState(false)
 
@@ -31,25 +30,18 @@ const EditableBox = ({ defaultText, isEditting }: IEditableBox) => {
   }
 
   const handleClickOutside = (e: any) => {
-    // TODO:
-    // console.log(ref.current, e.target)
-    if (editable === !ref?.current?.contains(e.target)) {
-      setEditable(false)
-    }
+    if (editable === true && !ref?.current?.contains(e.target)) setEditable(false)
   }
 
   useEffect(() => {
     window.addEventListener('click', handleClickOutside, true)
   })
 
-  useEffect(() => {
-    inputRef?.current?.focus()
-  }, [editable])
-
   return (
-    <div ref={ref} className={styles.container}>
+    <div className={styles.container} ref={ref}>
       {isEditting && editable ? (
-        <input type='text' value={text} ref={inputRef} onChange={handleChange} onKeyDown={handleKeyDown} />
+        // eslint-disable-next-line jsx-a11y/no-autofocus
+        <input type='text' value={text} onChange={handleChange} onKeyDown={handleKeyDown} autoFocus />
       ) : (
         <div className={styles.editBox}>
           {isEditting && <EditIcon />}
