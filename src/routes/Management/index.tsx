@@ -1,23 +1,25 @@
-import { useState, useEffect, ChangeEvent } from 'react'
+import { useState, ChangeEvent } from 'react'
 import { useRecoilState } from 'recoil'
+import { useQuery } from 'react-query'
 
+import { adListState } from 'store/atoms'
 import { getAds } from 'services/getData'
 import { IAdCard } from 'types/ad'
+import AdItem from './AdCard'
 
 import styles from './Management.module.scss'
-import AdItem from './AdCard'
-import { adListState } from 'store/atoms'
 
 const Management = () => {
   const [adList, setAdList] = useRecoilState<IAdCard[]>(adListState)
   const [filter, setFilter] = useState('all')
-
-  useEffect(() => {
-    ;(async () => {
-      const ads = await getAds()
-      setAdList(ads)
-    })()
-  }, [setAdList])
+  useQuery<IAdCard[], Error>('ads', getAds, {
+    retry: 1,
+    staleTime: 60 * 60 * 1000,
+    cacheTime: 60 * 60 * 1000,
+    onSuccess: async (res) => {
+      setAdList(res)
+    },
+  })
 
   const handleAddBtnClick = () => {
     const newAd = {
