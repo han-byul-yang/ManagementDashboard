@@ -6,10 +6,13 @@ export const sumMediaCategory = (startDate: string, endDate: string) => {
   const selectedAllData = [...google, ...facebook, ...naver, ...kakao]
 
   let allCost: number = 0
-  let allRoas: number = 0
+  let allSales: number = 0
   let allImp: number = 0
+  let allClick: number = 0
+  let allConversion: number = 0
+  let allRoas: number = 0
   let allCtr: number = 0
-  let allCvr: number = 0
+  let allCpc: number = 0
 
   const sumMediaValueData: Record<string, { value: number; category: string }[]> = {
     google: [],
@@ -20,10 +23,13 @@ export const sumMediaCategory = (startDate: string, endDate: string) => {
 
   selectedAllData.forEach((media) => {
     allCost += media.cost
-    allRoas += media.roas
+    allSales += media.roas * media.cost
     allImp += media.imp
+    allClick += media.click
+    allConversion += media.click * media.cvr
+    allRoas += media.roas
     allCtr += media.ctr
-    allCvr += media.cvr
+    allCpc += media.cpc
   })
 
   const sumMediaCategoryData = (media: string) => {
@@ -36,18 +42,27 @@ export const sumMediaCategory = (startDate: string, endDate: string) => {
     const imp = selectedMediaData[media].reduce((acc, cur) => {
       return cur.imp + acc
     }, 0)
-    const ctr = selectedMediaData[media].reduce((acc, cur) => {
-      return cur.ctr + acc
+    const click = selectedMediaData[media].reduce((acc, cur) => {
+      return cur.click + acc
     }, 0)
     const cvr = selectedMediaData[media].reduce((acc, cur) => {
       return cur.cvr + acc
     }, 0)
+    const ctr = selectedMediaData[media].reduce((acc, cur) => {
+      return cur.ctr + acc
+    }, 0)
+    const cpc = selectedMediaData[media].reduce((acc, cur) => {
+      return cur.cpc + acc
+    }, 0)
     return [
       { value: (cost / allCost) * 100, category: '광고비' },
-      { value: (roas / allRoas) * 100, category: '매출' },
+      { value: ((roas * cost) / allSales) * 100, category: '매출' },
       { value: (imp / allImp) * 100, category: '노출 수' },
-      { value: (ctr / allCtr) * 100, category: '클릭 수' },
-      { value: (cvr / allCvr) * 100, category: '전환 수' },
+      { value: (click / allClick) * 100, category: '클릭 수' },
+      { value: ((click * cvr) / allConversion) * 100, category: '전환 수' },
+      { value: (roas / allRoas) * 100, category: 'ROAS' },
+      { value: (ctr / allCtr) * 100, category: '클릭률(CTR)' },
+      { value: (cpc / allCpc) * 100, category: '클릭당비용(CPC)' },
     ]
   }
 
