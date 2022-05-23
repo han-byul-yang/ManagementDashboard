@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
-import axios from 'axios'
 import dayjs from 'dayjs'
+
+import { getAds } from 'services/getData'
 
 import styles from './Management.module.scss'
 
@@ -23,14 +24,6 @@ interface IAd {
     convValue: number
     roas: number
   }
-}
-
-const getAds = async () => {
-  const {
-    data: { ads },
-  } = await axios.get('data/adListData.json')
-
-  return ads
 }
 
 const Management = () => {
