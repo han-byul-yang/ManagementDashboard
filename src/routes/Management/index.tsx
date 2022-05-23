@@ -1,5 +1,6 @@
-import { useState, ChangeEvent } from 'react'
-import { useRecoilState } from 'recoil'
+/* eslint-disable react/display-name */
+import { useState, memo, ChangeEvent } from 'react'
+import { useRecoilState, useSetRecoilState } from 'recoil'
 import { useQuery } from 'react-query'
 
 import { adListState } from 'store/atoms'
@@ -11,17 +12,13 @@ import { DownIcon } from 'assets/svgs'
 import styles from './Management.module.scss'
 import SkeletonUICards from './CardsSkeleton'
 
-const Management = () => {
-  const [adList, setAdList] = useRecoilState<IAdCard[]>(adListState)
-  const [filter, setFilter] = useState('all')
-  const { isLoading } = useQuery<IAdCard[], Error>('ads', getAds, {
-    retry: 1,
-    staleTime: 60 * 60 * 1000,
-    cacheTime: 60 * 60 * 1000,
-    onSuccess: async (res) => {
-      setAdList(res)
-    },
-  })
+const AdsTop = memo(() => {
+  const setAdList = useSetRecoilState<IAdCard[]>(adListState)
+  const [, setFilter] = useState('')
+
+  const handleSelectChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    setFilter(e.target.value)
+  }
 
   const handleAddBtnClick = () => {
     const newAd = {
@@ -42,23 +39,39 @@ const Management = () => {
     setAdList((prev) => [...prev, newAd])
   }
 
-  const handleSelectChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    setFilter(e.target.value)
-  }
+  return (
+    <div className={styles.top}>
+      <div className={styles.options}>
+        <select onChange={handleSelectChange}>
+          <option value='all'>전체 광고</option>
+          <option value='active'>진행중인 광고</option>
+          <option value='ended'>중단된 광고</option>
+        </select>
+        <DownIcon />
+      </div>
+      <button type='button' onClick={handleAddBtnClick} className={styles.addBtn}>
+        광고 만들기
+      </button>
+    </div>
+  )
+})
+
+const Management = () => {
+  const [adList, setAdList] = useRecoilState<IAdCard[]>(adListState)
+  const [filter] = useState('')
+  const { isLoading } = useQuery<IAdCard[], Error>('ads', getAds, {
+    retry: 1,
+    staleTime: 60 * 60 * 1000,
+    cacheTime: 60 * 60 * 1000,
+    onSuccess: async (res) => {
+      setAdList(res)
+    },
+  })
 
   if (isLoading) {
     return (
       <div className={styles.container}>
-        <div className={styles.top}>
-          <div className={styles.options}>
-            <select>
-              <option value=''>전체 광고</option>
-            </select>
-          </div>
-          <button type='button' onClick={handleAddBtnClick} className={styles.addBtn}>
-            광고 만들기
-          </button>
-        </div>
+        <AdsTop />
         <SkeletonUICards />
       </div>
     )
@@ -66,22 +79,9 @@ const Management = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.top}>
-        <div className={styles.options}>
-          <select onChange={handleSelectChange}>
-            <option value='all'>전체 광고</option>
-            <option value='active'>진행중인 광고</option>
-            <option value='ended'>중단된 광고</option>
-          </select>
-          <DownIcon />
-        </div>
-        <button type='button' onClick={handleAddBtnClick} className={styles.addBtn}>
-          광고 만들기
-        </button>
-      </div>
-      {/* TODO: 메모이제이션 */}
+      <AdsTop />
       <div className={styles.cards}>
-        {/* TODO: 가독성 */}
+        {/* TODO: 메모이제이션, 가독성 */}
         {adList
           ?.filter((ad) => {
             if (filter === 'active') {
