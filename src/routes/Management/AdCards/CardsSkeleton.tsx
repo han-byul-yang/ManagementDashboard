@@ -1,4 +1,4 @@
-import styles from './management.module.scss'
+import styles from './AdCard/adCard.module.scss'
 
 const CardsSkeleton = () => {
   return (

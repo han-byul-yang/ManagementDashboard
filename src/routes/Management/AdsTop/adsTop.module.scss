@@ -1,0 +1,15 @@
+@use 'styles/constants/colors';
+@use 'styles/mixins/typo';
+
+.top {
+  display: flex;
+  justify-content: space-between;
+}
+
+.addBtn {
+  @include typo.body14bold;
+  padding: 12px 20px;
+  color: colors.$WHITE;
+  background-color: colors.$PRIMARY;
+  border-radius: 10px;
+}
