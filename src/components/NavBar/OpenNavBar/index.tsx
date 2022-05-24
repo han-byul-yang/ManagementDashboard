@@ -4,6 +4,7 @@ import cx from 'classnames'
 import { DashboardIcon, LightIcon, LogoIcon, ManagementIcon } from 'assets/svgs'
 
 import styles from './openNavBar.module.scss'
+import DropDown from '../DropDown'
 
 const OpenNavBar = () => {
   return (
@@ -13,7 +14,7 @@ const OpenNavBar = () => {
       </div>
       <div className={styles.service}>
         <div>서비스</div>
-        <div>매드업</div>
+        <DropDown />
       </div>
       <div className={styles.nav}>
         <div>광고 센터</div>
