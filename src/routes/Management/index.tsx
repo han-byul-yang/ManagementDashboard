@@ -39,6 +39,7 @@ const AdsTop = ({ setFilter }: { setFilter: Dispatch<SetStateAction<string>> }) 
 
   return (
     <div className={styles.top}>
+      {/* TODO: 드롭다운 공통 컴포넌트화 */}
       <div className={styles.options}>
         <select onChange={handleSelectChange}>
           <option value='all'>전체 광고</option>
