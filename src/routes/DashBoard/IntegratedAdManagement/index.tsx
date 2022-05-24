@@ -1,13 +1,16 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import cx from 'classnames'
+import dayjs from 'dayjs'
+import DatePicker from 'react-datepicker'
 
 import Item from './Item'
-import { numberFormatter } from 'utils/numberFormatter'
 import { IData } from 'types/types'
 import IntergratedAdChart from './IntergratedAdChart'
+import { compactNumber } from 'utils/compactNumber'
 
 import styles from './integratedAdManagement.module.scss'
+import 'react-datepicker/dist/react-datepicker.css'
 
 const ITEMS = [
   {
@@ -45,6 +48,8 @@ const ITEMS = [
 const IntegratedAdManagement = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [data, setData] = useState<IData[]>([])
+  const [pickStartDate, setPickStartDate] = useState(new Date('2022-03-01'))
+  const [pickEndDate, setPickEndDate] = useState(new Date('2022-03-11'))
   const [isFirstSelectOpen, setIsFirstSelectOpen] = useState(false)
   const [isSecondSelectOpen, setIsSecondSelectOpen] = useState(false)
   const [isThirdSelectOpen, setIsThirdSelectOpen] = useState(false)
@@ -58,13 +63,10 @@ const IntegratedAdManagement = () => {
       try {
         setIsLoading(true)
         const res = await getTrendDataApi()
+        const startDate = dayjs(pickStartDate).subtract(1, 'day')
+        const endDate = dayjs(pickEndDate).add(1, 'day')
         const newData = res.data.report.daily.filter(
-          (item: IData) =>
-            (item.date === '2022-03-01' ||
-              item.date === '2022-03-02' ||
-              item.date === '2022-03-03' ||
-              item.date === '2022-03-04') &&
-            item
+          (item: IData) => startDate.isBefore(dayjs(item.date)) && endDate.isAfter(dayjs(item.date)) && item
         )
         setData(newData)
         setIsLoading(false)
@@ -74,7 +76,7 @@ const IntegratedAdManagement = () => {
     }
 
     loadTredData()
-  }, [])
+  }, [pickEndDate, pickStartDate])
 
   if (isLoading) return <div>로딩중...</div>
 
@@ -116,19 +118,19 @@ const IntegratedAdManagement = () => {
         value = String(Math.round(roas))
         break
       case '광고비':
-        value = numberFormatter(totalCost)
+        value = compactNumber(totalCost)
         break
       case '노출 수':
-        value = numberFormatter(totalImp)
+        value = compactNumber(totalImp)
         break
       case '클릭수':
-        value = numberFormatter(totalClick)
+        value = compactNumber(totalClick)
         break
       case '전환 수':
-        value = numberFormatter(conversion)
+        value = compactNumber(conversion)
         break
       case '매출':
-        value = numberFormatter(totalConvValue)
+        value = compactNumber(totalConvValue)
         break
     }
     return {
@@ -152,8 +154,24 @@ const IntegratedAdManagement = () => {
   return (
     <section className={styles.container}>
       <h2 className={styles.sectionTitle}>통합 광고 현황</h2>
-
       <div className={styles.wrapper}>
+        <div className={styles.selectDate}>
+          <DatePicker
+            selected={pickStartDate}
+            onChange={(date: Date) => setPickStartDate(date)}
+            customInput={<input type='text' style={{ width: '90px' }} />}
+          />
+          <div>~</div>
+          <DatePicker
+            selected={pickEndDate}
+            onChange={(date: Date) => setPickEndDate(date)}
+            customInput={
+              // 날짜 뜨는 인풋 커스텀
+              <input type='text' style={{ width: '90px' }} />
+            }
+          />
+        </div>
+
         <ul className={styles.group}>
           {items.map((item) => {
             return <Item key={`${item.id}`} item={item} />
