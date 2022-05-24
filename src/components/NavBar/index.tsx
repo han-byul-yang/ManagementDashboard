@@ -28,9 +28,11 @@ const NavBar = () => {
   const FullNavBar = useMemo(() => (isOpen ? <OpenNavBar /> : <CloseNavBar setIsOpen={setIsOpen} />), [isOpen])
 
   return (
-    <nav className={cx(styles.navBar, { [styles.closeBar]: !isOpen })} ref={nav}>
-      {FullNavBar}
-    </nav>
+    <aside className={styles.aside}>
+      <nav className={cx(styles.navBar, { [styles.closeBar]: !isOpen })} ref={nav}>
+        {FullNavBar}
+      </nav>
+    </aside>
   )
 }
 
