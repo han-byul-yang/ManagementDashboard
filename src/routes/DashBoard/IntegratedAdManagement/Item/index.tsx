@@ -1,4 +1,4 @@
-import { AiOutlineCaretDown } from 'react-icons/ai'
+// import { AiOutlineCaretDown } from 'react-icons/ai'
 import styles from './item.module.scss'
 
 interface IItem {
@@ -23,7 +23,7 @@ const Item = ({ item }: IProps) => {
       </dl>
 
       <div className={styles.rate}>
-        <AiOutlineCaretDown />
+        {/* <AiOutlineCaretDown /> */}
         <span className={styles.rateText}>1{item.unit}</span>
       </div>
     </li>
