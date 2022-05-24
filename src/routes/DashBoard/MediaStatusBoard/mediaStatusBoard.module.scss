@@ -12,6 +12,15 @@
   box-shadow: 0 4px 10px rgba(0, 0, 0, 4%);
 }
 
+.container {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 743px;
+  padding: 60px 41px 29px 40px;
+  background: colors.$WHITEGRAYA;
+}
+
 .title {
   margin-bottom: 25px;
   font-size: 16px;
@@ -25,22 +34,23 @@
 .tableBox {
   width: 1000;
   margin: 20px 0;
+  overflow-x: auto;
   font-size: 14px;
 }
 
 .table {
   width: 1100px;
-  height: 200px;
+  height: 220px;
   overflow: auto;
 }
 
 .tableRow {
-  height: 30px;
+  height: 33px;
   border-top: 2px solid colors.$LIGHTGRAY;
 }
 
 .tableColumn {
   width: 200px;
-  height: 30px;
+  height: 33px;
   text-align: end;
 }

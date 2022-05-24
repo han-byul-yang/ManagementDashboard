@@ -82,5 +82,6 @@ export const sumMediaCategory = (startDate: string, endDate: string) => {
     { value: allCpc, category: '클릭당비용(CPC)' },
   ]
 
+  console.log(sumMediaValueData)
   return sumMediaValueData
 }

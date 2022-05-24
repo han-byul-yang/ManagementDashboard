@@ -30,7 +30,7 @@ const MediaStatusBoard = () => {
   const tickFormat = ['광고비', '매출', '노출 수', '클릭 수', '전환 수']
 
   return (
-    <div>
+    <div className={styles.container}>
       <div className={styles.title}>매체 현황</div>
       <div className={styles.background}>
         <div className={styles.chartBox}>
