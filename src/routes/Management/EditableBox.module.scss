@@ -1,10 +1,15 @@
+@use 'styles/constants/colors';
+@use 'styles/mixins/typo';
+
 .container {
   display: flex;
   align-items: center;
 
   input {
+    @include typo.body14;
     display: block;
-    padding: 4px;
+    padding: 2px 4px;
+    border-bottom: 1px solid colors.$SECONDARY_02;
   }
 }
 
