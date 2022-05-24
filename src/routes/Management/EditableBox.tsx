@@ -3,7 +3,7 @@ import cx from 'classnames'
 
 import { EditIcon } from 'assets/svgs'
 
-import styles from './EditableBox.module.scss'
+import styles from './editableBox.module.scss'
 
 interface IEditableBox {
   defaultText: string

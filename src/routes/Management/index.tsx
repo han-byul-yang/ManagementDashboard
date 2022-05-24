@@ -8,7 +8,7 @@ import { IAdCard } from 'types/ad'
 import AdCard from './AdCard'
 import Dropdown from 'components/Dropdown'
 
-import styles from './Management.module.scss'
+import styles from './management.module.scss'
 import SkeletonUICards from './CardsSkeleton'
 
 const AdsTop = ({ setFilter }: { setFilter: Dispatch<SetStateAction<string>> }) => {

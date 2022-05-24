@@ -9,7 +9,7 @@ import { IAdCard } from 'types/ad'
 import EditableBox from './EditableBox'
 import { EditIcon } from 'assets/svgs'
 
-import styles from './Management.module.scss'
+import styles from './management.module.scss'
 
 const AdCard = ({ ad }: { ad: IAdCard }) => {
   const setAdList = useSetRecoilState<IAdCard[]>(adListState)

@@ -1,0 +1,23 @@
+@use 'styles/constants/colors';
+
+.page {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100vw;
+  height: 100vh;
+}
+
+.section {
+  width: calc(100% - 320px);
+  @media screen and (max-width: 1050px) {
+    width: calc(100% - 1.5rem);
+  }
+  height: 100%;
+  background: colors.$BG_G;
+}
+
+.main {
+  width: 100%;
+  height: calc(100% - 80px);
+}
