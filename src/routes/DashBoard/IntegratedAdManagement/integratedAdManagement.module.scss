@@ -1,0 +1,168 @@
+@use 'styles/constants/levels';
+@use '/src/styles/constants/colors';
+
+.container {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 743px;
+  padding: 60px 41px 29px 40px;
+  background: colors.$WHITEGRAYA;
+}
+
+.sectionTitle {
+  position: absolute;
+  top: 21px;
+  left: 40px;
+  width: 97px;
+  height: 19px;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 19px;
+  color: colors.$GRAYA;
+}
+
+.wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 1039px;
+  min-height: 654px;
+  margin: 0;
+  background-color: colors.$WHITE;
+  border-radius: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 4%);
+
+  .group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    min-height: 178px;
+    padding: 40px 44px 40px 40px;
+  }
+}
+
+.selectBtnGroup {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 55px 0 40px;
+
+  .selectBtn {
+    width: 123px;
+    height: 40px;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 16px;
+    text-align: center;
+    background: colors.$WHITE;
+    border: 1px solid #d1d8dc;
+    border-radius: 10px;
+
+    svg {
+      width: 12px;
+      height: 12px;
+    }
+
+    + .selectBtn {
+      margin-left: 10px;
+    }
+  }
+
+  .filterBtn {
+    svg {
+      width: 12px;
+      height: 12px;
+    }
+
+    span {
+      display: inline-block;
+      width: 26px;
+      height: 16px;
+      margin-right: 16px;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 16px;
+    }
+
+    &.daily {
+      display: inline-block;
+      min-width: 54px;
+      min-height: 40px;
+      text-align: left;
+    }
+  }
+}
+
+.filterBox {
+  position: absolute;
+  top: 50px;
+  right: 55px;
+  z-index: levels.$KEYWORDFORM;
+}
+
+.chartWrapper {
+  min-height: 354px;
+  padding: 40px 39px 40px 40px;
+}
+
+.firstCircle,
+.secondCircle {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background: colors.$SKYBLUE;
+  border-radius: 50%;
+}
+
+.secondCircle {
+  background: colors.$LIGHTGREEN;
+}
+
+.firstBtnText {
+  width: 37px;
+  height: 16px;
+  padding: 0 10px;
+}
+
+.secondBtnText {
+  width: 39px;
+  height: 16px;
+  padding: 0 10px;
+}
+
+.selectBox {
+  z-index: levels.$KEYWORDFORM;
+  width: 123px;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px;
+  text-align: center;
+  background: #ffffff;
+  border: 1px solid #d1d8dc;
+  border-radius: 10px;
+
+  .selectItem {
+    padding: 10px;
+  }
+}
+
+.first {
+  position: absolute;
+  top: 50px;
+  left: 40px;
+}
+
+.second {
+  position: absolute;
+  top: 50px;
+  left: 171px;
+}
+
+.hidden {
+  display: none;
+}
