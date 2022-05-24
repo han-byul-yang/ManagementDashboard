@@ -19,6 +19,7 @@ export const sumMediaCategory = (startDate: string, endDate: string) => {
     facebook: [],
     naver: [],
     kakao: [],
+    all: [],
   }
 
   selectedAllData.forEach((media) => {
@@ -70,5 +71,16 @@ export const sumMediaCategory = (startDate: string, endDate: string) => {
   sumMediaValueData.facebook = sumMediaCategoryData('facebook')
   sumMediaValueData.naver = sumMediaCategoryData('naver')
   sumMediaValueData.kakao = sumMediaCategoryData('kakao')
+
+  sumMediaValueData.all = [
+    { value: allCost, category: '광고비' },
+    { value: allSales, category: '매출' },
+    { value: allRoas, category: 'ROAS' },
+    { value: allImp, category: '노출 수' },
+    { value: allClick, category: '클릭 수' },
+    { value: allCtr, category: '클릭률(CTR)' },
+    { value: allCpc, category: '클릭당비용(CPC)' },
+  ]
+
   return sumMediaValueData
 }
