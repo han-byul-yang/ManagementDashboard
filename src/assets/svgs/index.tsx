@@ -1,3 +1,5 @@
+export { ReactComponent as EditIcon } from './editting.svg'
+export { ReactComponent as DownIcon } from './icon_down.svg'
 export { ReactComponent as LogoIcon } from './logo.svg'
 export { ReactComponent as Logo90Icon } from './logo(90).svg'
 export { ReactComponent as HamburgerIcon } from './hamburger.svg'

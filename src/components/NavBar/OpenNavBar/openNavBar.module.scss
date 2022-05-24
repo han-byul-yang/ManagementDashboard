@@ -34,7 +34,7 @@
     font-size: 12px;
     font-weight: 700;
     line-height: 14px;
-    color: colors.$LIGHTGRAYFONT;
+    color: colors.$GRAY_300;
   }
 }
 
@@ -50,7 +50,7 @@
     font-size: 12px;
     font-weight: 700;
     line-height: 14px;
-    color: colors.$LIGHTGRAYFONT;
+    color: colors.$GRAY_300;
   }
 }
 
@@ -64,7 +64,7 @@
   border-radius: 10px;
 
   span {
-    color: colors.$LINK;
+    color: colors.$GRAY_800;
   }
 
   svg {
@@ -76,7 +76,7 @@
   }
 
   &.active {
-    color: colors.$ACTIVELINK;
+    color: colors.$PRIMARY;
     background-color: #edeff1;
 
     svg {
@@ -86,7 +86,7 @@
     }
 
     span {
-      color: colors.$ACTIVELINK;
+      color: colors.$PRIMARY;
     }
   }
 }
@@ -128,14 +128,14 @@
     font-size: 16px;
     font-weight: 700;
     line-height: 19px;
-    color: colors.$SOFTBLACK;
+    color: colors.$GRAY_800;
   }
 
   div:last-child {
     font-size: 12px;
     font-weight: 500;
     line-height: 14px;
-    color: colors.$LIGHTGRAYFONT;
+    color: colors.$GRAY_300;
   }
 }
 
@@ -145,7 +145,7 @@
   justify-content: center;
   width: 40px;
   height: 40px;
-  background-color: #586cf5;
+  background-color: colors.$PRIMARY;
   border-radius: 50%;
 }
 
@@ -158,12 +158,12 @@
   font-size: 12px;
   font-weight: 500;
   line-height: 14px;
-  color: colors.$LIGHTGRAYFONT;
+  color: colors.$GRAY_300;
   background-color: transparent;
 
   a {
     margin-top: 10px;
-    color: colors.$LIGHTGRAYFONT;
+    color: colors.$GRAY_300;
     text-decoration: underline;
   }
   @media screen and (max-width: 1050px) {
