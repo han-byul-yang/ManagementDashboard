@@ -1,7 +1,14 @@
-import styles from './DashBoard.module.scss'
+import styles from './dashBoard.module.scss'
+import IntegratedAdManagement from './IntegratedAdManagement'
+import MediaStatusBoard from './MediaStatusBoard'
 
 const DashBoard = () => {
-  return <div className={styles.container}>DashBoard</div>
+  return (
+    <div className={styles.container}>
+      <IntegratedAdManagement />
+      <MediaStatusBoard />
+    </div>
+  )
 }
 
 export default DashBoard
