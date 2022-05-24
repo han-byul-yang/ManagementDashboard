@@ -10,9 +10,14 @@ interface Props {
 
 const CloseNavBar = (props: Props) => {
   const { setIsOpen } = props
+
+  const handleOpenClick = () => {
+    setIsOpen(true)
+  }
+
   return (
     <>
-      <button type='button' className={styles.btn} onClick={() => setIsOpen(true)}>
+      <button type='button' className={styles.btn} onClick={handleOpenClick}>
         <HamburgerIcon />
       </button>
       <div className={styles.logo90}>
