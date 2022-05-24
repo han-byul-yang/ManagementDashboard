@@ -1,0 +1,30 @@
+.consoleBar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  height: 80px;
+  padding: 0 40px;
+  border-bottom: 1px solid #edeff1;
+
+  button {
+    margin-right: 30px;
+  }
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 102px;
+}
+
+.avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background-color: #edeff1;
+  border: 1px solid #d1d8dd;
+  border-radius: 50%;
+}
