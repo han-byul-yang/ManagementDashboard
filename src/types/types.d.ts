@@ -11,3 +11,17 @@ export interface IMediaChannelData {
   cpa: number
   roas: number
 }
+
+export interface IData {
+  click: number
+  conv: number
+  convValue: number
+  cost: number
+  cpa: number
+  cpc: number
+  ctr: number
+  cvr: number
+  date: string
+  imp: number
+  roas: number
+}

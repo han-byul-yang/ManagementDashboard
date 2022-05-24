@@ -1,27 +1,13 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import cx from 'classnames'
-import { VictoryChart, VictoryGroup, VictoryLine } from 'victory'
-// import { FaChevronDown } from 'react-icons/fa'
-
-import { numberFormatter } from 'utils/numberFormatter'
 
 import Item from './Item'
-import styles from './integratedAdManagement.module.scss'
+import { numberFormatter } from 'utils/numberFormatter'
+import { IData } from 'types/types'
+import IntergratedAdChart from './IntergratedAdChart'
 
-interface IData {
-  click: number
-  conv: number
-  convValue: number
-  cost: number
-  cpa: number
-  cpc: number
-  ctr: number
-  cvr: number
-  date: string
-  imp: number
-  roas: number
-}
+import styles from './integratedAdManagement.module.scss'
 
 const ITEMS = [
   {
@@ -72,7 +58,15 @@ const IntegratedAdManagement = () => {
       try {
         setIsLoading(true)
         const res = await getTrendDataApi()
-        setData(res.data.report.daily)
+        const newData = res.data.report.daily.filter(
+          (item: IData) =>
+            (item.date === '2022-03-01' ||
+              item.date === '2022-03-02' ||
+              item.date === '2022-03-03' ||
+              item.date === '2022-03-04') &&
+            item
+        )
+        setData(newData)
         setIsLoading(false)
       } catch (err) {
         setData([])
@@ -216,7 +210,7 @@ const IntegratedAdManagement = () => {
           </div>
         </div>
 
-        <div className={styles.chartWrapper} />
+        {data.length !== 0 && <IntergratedAdChart data={data} firstData='click' secondData='roas' />}
       </div>
     </section>
   )
