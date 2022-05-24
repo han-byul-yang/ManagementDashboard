@@ -1,6 +1,8 @@
 @use 'styles/constants/colors';
+@use 'styles/mixins/typo';
 
 .options {
+  @include typo.body14;
   position: relative;
   display: flex;
   align-items: center;

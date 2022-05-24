@@ -1,10 +1,5 @@
 @use 'styles/constants/colors';
-
-// TODO: 공통 상수 논의(피그마 기준)
-$PRIMARY: #586cf5;
-$GRAY_300: #94a2ad;
-$GRAY_100: #d1d8dc;
-$GRAY_50: #edeff1;
+@use 'styles/mixins/typo';
 
 @keyframes blink {
   50% {
@@ -26,10 +21,10 @@ $GRAY_50: #edeff1;
 }
 
 .addBtn {
+  @include typo.body14bold;
   padding: 12px 20px;
-  font-weight: 700;
   color: colors.$WHITE;
-  background-color: $PRIMARY;
+  background-color: colors.$PRIMARY;
   border-radius: 10px;
 }
 
@@ -60,7 +55,7 @@ $GRAY_50: #edeff1;
 
 .card {
   padding: 20px;
-  border: 1px solid $GRAY_100;
+  border: 1px solid colors.$GRAY_100;
   border-radius: 10px;
 
   .adTypeBtn {
@@ -68,42 +63,42 @@ $GRAY_50: #edeff1;
   }
 
   h4 {
+    @include typo.head16;
     margin: 40px 0;
-    font-weight: 700;
   }
 
   li {
     display: flex;
     padding: 12px 0;
-    border-bottom: 1px solid $GRAY_50;
+    border-bottom: 1px solid colors.$GRAY_50;
 
     &:first-child {
-      border-top: 1px solid $GRAY_50;
+      border-top: 1px solid colors.$GRAY_50;
     }
 
     .itemName {
+      @include typo.body12 ;
       width: 40%;
-      color: $GRAY_300;
+      color: colors.$GRAY_300;
     }
 
     .itemContent {
+      @include typo.body12bold;
       display: flex;
       gap: 4px;
-      font-weight: 700;
     }
   }
 
   &.isEditting {
-    border: 1px $PRIMARY solid;
+    border: 1px colors.$PRIMARY solid;
     animation: blink 1s step-end 1;
   }
 }
 
 .editBtn {
+  @include typo.body14bold;
   padding: 12px 20px;
   margin-top: 20px;
-  font-size: 14px;
-  font-weight: 700;
-  border: 1px solid $GRAY_100;
+  border: 1px solid colors.$GRAY_100;
   border-radius: 10px;
 }

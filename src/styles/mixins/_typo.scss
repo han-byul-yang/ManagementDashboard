@@ -19,6 +19,13 @@
   line-height: 16px;
 }
 
+@mixin body14 {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px;
+}
+
 @mixin body12bold {
   font-size: 12px;
   font-style: normal;
