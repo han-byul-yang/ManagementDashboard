@@ -32,7 +32,7 @@ const ChartTable = () => {
   return (
     <table className={styles.table}>
       <thead>
-        <tr className={styles.tableHead}>
+        <tr className={styles.tableRow}>
           <td />
           {tableHeadList.map((column) => (
             <th key={column}>{column}</th>
@@ -40,34 +40,44 @@ const ChartTable = () => {
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th>카카오</th>
+        <tr className={styles.tableRow}>
+          <th className={styles.tableColumn}>카카오</th>
           {kakaoData.map((data, i) => (
-            <td key={data?.category}>{data?.value.toFixed(2)}</td>
+            <td className={styles.tableColumn} key={data?.category}>
+              {data?.value.toFixed(2)}
+            </td>
           ))}
         </tr>
-        <tr>
-          <th>페이스북</th>
+        <tr className={styles.tableRow}>
+          <th className={styles.tableColumn}>페이스북</th>
           {facebookData.map((data, i) => (
-            <td key={data?.category}>{data?.value.toFixed(2)}</td>
+            <td className={styles.tableColumn} key={data?.category}>
+              {data?.value.toFixed(2)}
+            </td>
           ))}
         </tr>
-        <tr>
-          <th>네이버</th>
+        <tr className={styles.tableRow}>
+          <th className={styles.tableColumn}>네이버</th>
           {naverData.map((data, i) => (
-            <td key={data?.category}>{data?.value.toFixed(2)}</td>
+            <td className={styles.tableColumn} key={data?.category}>
+              {data?.value.toFixed(2)}
+            </td>
           ))}
         </tr>
-        <tr>
-          <th>구글</th>
+        <tr className={styles.tableRow}>
+          <th className={styles.tableColumn}>구글</th>
           {googleData.map((data, i) => (
-            <td key={data?.category}>{data?.value.toFixed(2)}</td>
+            <td className={styles.tableColumn} key={data?.category}>
+              {data?.value.toFixed(2)}
+            </td>
           ))}
         </tr>
-        <tr>
-          <th>총계</th>
+        <tr className={styles.tableRow}>
+          <th className={styles.tableColumn}>총계</th>
           {allData.map((data) => (
-            <td key={data?.category}>{data?.value.toFixed(2)}</td>
+            <td className={styles.tableColumn} key={data?.category}>
+              {data?.value.toFixed(2)}
+            </td>
           ))}
         </tr>
       </tbody>
