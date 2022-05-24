@@ -34,7 +34,6 @@ const EditableBox = ({ defaultText, isEditting }: IEditableBox) => {
   }
 
   useEffect(() => {
-    // TODO: 이벤트 리스너 제거
     window.addEventListener('click', handleClickOutside, true)
   })
 
