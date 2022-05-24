@@ -10,6 +10,7 @@ import AdsTop from './AdsTop'
 import styles from './management.module.scss'
 import SkeletonUICards from './AdCards/CardsSkeleton'
 import AdCards from './AdCards'
+import PageHeader from 'components/PageHeader'
 
 const Management = () => {
   const [filter, setFilter] = useState('all')
@@ -33,10 +34,13 @@ const Management = () => {
   }
 
   return (
-    <div className={styles.container}>
-      <AdsTop setFilter={setFilter} />
-      <AdCards filter={filter} />
-    </div>
+    <>
+      <PageHeader title='광고관리' />
+      <div className={styles.container}>
+        <AdsTop setFilter={setFilter} />
+        <AdCards filter={filter} />
+      </div>
+    </>
   )
 }
 
