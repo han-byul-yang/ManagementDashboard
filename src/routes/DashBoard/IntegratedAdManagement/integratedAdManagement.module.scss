@@ -7,7 +7,7 @@
   width: 100%;
   min-height: 743px;
   padding: 60px 41px 29px 40px;
-  background: colors.$WHITEGRAYA;
+  background: colors.$BG_G;
 }
 
 .sectionTitle {
@@ -20,7 +20,7 @@
   font-style: normal;
   font-weight: 700;
   line-height: 19px;
-  color: colors.$GRAYA;
+  color: colors.$GRAY_800;
 }
 
 .wrapper {
@@ -114,12 +114,12 @@
   display: inline-block;
   width: 10px;
   height: 10px;
-  background: colors.$SKYBLUE;
+  background: colors.$GRAPH_01;
   border-radius: 50%;
 }
 
 .secondCircle {
-  background: colors.$LIGHTGREEN;
+  background: colors.$GRAPH_02;
 }
 
 .firstBtnText {

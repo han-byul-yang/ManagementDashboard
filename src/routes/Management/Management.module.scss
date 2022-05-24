@@ -1,9 +1,131 @@
 @use 'styles/constants/colors';
 
+// TODO: 공통 상수 논의(피그마 기준)
+$PRIMARY: #586cf5;
+$GRAY_300: #94a2ad;
+$GRAY_100: #d1d8dc;
+$GRAY_50: #edeff1;
+
+@keyframes blink {
+  50% {
+    border-color: transparent;
+  }
+}
+
 .container {
+  // max-height: 80%;
+  // overflow: scroll;
+  padding: 40px;
+  margin: 80px 40px;
+  background-color: colors.$WHITE;
+  border-radius: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 4%);
+}
+
+.top {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+}
+
+.options {
+  position: relative;
+  display: flex;
   align-items: center;
-  width: 100%;
-  height: 100%;
+  cursor: pointer;
+  border: 1px solid $GRAY_100;
+  border-radius: 10px;
+
+  select {
+    padding: 12px 48px 12px 20px;
+    border: none;
+    appearance: none;
+  }
+
+  svg {
+    position: absolute;
+    right: 16px;
+  }
+}
+
+.addBtn {
+  padding: 12px 20px;
+  font-weight: 700;
+  color: colors.$WHITE;
+  background-color: $PRIMARY;
+  border-radius: 10px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  margin-top: 40px;
+}
+
+@media screen and (min-width: 900px) {
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (min-width: 1680px) {
+  .cards {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.card {
+  padding: 20px;
+  border: 1px solid $GRAY_100;
+  border-radius: 10px;
+
+  .adTypeBtn {
+    position: absolute;
+  }
+
+  h4 {
+    margin: 40px 0;
+    font-weight: 700;
+  }
+
+  li {
+    display: flex;
+    padding: 12px 0;
+    border-bottom: 1px solid $GRAY_50;
+
+    &:first-child {
+      border-top: 1px solid $GRAY_50;
+    }
+
+    .itemName {
+      width: 40%;
+      color: $GRAY_300;
+    }
+
+    .itemContent {
+      display: flex;
+      gap: 4px;
+      font-weight: 700;
+    }
+  }
+
+  &.isEditting {
+    border: 1px $PRIMARY solid;
+    animation: blink 1s step-end 1;
+  }
+}
+
+.editBtn {
+  padding: 12px 20px;
+  margin-top: 20px;
+  font-size: 14px;
+  font-weight: 700;
+  border: 1px solid $GRAY_100;
+  border-radius: 10px;
 }

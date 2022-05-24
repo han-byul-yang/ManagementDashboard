@@ -10,7 +10,7 @@
   height: 79px;
   padding: 18px 40px;
   background: colors.$WHITE;
-  border: 0.5px solid colors.$WHITEGRAY;
+  border: 0.5px solid colors.$GRAY_50;
   border-radius: 10px;
 
   &:nth-child(4) {
@@ -37,14 +37,14 @@
   font-style: normal;
   font-weight: 500;
   line-height: 14px;
-  color: colors.$GRAYB;
+  color: colors.$GRAY_300;
   text-align: right;
 
   & svg {
     width: 10px;
     height: 8px;
     margin: 0;
-    fill: colors.$LIGHTGREEN;
+    fill: colors.$GRAPH_02;
     transform: rotate(180deg);
   }
 
@@ -68,7 +68,7 @@ dt {
   font-style: normal;
   font-weight: 500;
   line-height: 14px;
-  color: colors.$GRAYB;
+  color: colors.$GRAY_300;
 }
 
 dd {
@@ -78,5 +78,5 @@ dd {
   font-style: normal;
   font-weight: 700;
   line-height: 19px;
-  color: colors.$GRAYA;
+  color: colors.$GRAY_800;
 }

@@ -1,0 +1,33 @@
+@mixin head26() {
+  font-size: 26px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 30px;
+}
+
+@mixin head16() {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 19px;
+}
+
+@mixin body14bold {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 16px;
+}
+
+@mixin body12bold {
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 14px;
+}
+@mixin body12 {
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 14px;
+}
