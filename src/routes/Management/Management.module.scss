@@ -13,8 +13,6 @@ $GRAY_50: #edeff1;
 }
 
 .container {
-  // max-height: 80%;
-  // overflow: scroll;
   padding: 40px;
   margin: 80px 40px;
   background-color: colors.$WHITE;
@@ -25,26 +23,6 @@ $GRAY_50: #edeff1;
 .top {
   display: flex;
   justify-content: space-between;
-}
-
-.options {
-  position: relative;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  border: 1px solid $GRAY_100;
-  border-radius: 10px;
-
-  select {
-    padding: 12px 48px 12px 20px;
-    border: none;
-    appearance: none;
-  }
-
-  svg {
-    position: absolute;
-    right: 16px;
-  }
 }
 
 .addBtn {

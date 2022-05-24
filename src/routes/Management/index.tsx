@@ -6,7 +6,7 @@ import { adListState } from 'store/atoms'
 import { getAds } from 'services/getData'
 import { IAdCard } from 'types/ad'
 import AdCard from './AdCard'
-import { DownIcon } from 'assets/svgs'
+import Dropdown from 'components/Dropdown'
 
 import styles from './Management.module.scss'
 import SkeletonUICards from './CardsSkeleton'
@@ -37,17 +37,15 @@ const AdsTop = ({ setFilter }: { setFilter: Dispatch<SetStateAction<string>> }) 
     setAdList((prev) => [...prev, newAd])
   }
 
+  const dropdownOptions = [
+    { value: 'all', content: '전체 광고' },
+    { value: 'active', content: '진행중인 광고' },
+    { value: 'ended', content: '중단된 광고' },
+  ]
+
   return (
     <div className={styles.top}>
-      {/* TODO: 드롭다운 공통 컴포넌트화 */}
-      <div className={styles.options}>
-        <select onChange={handleSelectChange}>
-          <option value='all'>전체 광고</option>
-          <option value='active'>진행중인 광고</option>
-          <option value='ended'>중단된 광고</option>
-        </select>
-        <DownIcon />
-      </div>
+      <Dropdown options={dropdownOptions} onChange={handleSelectChange} />
       <button type='button' onClick={handleAddBtnClick} className={styles.addBtn}>
         광고 만들기
       </button>
