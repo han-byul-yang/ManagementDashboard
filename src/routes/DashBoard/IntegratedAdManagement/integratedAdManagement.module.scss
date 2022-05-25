@@ -3,17 +3,10 @@
 
 .container {
   position: relative;
-  box-sizing: border-box;
   width: 100%;
-  min-height: 743px;
-  padding: 60px 41px 29px 40px;
-  background: colors.$BG_G;
 }
 
 .sectionTitle {
-  position: absolute;
-  top: 21px;
-  left: 40px;
   width: 97px;
   height: 19px;
   font-size: 16px;
@@ -26,8 +19,6 @@
 .wrapper {
   position: relative;
   width: 100%;
-  max-width: 1039px;
-  min-height: 654px;
   margin: 0;
   background-color: colors.$WHITE;
   border-radius: 20px;

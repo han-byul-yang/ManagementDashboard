@@ -21,7 +21,7 @@ const OpenNavBar = () => {
         <div>서비스</div>
         <Dropdown options={dropdownOptions} />
       </div>
-      <div className={styles.nav}>
+      <nav className={styles.nav}>
         <div>광고 센터</div>
         <NavLink to='/' className={({ isActive }) => `${styles.navLink} ${isActive ? styles.active : ''}`}>
           <DashboardIcon />
@@ -31,7 +31,7 @@ const OpenNavBar = () => {
           <ManagementIcon />
           <span>광고관리</span>
         </NavLink>
-      </div>
+      </nav>
       <div className={styles.footer}>
         <div className={styles.guide}>
           <div className={styles.lightIcon}>
