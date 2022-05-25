@@ -1,10 +1,12 @@
 import { useMemo } from 'react'
+
 import { IData } from 'types/types'
 import { compactNumber } from 'utils/compactNumber'
+import { getAdStatus } from 'routes/DashBoard/utils/adClac'
 import Item from '../Item'
+import { chartOptions } from './status'
 
 import styles from './intergratedAdStatus.module.scss'
-import { chartOptions } from './status'
 
 interface Props {
   data: IData[]
@@ -12,18 +14,7 @@ interface Props {
 
 const IntergratedAdStatus = (props: Props) => {
   const { data } = props
-  // 광고비
-  const totalCost = data.map((item) => item.cost).reduce((a, b) => a + b, 0)
-  // 노출수
-  const totalImp = data.map((item) => item.imp).reduce((a, b) => a + b, 0)
-  // 매출
-  const totalRevenue = data.map((item) => (item.roas * item.cost) / 100).reduce((a, b) => a + b, 0)
-  // ROAS
-  const roas = (totalRevenue / totalCost) * 100
-  // 클릭수
-  const totalClick = data.map((item) => Number(item.click)).reduce((a, b) => a + b, 0)
-  // 전환수
-  const totalConv = data.map((item) => item.conv).reduce((a, b) => a + b, 0)
+  const { totalCost, totalImp, totalSales, roas, totalClick, totalConv } = getAdStatus(data)
 
   const items = chartOptions.map((item) => {
     let value = '0'
@@ -35,7 +26,7 @@ const IntergratedAdStatus = (props: Props) => {
         value = compactNumber(totalImp)
         break
       case '매출':
-        value = compactNumber(totalRevenue)
+        value = compactNumber(totalSales)
         break
       case 'ROAS':
         value = String(Math.round(roas))
@@ -47,12 +38,15 @@ const IntergratedAdStatus = (props: Props) => {
         value = compactNumber(totalConv)
         break
     }
+
     return {
       ...item,
       value,
     }
   })
+
   const Status = useMemo(() => items.map((item) => <Item key={`chart-${item.content}`} item={item} />), [items])
+
   return <ul className={styles.group}>{Status}</ul>
 }
 

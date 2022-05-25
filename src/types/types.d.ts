@@ -1,5 +1,4 @@
-export interface IMediaChannelData {
-  channel: string
+interface ICommonAdData {
   date: string
   imp: number
   click: number
@@ -12,16 +11,10 @@ export interface IMediaChannelData {
   roas: number
 }
 
-export interface IData {
-  click: number
+export interface IMediaChannelData extends ICommonAdData {
+  channel: string
+}
+
+export interface IData extends ICommonAdData {
   conv: number
-  convValue: number
-  cost: number
-  cpa: number
-  cpc: number
-  ctr: number
-  cvr: number
-  date: string
-  imp: number
-  roas: number
 }

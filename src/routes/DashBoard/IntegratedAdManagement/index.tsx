@@ -1,16 +1,17 @@
 import { ChangeEvent, useEffect, useState } from 'react'
-import axios from 'axios'
+import { useQuery } from 'react-query'
 import cx from 'classnames'
 import dayjs from 'dayjs'
 
+import { getTrendData } from 'services/getData'
 import { IData } from 'types/types'
 import IntergratedAdChart from './IntergratedAdChart'
-import Dropdown from 'components/Dropdown'
 import IntergratedAdStatus from './IntergratedAdStatus'
+import { chartOptions } from './IntergratedAdStatus/status'
+import Dropdown from 'components/Dropdown'
 
 import 'react-datepicker/dist/react-datepicker.css'
 import styles from './integratedAdManagement.module.scss'
-import { chartOptions } from './IntergratedAdStatus/status'
 
 interface Props {
   pickStartDate: Date
@@ -21,35 +22,39 @@ const IntegratedAdManagement = (props: Props) => {
   const { pickStartDate, pickEndDate } = props
   const [firstChartName, setFirstChartName] = useState('roas')
   const [secondChartName, setSecondChartName] = useState('cost')
-  const [isLoading, setIsLoading] = useState(false)
   const [data, setData] = useState<IData[]>([])
   const [isThirdSelectOpen, setIsThirdSelectOpen] = useState(false)
 
-  function getTrendDataApi() {
-    return axios.get('./data/trendData.json')
-  }
+  const { isLoading } = useQuery<IData[], Error>('trendData', getTrendData, {
+    retry: 1,
+    // staleTime: 60 * 60 * 1000,
+    // cacheTime: 60 * 60 * 1000,
+    onSuccess: (res) => {
+      setData(
+        res.filter(
+          (item: IData) =>
+            dayjs(pickStartDate).subtract(1, 'day').unix() <= dayjs(item.date).unix() &&
+            dayjs(pickEndDate).unix() >= dayjs(item.date).unix() &&
+            item
+        )
+      )
+    },
+  })
 
   useEffect(() => {
-    const loadTredData = async () => {
-      try {
-        setIsLoading(true)
-        const res = await getTrendDataApi()
-        const startDate = dayjs(pickStartDate).subtract(1, 'day')
-        const endDate = dayjs(pickEndDate).add(1, 'day')
-        const newData = res.data.report.daily.filter(
-          (item: IData) => startDate.isBefore(dayjs(item.date)) && endDate.isAfter(dayjs(item.date)) && item
-        )
-        setData(newData)
-        setIsLoading(false)
-      } catch (err) {
-        setData([])
-      }
-    }
-
-    loadTredData()
+    setData((prev) =>
+      prev.filter(
+        (item: IData) =>
+          dayjs(pickStartDate).subtract(1, 'day').unix() <= dayjs(item.date).unix() &&
+          dayjs(pickEndDate).unix() >= dayjs(item.date).unix() &&
+          item
+      )
+    )
   }, [pickEndDate, pickStartDate])
 
-  if (isLoading) return <div>로딩중...</div>
+  if (isLoading) {
+    return <div className={styles.container}>...loading</div>
+  }
 
   const handleFirstChartChange = (e: ChangeEvent<HTMLSelectElement>) => {
     setFirstChartName(e.target.value)
@@ -86,9 +91,7 @@ const IntegratedAdManagement = (props: Props) => {
           </div>
         </div>
 
-        {data.length !== 0 && (
-          <IntergratedAdChart data={data} firstData={firstChartName} secondData={secondChartName} />
-        )}
+        <IntergratedAdChart data={data} firstData={firstChartName} secondData={secondChartName} />
       </div>
     </section>
   )
