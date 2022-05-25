@@ -1,23 +1,21 @@
-import { Dispatch, SetStateAction } from 'react'
 import { NavLink } from 'react-router-dom'
 import cx from 'classnames'
-
 import Dropdown from 'components/Dropdown'
 import { DashboardIcon, LightIcon, LogoIcon, ManagementIcon } from 'assets/svgs'
-
 import styles from './openNavBar.module.scss'
+import { Dispatch, SetStateAction } from 'react'
 
 interface Props {
+  isOpen: boolean
   setIsOpen: Dispatch<SetStateAction<boolean>>
 }
 
 const OpenNavBar = (props: Props) => {
-  const { setIsOpen } = props
+  const { isOpen, setIsOpen } = props
   const dropdownOptions = [
     { value: 'madup', content: '매드업' },
     { value: 'plus', content: '서비스 추가하기' },
   ]
-
   return (
     <>
       <div className={cx(styles.logo)}>
@@ -33,7 +31,7 @@ const OpenNavBar = (props: Props) => {
           to='/'
           className={({ isActive }) => `${styles.navLink} ${isActive ? styles.active : ''}`}
           onClick={() => {
-            setIsOpen(false)
+            !isOpen && setIsOpen(false)
           }}
         >
           <DashboardIcon />
@@ -43,7 +41,7 @@ const OpenNavBar = (props: Props) => {
           to='management'
           className={({ isActive }) => `${styles.navLink} ${isActive ? styles.active : ''}`}
           onClick={() => {
-            setIsOpen(false)
+            !isOpen && setIsOpen(false)
           }}
         >
           <ManagementIcon />
