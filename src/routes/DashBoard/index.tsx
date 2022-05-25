@@ -19,7 +19,7 @@ const DashBoard = () => {
         />
       </div>
       <IntegratedAdManagement pickStartDate={pickStartDate} pickEndDate={pickEndDate} />
-      <MediaStatusBoard />
+      <MediaStatusBoard pickStartDate={pickStartDate} pickEndDate={pickEndDate} />
     </div>
   )
 }

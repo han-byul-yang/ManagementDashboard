@@ -1,5 +1,13 @@
 import { useState } from 'react'
-import { VictoryAxis, VictoryBar, VictoryChart, VictoryStack, VictoryTheme, VictoryLegend } from 'victory'
+import {
+  VictoryAxis,
+  VictoryBar,
+  VictoryChart,
+  VictoryStack,
+  VictoryTheme,
+  VictoryLegend,
+  VictoryTooltip,
+} from 'victory'
 import { useQuery } from 'react-query'
 
 import { sumDataByCategory } from 'routes/DashBoard/MediaStatusBoard/utils/sumDataByCategory'
@@ -10,9 +18,14 @@ import MediaChartTable from './MediaChartTable'
 import chartStyle from './chartStyle'
 import styles from './mediaStatusBoard.module.scss'
 
-const MediaStatusBoard = () => {
+interface IMediaStatusBoard {
+  pickStartDate: Date
+  pickEndDate: Date
+}
+
+const MediaStatusBoard = ({ pickStartDate, pickEndDate }: IMediaStatusBoard) => {
   const [mediaDataList, setMediaDataList] = useState<IMediaChannelData[]>()
-  const { google, facebook, naver, kakao } = sumDataByCategory('2022-02-01', '2022-04-20', mediaDataList)
+  const { google, facebook, naver, kakao } = sumDataByCategory(pickStartDate, pickEndDate, mediaDataList)
   const { isLoading } = useQuery('medias', getMedias, {
     retry: 1,
     staleTime: 60 * 60 * 1000,
@@ -82,10 +95,31 @@ const MediaStatusBoard = () => {
               }}
             />
             <VictoryStack colorScale={['#AC8AF8', '#85DA47', '#4FADF7', '#FFEB00']}>
-              <VictoryBar data={googleData} {...chartStyle.bar} />
-              <VictoryBar data={facebookData} {...chartStyle.bar} />
-              <VictoryBar data={naverData} {...chartStyle.bar} />
-              <VictoryBar data={kakaoData} {...chartStyle.bar} cornerRadius={{ top: 6 }} />
+              <VictoryBar
+                data={googleData}
+                {...chartStyle.bar}
+                labels={({ datum }) => `${datum.value.toFixed(2)}`}
+                labelComponent={<VictoryTooltip flyoutWidth={80} style={{ fill: '#3a474e' }} />}
+              />
+              <VictoryBar
+                data={facebookData}
+                {...chartStyle.bar}
+                labels={({ datum }) => `${datum.value.toFixed(2)}`}
+                labelComponent={<VictoryTooltip flyoutWidth={80} style={{ fill: '#3a474e' }} />}
+              />
+              <VictoryBar
+                data={naverData}
+                {...chartStyle.bar}
+                labels={({ datum }) => `${datum.value.toFixed(2)}`}
+                labelComponent={<VictoryTooltip flyoutWidth={80} style={{ fill: '#3a474e' }} />}
+              />
+              <VictoryBar
+                data={kakaoData}
+                {...chartStyle.bar}
+                labels={({ datum }) => `${datum.value.toFixed(2)}`}
+                labelComponent={<VictoryTooltip flyoutWidth={80} style={{ fill: '#3a474e' }} />}
+                cornerRadius={{ top: 6 }}
+              />
             </VictoryStack>
             <VictoryLegend
               x={1140}
@@ -103,7 +137,7 @@ const MediaStatusBoard = () => {
           </VictoryChart>
         </div>
         <div className={styles.tableBox}>
-          <MediaChartTable mediaDataList={mediaDataList} />
+          <MediaChartTable pickStartDate={pickStartDate} pickEndDate={pickEndDate} mediaDataList={mediaDataList} />
         </div>
       </div>
     </div>
