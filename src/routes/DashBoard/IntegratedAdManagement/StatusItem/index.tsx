@@ -1,13 +1,12 @@
-// import { AiOutlineCaretDown } from 'react-icons/ai'
-import styles from './item.module.scss'
+import styles from './statusItem.module.scss'
 
-interface IItem {
+interface IStatusItem {
   value: string
   content: string
   unit: string
 }
 
-const Item = ({ item }: { item: IItem }) => {
+const StatusItem = ({ item }: { item: IStatusItem }) => {
   return (
     <li key={`item_${item.value}`} className={styles.item}>
       <dl>
@@ -18,11 +17,10 @@ const Item = ({ item }: { item: IItem }) => {
       </dl>
 
       <div className={styles.rate}>
-        {/* <AiOutlineCaretDown /> */}
         <span className={styles.rateText}>1{item.unit}</span>
       </div>
     </li>
   )
 }
 
-export default Item
+export default StatusItem
