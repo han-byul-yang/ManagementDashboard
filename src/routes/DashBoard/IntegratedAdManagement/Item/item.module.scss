@@ -4,26 +4,14 @@
 .item {
   display: flex;
   flex-direction: row;
-  align-items: flex-end;
-  justify-content: space-between;
+  align-items: center;
+  justify-content: space-around;
   width: 304px;
   height: 79px;
   padding: 18px 40px;
   background: colors.$WHITE;
   border: 0.5px solid colors.$GRAY_50;
   border-radius: 10px;
-
-  &:nth-child(4) {
-    margin-top: 20px;
-  }
-
-  &:nth-child(5) {
-    margin-top: 20px;
-  }
-
-  &:nth-child(6) {
-    margin-top: 20px;
-  }
 }
 
 .rate {
