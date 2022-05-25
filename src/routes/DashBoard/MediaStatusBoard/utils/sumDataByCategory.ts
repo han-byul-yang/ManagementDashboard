@@ -38,6 +38,7 @@ export const sumDataByCategory = (
     allCpc += media.cpc
   })
 
+  console.log(selectedAllData)
   const sumMediaCategoryData = (media: string) => {
     const cost = selectedMediaData[media].reduce((acc, cur) => {
       return cur.cost + acc

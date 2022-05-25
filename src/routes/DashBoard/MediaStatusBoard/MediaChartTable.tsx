@@ -53,7 +53,7 @@ const MediaChartTable = ({ pickStartDate, pickEndDate, mediaDataList }: IMediaCh
           <th className={styles.tableColumn}>카카오</th>
           {kakaoData.map((data, i) => (
             <td className={styles.tableColumn} key={data!.category}>
-              {(data!.value * allData[i]!.value).toFixed(2)}
+              {((data!.value * allData[i]!.value) / 100).toFixed(2)}
             </td>
           ))}
         </tr>
@@ -61,7 +61,7 @@ const MediaChartTable = ({ pickStartDate, pickEndDate, mediaDataList }: IMediaCh
           <th className={styles.tableColumn}>페이스북</th>
           {facebookData.map((data, i) => (
             <td className={styles.tableColumn} key={data!.category}>
-              {(data!.value * allData[i]!.value).toFixed(2)}
+              {((data!.value * allData[i]!.value) / 100).toFixed(2)}
             </td>
           ))}
         </tr>
@@ -69,7 +69,7 @@ const MediaChartTable = ({ pickStartDate, pickEndDate, mediaDataList }: IMediaCh
           <th className={styles.tableColumn}>네이버</th>
           {naverData.map((data, i) => (
             <td className={styles.tableColumn} key={data!.category}>
-              {(data!.value * allData[i]!.value).toFixed(2)}
+              {((data!.value * allData[i]!.value) / 100).toFixed(2)}
             </td>
           ))}
         </tr>
@@ -77,7 +77,7 @@ const MediaChartTable = ({ pickStartDate, pickEndDate, mediaDataList }: IMediaCh
           <th className={styles.tableColumn}>구글</th>
           {googleData.map((data, i) => (
             <td className={styles.tableColumn} key={data!.category}>
-              {(data!.value * allData[i]!.value).toFixed(2)}
+              {((data!.value * allData[i]!.value) / 100).toFixed(2)}
             </td>
           ))}
         </tr>

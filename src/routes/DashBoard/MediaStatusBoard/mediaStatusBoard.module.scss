@@ -1,5 +1,13 @@
 @use 'styles/constants/colors';
 
+.container {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  margin-bottom: 98px;
+  background: colors.$BG_G;
+}
+
 .section {
   display: flex;
   flex-direction: column;
@@ -10,14 +18,6 @@
   background: colors.$WHITE;
   border-radius: 20px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 4%);
-}
-
-.container {
-  position: relative;
-  box-sizing: border-box;
-  width: 100%;
-  margin-bottom: 98px;
-  background: colors.$BG_G;
 }
 
 .title {
@@ -49,10 +49,6 @@
   width: 100%;
   height: 220px;
   margin: 0;
-
-  &::-webkit-scrollbar {
-    display: inline-table;
-  }
 }
 
 .tableHead {
