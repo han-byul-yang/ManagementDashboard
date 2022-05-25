@@ -22,8 +22,8 @@ const IntegratedAdManagement = (props: Props) => {
   const { startDate, endDate } = props
   const [firstChartName, setFirstChartName] = useState('roas')
   const [secondChartName, setSecondChartName] = useState('cost')
-  const [data, setData] = useState<IStatusData[]>([])
-  const [pastData, setPastData] = useState<IStatusData[]>([])
+  const [statusData, setStatusData] = useState<IStatusData[]>([])
+  const [pastStatusData, setPastStatusData] = useState<IStatusData[]>([])
   const [isThirdSelectOpen, setIsThirdSelectOpen] = useState(false)
 
   const { isLoading } = useQuery<IStatusData[], Error>('trendData', getTrendData, {
@@ -31,7 +31,7 @@ const IntegratedAdManagement = (props: Props) => {
     // staleTime: 60 * 60 * 1000,
     // cacheTime: 60 * 60 * 1000,
     onSuccess: (res) => {
-      setData(
+      setStatusData(
         res.filter(
           (item: IStatusData) =>
             dayjs(startDate).subtract(1, 'day').unix() <= dayjs(item.date).unix() &&
@@ -42,7 +42,7 @@ const IntegratedAdManagement = (props: Props) => {
 
       const dayDifference = dayjs(endDate).diff(dayjs(startDate), 'day')
 
-      setPastData(
+      setPastStatusData(
         res.filter(
           (item: IStatusData) =>
             dayjs(startDate)
@@ -56,7 +56,7 @@ const IntegratedAdManagement = (props: Props) => {
   })
 
   useEffect(() => {
-    setData((prev) =>
+    setStatusData((prev) =>
       prev.filter(
         (item: IStatusData) =>
           dayjs(startDate).subtract(1, 'day').unix() <= dayjs(item.date).unix() &&
@@ -87,7 +87,7 @@ const IntegratedAdManagement = (props: Props) => {
       <h2 className={styles.sectionTitle}>통합 광고 현황</h2>
 
       <div className={styles.wrapper}>
-        <IntergratedAdStatus data={data} pastData={pastData} />
+        <IntergratedAdStatus data={statusData} pastData={pastStatusData} />
 
         <div className={styles.selectBtnGroup}>
           <Dropdown options={chartOptions} onChange={handleFirstChartChange} />
@@ -105,7 +105,7 @@ const IntegratedAdManagement = (props: Props) => {
           </div>
         </div>
 
-        <IntergratedAdChart data={data} firstData={firstChartName} secondData={secondChartName} />
+        <IntergratedAdChart data={statusData} firstData={firstChartName} secondData={secondChartName} />
       </div>
     </section>
   )

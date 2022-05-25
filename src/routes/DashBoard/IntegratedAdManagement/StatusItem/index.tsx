@@ -4,6 +4,7 @@ interface IStatusItem {
   value: string
   content: string
   unit: string
+  difference: string
 }
 
 const StatusItem = ({ item }: { item: IStatusItem }) => {
@@ -12,12 +13,16 @@ const StatusItem = ({ item }: { item: IStatusItem }) => {
       <dl>
         <dt>{item.content}</dt>
         <dd>
-          {item.value} {item.unit}
+          {item.value}
+          {item.unit}
         </dd>
       </dl>
 
       <div className={styles.rate}>
-        <span className={styles.rateText}>1{item.unit}</span>
+        <span className={styles.rateText}>
+          {item.difference}
+          {item.unit}
+        </span>
       </div>
     </li>
   )

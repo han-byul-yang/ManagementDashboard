@@ -1,6 +1,6 @@
 import { IStatusData } from 'types/types'
 
-export const getAdStatus = (data: IStatusData[]) => {
+export const getAdStatusTotals = (data: IStatusData[]) => {
   const totalCost = data.reduce((acc, cur) => acc + cur.cost, 0)
   // 노출수
   const totalImp = data.reduce((acc, cur) => acc + cur.imp, 0)
