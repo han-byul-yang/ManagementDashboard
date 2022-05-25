@@ -27,9 +27,6 @@ const MediaStatusBoard = ({ pickStartDate, pickEndDate }: IMediaStatusBoard) => 
   const [mediaDataList, setMediaDataList] = useState<IMediaChannelData[]>()
   const { google, facebook, naver, kakao } = sumDataByCategory(pickStartDate, pickEndDate, mediaDataList)
   const { isLoading } = useQuery('medias', getMedias, {
-    retry: 1,
-    staleTime: 60 * 60 * 1000,
-    cacheTime: 60 * 60 * 1000,
     onSuccess: (res) => {
       setMediaDataList(res.data)
     },
