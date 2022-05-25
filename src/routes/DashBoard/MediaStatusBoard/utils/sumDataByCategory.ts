@@ -89,7 +89,6 @@ export const sumDataByCategory = (
     { value: allCtr, category: '클릭률(CTR)' },
     { value: allCpc, category: '클릭당비용(CPC)' },
   ]
-  console.log(sumMediaValueData, 'sumDataByCategory')
 
   return sumMediaValueData
 }

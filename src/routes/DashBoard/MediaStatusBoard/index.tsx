@@ -26,6 +26,7 @@ interface IMediaStatusBoard {
 const MediaStatusBoard = ({ pickStartDate, pickEndDate }: IMediaStatusBoard) => {
   const [mediaDataList, setMediaDataList] = useState<IMediaChannelData[]>()
   const { google, facebook, naver, kakao } = sumDataByCategory(pickStartDate, pickEndDate, mediaDataList)
+
   const { isLoading } = useQuery('medias', getMedias, {
     onSuccess: (res) => {
       setMediaDataList(res.data)
@@ -55,9 +56,10 @@ const MediaStatusBoard = ({ pickStartDate, pickEndDate }: IMediaStatusBoard) => 
     naverData: [...filterCategry(naver)],
     kakaoData: [...filterCategry(kakao)],
   }
-  console.log(mediaDataForChart, 'mediaDataForChart')
 
   const { googleData, facebookData, naverData, kakaoData } = mediaDataForChart
+  const chartDataLIst = [googleData, facebookData, naverData, kakaoData]
+
   const tickFormat = ['광고비', '매출', '노출 수', '클릭 수', '전환 수']
 
   return (
@@ -92,31 +94,17 @@ const MediaStatusBoard = ({ pickStartDate, pickEndDate }: IMediaStatusBoard) => 
               }}
             />
             <VictoryStack colorScale={['#AC8AF8', '#85DA47', '#4FADF7', '#FFEB00']}>
-              <VictoryBar
-                data={googleData}
-                {...chartStyle.bar}
-                labels={({ datum }) => `${datum.value.toFixed(2)}`}
-                labelComponent={<VictoryTooltip flyoutWidth={80} style={{ fill: '#3a474e' }} />}
-              />
-              <VictoryBar
-                data={facebookData}
-                {...chartStyle.bar}
-                labels={({ datum }) => `${datum.value.toFixed(2)}`}
-                labelComponent={<VictoryTooltip flyoutWidth={80} style={{ fill: '#3a474e' }} />}
-              />
-              <VictoryBar
-                data={naverData}
-                {...chartStyle.bar}
-                labels={({ datum }) => `${datum.value.toFixed(2)}`}
-                labelComponent={<VictoryTooltip flyoutWidth={80} style={{ fill: '#3a474e' }} />}
-              />
-              <VictoryBar
-                data={kakaoData}
-                {...chartStyle.bar}
-                labels={({ datum }) => `${datum.value.toFixed(2)}`}
-                labelComponent={<VictoryTooltip flyoutWidth={80} style={{ fill: '#3a474e' }} />}
-                cornerRadius={{ top: 6 }}
-              />
+              {chartDataLIst.map((media) => {
+                return (
+                  <VictoryBar
+                    key={`media-${media}`}
+                    data={media}
+                    {...chartStyle.bar}
+                    labels={({ datum }) => `${datum.value.toFixed(2)}`}
+                    labelComponent={<VictoryTooltip flyoutWidth={80} style={{ fill: '#3a474e' }} />}
+                  />
+                )
+              })}
             </VictoryStack>
             <VictoryLegend
               x={1500}

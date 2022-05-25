@@ -24,7 +24,7 @@ const MediaChartTable = ({ pickStartDate, pickEndDate, mediaDataList }: IMediaCh
     ]
   }
 
-  const mediaDataForChart = {
+  const filteredmediaData = {
     googleData: [...filterCategry(google)],
     facebookData: [...filterCategry(facebook)],
     naverData: [...filterCategry(naver)],
@@ -32,7 +32,14 @@ const MediaChartTable = ({ pickStartDate, pickEndDate, mediaDataList }: IMediaCh
     allData: [...filterCategry(all)],
   }
 
-  const { googleData, facebookData, naverData, kakaoData, allData } = mediaDataForChart
+  const { googleData, facebookData, naverData, kakaoData, allData } = filteredmediaData
+
+  const mediaDataForTable = [
+    { value: kakaoData, name: '카카오' },
+    { value: naverData, name: '네이버' },
+    { value: facebookData, name: '페이스북' },
+    { value: googleData, name: '구글' },
+  ]
 
   const tableHeadList = ['광고비', '매출', 'ROAS', '노출 수', '클릭 수', '클릭률(CTR)', '클릭당 비용(CPC)']
 
@@ -49,38 +56,18 @@ const MediaChartTable = ({ pickStartDate, pickEndDate, mediaDataList }: IMediaCh
         </tr>
       </thead>
       <tbody>
-        <tr className={styles.tableRow}>
-          <th className={styles.tableColumn}>카카오</th>
-          {kakaoData.map((data, i) => (
-            <td className={styles.tableColumn} key={data!.category}>
-              {((data!.value * allData[i]!.value) / 100).toFixed(2)}
-            </td>
-          ))}
-        </tr>
-        <tr className={styles.tableRow}>
-          <th className={styles.tableColumn}>페이스북</th>
-          {facebookData.map((data, i) => (
-            <td className={styles.tableColumn} key={data!.category}>
-              {((data!.value * allData[i]!.value) / 100).toFixed(2)}
-            </td>
-          ))}
-        </tr>
-        <tr className={styles.tableRow}>
-          <th className={styles.tableColumn}>네이버</th>
-          {naverData.map((data, i) => (
-            <td className={styles.tableColumn} key={data!.category}>
-              {((data!.value * allData[i]!.value) / 100).toFixed(2)}
-            </td>
-          ))}
-        </tr>
-        <tr className={styles.tableRow}>
-          <th className={styles.tableColumn}>구글</th>
-          {googleData.map((data, i) => (
-            <td className={styles.tableColumn} key={data!.category}>
-              {((data!.value * allData[i]!.value) / 100).toFixed(2)}
-            </td>
-          ))}
-        </tr>
+        {mediaDataForTable.map((media, index) => {
+          return (
+            <tr key={`media-${index}`} className={styles.tableRow}>
+              <th className={styles.tableColumn}>{media.name}</th>
+              {media.value.map((data, i) => (
+                <td className={styles.tableColumn} key={data!.category}>
+                  {((data!.value * allData[i]!.value) / 100).toFixed(2)}
+                </td>
+              ))}
+            </tr>
+          )
+        })}
         <tr className={styles.tableRow}>
           <th className={styles.tableTotal}>총계</th>
           {allData.map((data) => (
