@@ -3,10 +3,13 @@
 
 .container {
   position: relative;
-  box-sizing: border-box;
   width: 100%;
-  padding: 60px 41px 29px 40px;
-  background: colors.$BG_G;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .sectionTitle {
@@ -19,11 +22,19 @@
   color: colors.$GRAY_800;
 }
 
+.selectDate {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  input {
+    cursor: pointer;
+  }
+}
+
 .wrapper {
   position: relative;
   width: 100%;
-  max-width: 1039px;
-  min-height: 654px;
   margin: 0;
   background-color: colors.$WHITE;
   border-radius: 20px;
@@ -36,13 +47,6 @@
     min-height: 178px;
     padding: 40px 44px 40px 40px;
   }
-}
-
-.selectDate {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 200px;
 }
 
 .selectBtnGroup {

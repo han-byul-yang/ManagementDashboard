@@ -153,25 +153,29 @@ const IntegratedAdManagement = () => {
 
   return (
     <section className={styles.container}>
-      <h2 className={styles.sectionTitle}>통합 광고 현황</h2>
-      <div className={styles.wrapper}>
+      <div className={styles.header}>
+        <h2 className={styles.sectionTitle}>통합 광고 현황</h2>
         <div className={styles.selectDate}>
           <DatePicker
             selected={pickStartDate}
+            dateFormat='yyyy년 MM월 dd일'
             onChange={(date: Date) => setPickStartDate(date)}
-            customInput={<input type='text' style={{ width: '90px' }} />}
+            customInput={<input type='text' style={{ width: '120px' }} />}
           />
           <div>~</div>
           <DatePicker
             selected={pickEndDate}
+            dateFormat='yyyy년 MM월 dd일'
             onChange={(date: Date) => setPickEndDate(date)}
             customInput={
               // 날짜 뜨는 인풋 커스텀
-              <input type='text' style={{ width: '90px' }} />
+              <input type='text' style={{ width: '120px', marginLeft: '5px' }} />
             }
           />
         </div>
+      </div>
 
+      <div className={styles.wrapper}>
         <ul className={styles.group}>
           {items.map((item) => {
             return <Item key={`${item.id}`} item={item} />
