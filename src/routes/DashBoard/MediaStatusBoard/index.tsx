@@ -49,13 +49,13 @@ const MediaStatusBoard = ({ pickStartDate, pickEndDate }: IMediaStatusBoard) => 
       media.find((data) => data.category === '전환 수'),
     ]
   }
-
   const mediaDataForChart = {
     googleData: [...filterCategry(google)],
     facebookData: [...filterCategry(facebook)],
     naverData: [...filterCategry(naver)],
     kakaoData: [...filterCategry(kakao)],
   }
+  console.log(mediaDataForChart, 'mediaDataForChart')
 
   const { googleData, facebookData, naverData, kakaoData } = mediaDataForChart
   const tickFormat = ['광고비', '매출', '노출 수', '클릭 수', '전환 수']
