@@ -10,7 +10,6 @@ import { compactNumber } from 'utils/compactNumber'
 
 import styles from './integratedAdManagement.module.scss'
 import 'react-datepicker/dist/react-datepicker.css'
-import SelectDate from './SelectDate'
 
 const ITEMS = [
   {
@@ -52,6 +51,8 @@ interface Props {
 
 const IntegratedAdManagement = (props: Props) => {
   const { pickStartDate, pickEndDate } = props
+  const [firstChartName, setFirstChartName] = useState('click')
+  const [secondChartName, setSecondChartName] = useState('roas')
   const [isLoading, setIsLoading] = useState(false)
   const [data, setData] = useState<IData[]>([])
 
@@ -217,7 +218,9 @@ const IntegratedAdManagement = (props: Props) => {
           </div>
         </div>
 
-        {data.length !== 0 && <IntergratedAdChart data={data} firstData='click' secondData='roas' />}
+        {data.length !== 0 && (
+          <IntergratedAdChart data={data} firstData={firstChartName} secondData={secondChartName} />
+        )}
       </div>
     </section>
   )

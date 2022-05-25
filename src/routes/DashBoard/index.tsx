@@ -9,7 +9,7 @@ const DashBoard = () => {
   const [pickEndDate, setPickEndDate] = useState(new Date('2022-03-11'))
   return (
     <div className={styles.container}>
-      <head className={styles.head}>
+      <div className={styles.head}>
         <h2>대시보드</h2>
         <SelectDate
           pickStartDate={pickStartDate}
@@ -17,7 +17,7 @@ const DashBoard = () => {
           pickEndDate={pickEndDate}
           setPickEndDate={setPickEndDate}
         />
-      </head>
+      </div>
       <IntegratedAdManagement pickStartDate={pickStartDate} pickEndDate={pickEndDate} />
       <MediaStatusBoard />
     </div>
