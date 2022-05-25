@@ -25,11 +25,7 @@ interface IMediaStatusBoard {
 
 const MediaStatusBoard = ({ pickStartDate, pickEndDate }: IMediaStatusBoard) => {
   const [mediaDataList, setMediaDataList] = useState<IMediaChannelData[]>()
-  const { googleList, facebookList, naverList, kakaoList } = sumDataByCategory(
-    pickStartDate,
-    pickEndDate,
-    mediaDataList
-  )
+  const { google, facebook, naver, kakao } = sumDataByCategory(pickStartDate, pickEndDate, mediaDataList)
 
   const { isLoading } = useQuery('medias', getMedias, {
     onSuccess: (res) => {
@@ -55,10 +51,10 @@ const MediaStatusBoard = ({ pickStartDate, pickEndDate }: IMediaStatusBoard) => 
     ]
   }
   const mediaDataForChart = {
-    googleData: [...filterCategry(googleList)],
-    facebookData: [...filterCategry(facebookList)],
-    naverData: [...filterCategry(naverList)],
-    kakaoData: [...filterCategry(kakaoList)],
+    googleData: [...filterCategry(google)],
+    facebookData: [...filterCategry(facebook)],
+    naverData: [...filterCategry(naver)],
+    kakaoData: [...filterCategry(kakao)],
   }
 
   const { googleData, facebookData, naverData, kakaoData } = mediaDataForChart

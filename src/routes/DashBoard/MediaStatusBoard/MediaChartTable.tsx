@@ -10,11 +10,7 @@ interface IMediaChartTable {
 }
 
 const MediaChartTable = ({ pickStartDate, pickEndDate, mediaDataList }: IMediaChartTable) => {
-  const { googleList, facebookList, naverList, kakaoList, totalDataList } = sumDataByCategory(
-    pickStartDate,
-    pickEndDate,
-    mediaDataList
-  )
+  const { google, facebook, naver, kakao, all } = sumDataByCategory(pickStartDate, pickEndDate, mediaDataList)
 
   const filterCategry = (media: { value: number; category: string }[]) => {
     return [
@@ -29,11 +25,11 @@ const MediaChartTable = ({ pickStartDate, pickEndDate, mediaDataList }: IMediaCh
   }
 
   const filteredmediaData = {
-    googleData: [...filterCategry(googleList)],
-    facebookData: [...filterCategry(facebookList)],
-    naverData: [...filterCategry(naverList)],
-    kakaoData: [...filterCategry(kakaoList)],
-    allData: [...filterCategry(totalDataList)],
+    googleData: [...filterCategry(google)],
+    facebookData: [...filterCategry(facebook)],
+    naverData: [...filterCategry(naver)],
+    kakaoData: [...filterCategry(kakao)],
+    allData: [...filterCategry(all)],
   }
 
   const { googleData, facebookData, naverData, kakaoData, allData } = filteredmediaData

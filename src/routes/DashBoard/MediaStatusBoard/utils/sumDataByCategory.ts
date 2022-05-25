@@ -2,59 +2,6 @@ import { IMediaChannelData } from 'types/types'
 import { mediaDataByDate } from './mediaDataByDate'
 import { getMediaStatus } from 'routes/DashBoard/utils/adClac'
 
-interface ISumData {
-  totalCost: number
-  totalImp: number
-  totalSales: number
-  totalRoas: number
-  totalClick: number
-  totalConv: number
-  totalCtr: number
-  totalCpc: number
-}
-
-export const sumDataByCategory = (pickStartDate: Date, pickEndDate: Date, mediaDataList: IMediaChannelData[]) => {
-  const selectedDateMediaData = mediaDataByDate(pickStartDate, pickEndDate, mediaDataList)
-  const { google, facebook, naver, kakao } = selectedDateMediaData
-
-  const googleData = getMediaStatus(google)
-  const facebookData = getMediaStatus(facebook)
-  const naverData = getMediaStatus(naver)
-  const kakaoData = getMediaStatus(kakao)
-  const totalData = getMediaStatus(mediaDataList)
-
-  const sumCategoryData = (media: ISumData) => [
-    { value: (media.totalCost / totalData.totalCost) * 100, category: '광고비' },
-    { value: (media.totalSales / totalData.totalSales) * 100, category: '매출 수' },
-    { value: (media.totalImp / totalData.totalImp) * 100, category: '노출 수' },
-    { value: (media.totalClick / totalData.totalClick) * 100, category: '클리 수' },
-    { value: (media.totalConv / totalData.totalConv) * 100, category: '전환 수' },
-    { value: (media.totalRoas / totalData.totalRoas) * 100, category: 'ROAS' },
-    { value: (media.totalCtr / totalData.totalCtr) * 100, category: '클릭률(CTR)' },
-    { value: (media.totalCpc / totalData.totalCpc) * 100, category: '클릭당비용(CPC)' },
-  ]
-
-  const sumAllMediaData = [
-    { value: totalData.totalCost, category: '광고비' },
-    { value: totalData.totalSales, category: '매출 수' },
-    { value: totalData.totalImp, category: '노출 수' },
-    { value: totalData.totalClick, category: '클리 수' },
-    { value: totalData.totalConv, category: '전환 수' },
-    { value: totalData.totalRoas, category: 'ROAS' },
-    { value: totalData.totalCtr, category: '클릭률(CTR)' },
-    { value: totalData.totalCpc, category: '클릭당비용(CPC)' },
-  ]
-
-  return {
-    googleList: sumCategoryData(googleData),
-    facebookList: sumCategoryData(facebookData),
-    naverList: sumCategoryData(naverData),
-    kakaoList: sumCategoryData(kakaoData),
-    totalDataList: sumAllMediaData,
-  }
-}
-
-/*
 export const sumDataByCategory = (
   pickStartDate: Date,
   pickEndDate: Date,
@@ -146,4 +93,3 @@ export const sumDataByCategory = (
 
   return sumMediaValueData
 }
-*/
