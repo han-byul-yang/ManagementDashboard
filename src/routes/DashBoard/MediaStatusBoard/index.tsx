@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { VictoryAxis, VictoryBar, VictoryChart, VictoryStack, VictoryTheme, VictoryLegend } from 'victory'
 import { useQuery } from 'react-query'
 
-import { sumMediaCategory } from 'utils/sumMediaCategory'
+import { sumMediaCategory } from 'routes/DashBoard/MediaStatusBoard/utils/sumMediaCategory'
 import { getMedias } from 'services/getData'
 import { IMediaChannelData } from 'types/types.d'
 

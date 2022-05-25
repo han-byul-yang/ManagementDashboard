@@ -1,5 +1,5 @@
 import { IMediaChannelData } from 'types/types'
-import { sumMediaCategory } from 'utils/sumMediaCategory'
+import { sumMediaCategory } from 'routes/DashBoard/MediaStatusBoard/utils/sumMediaCategory'
 
 import styles from './mediaStatusBoard.module.scss'
 
