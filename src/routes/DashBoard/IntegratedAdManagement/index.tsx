@@ -7,43 +7,10 @@ import Item from './Item'
 import { IData } from 'types/types'
 import IntergratedAdChart from './IntergratedAdChart'
 import { compactNumber } from 'utils/compactNumber'
+import Dropdown from 'components/Dropdown'
 
 import styles from './integratedAdManagement.module.scss'
 import 'react-datepicker/dist/react-datepicker.css'
-import Dropdown from 'components/Dropdown'
-
-const ITEMS = [
-  {
-    id: 0,
-    title: 'ROAS',
-    unit: '%',
-  },
-  {
-    id: 1,
-    title: '광고비',
-    unit: '원',
-  },
-  {
-    id: 2,
-    title: '노출 수',
-    unit: '회',
-  },
-  {
-    id: 3,
-    title: '클릭수',
-    unit: '회',
-  },
-  {
-    id: 4,
-    title: '전환 수',
-    unit: '회',
-  },
-  {
-    id: 5,
-    title: '매출',
-    unit: '원',
-  },
-]
 
 interface Props {
   pickStartDate: Date
@@ -55,26 +22,32 @@ const IntegratedAdManagement = (props: Props) => {
     {
       value: 'roas',
       content: 'ROAS',
+      unit: '%',
     },
     {
       value: 'cost',
       content: '광고비',
+      unit: '원',
     },
     {
       value: 'cpc',
       content: '노출 수',
+      unit: '회',
     },
     {
       value: 'click',
       content: '클릭 수',
+      unit: '회',
     },
     {
       value: 'conv',
       content: '전환 수',
+      unit: '회',
     },
     {
       value: 'convValue',
       content: '매출',
+      unit: '원',
     },
   ]
 
@@ -142,9 +115,9 @@ const IntegratedAdManagement = (props: Props) => {
   const totalCvr = cvrArray.reduce((a, b) => a + b, 0)
   const conversion = totalClick * totalCvr
 
-  const items = ITEMS.map((item) => {
+  const items = chartOptions.map((item) => {
     let value = '0'
-    switch (item.title) {
+    switch (item.content) {
       case 'ROAS':
         value = String(Math.round(roas))
         break
@@ -189,7 +162,7 @@ const IntegratedAdManagement = (props: Props) => {
       <div className={styles.wrapper}>
         <ul className={styles.group}>
           {items.map((item) => {
-            return <Item key={item.id} item={item} />
+            return <Item key={`chart-${item.value}`} item={item} />
           })}
         </ul>
 

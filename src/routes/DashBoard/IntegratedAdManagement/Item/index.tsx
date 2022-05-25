@@ -2,21 +2,16 @@
 import styles from './item.module.scss'
 
 interface IItem {
-  id: number
-  title: string
-  unit: string
   value: string
+  content: string
+  unit: string
 }
 
-interface IProps {
-  item: IItem
-}
-
-const Item = ({ item }: IProps) => {
+const Item = ({ item }: { item: IItem }) => {
   return (
-    <li key={`item_${item.id}`} className={styles.item}>
+    <li key={`item_${item.value}`} className={styles.item}>
       <dl>
-        <dt>{item.title}</dt>
+        <dt>{item.content}</dt>
         <dd>
           {item.value} {item.unit}
         </dd>
