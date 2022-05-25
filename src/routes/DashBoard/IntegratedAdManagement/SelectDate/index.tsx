@@ -1,30 +1,24 @@
-import { Dispatch, SetStateAction } from 'react'
 import DatePicker from 'react-datepicker'
+import { useRecoilState } from 'recoil'
+import { pickedDate } from 'store/atoms'
 
 import styles from './selectDate.module.scss'
 
-interface Props {
-  startDate: Date
-  setStartDate: Dispatch<SetStateAction<Date>>
-  endDate: Date
-  setEndDate: Dispatch<SetStateAction<Date>>
-}
-
-const SelectDate = (props: Props) => {
-  const { startDate, setStartDate, endDate, setEndDate } = props
+const SelectDate = () => {
+  const [selectDate, setSelectDate] = useRecoilState(pickedDate)
   return (
     <div className={styles.selectDate}>
       <DatePicker
-        selected={startDate}
+        selected={selectDate.start}
         dateFormat='yyyy년 MM월 dd일'
-        onChange={(date: Date) => setStartDate(date)}
+        onChange={(date: Date) => setSelectDate((prev) => ({ ...prev, start: date }))}
         customInput={<input type='text' style={{ width: '120px' }} />}
       />
       <div>~</div>
       <DatePicker
-        selected={endDate}
+        selected={selectDate.end}
         dateFormat='yyyy년 MM월 dd일'
-        onChange={(date: Date) => setEndDate(date)}
+        onChange={(date: Date) => setSelectDate((prev) => ({ ...prev, end: date }))}
         customInput={
           // 날짜 뜨는 인풋 커스텀
           <input type='text' style={{ width: '120px', marginLeft: '5px' }} />

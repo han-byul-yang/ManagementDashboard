@@ -64,6 +64,19 @@ const IntegratedAdManagement = (props: Props) => {
           item
       )
     )
+
+    const dayDifference = dayjs(endDate).diff(dayjs(startDate), 'day')
+
+    setPastStatusData((prev) =>
+      prev.filter(
+        (item: IStatusData) =>
+          dayjs(startDate)
+            .subtract(1 + dayDifference, 'day')
+            .unix() <= dayjs(item.date).unix() &&
+          dayjs(endDate).subtract(dayDifference, 'day').unix() >= dayjs(item.date).unix() &&
+          item
+      )
+    )
   }, [endDate, startDate])
 
   if (isLoading) {
@@ -90,11 +103,13 @@ const IntegratedAdManagement = (props: Props) => {
         <IntergratedAdStatus data={statusData} pastData={pastStatusData} />
 
         <div className={styles.selectBtnGroup}>
-          <Dropdown options={chartOptions} onChange={handleFirstChartChange} />
-          <Dropdown
-            options={chartOptions.filter((option) => option.content !== firstChartName)}
-            onChange={handleSecondChartChange}
-          />
+          <div className={styles.selectBtnBox}>
+            <Dropdown options={chartOptions} onChange={handleFirstChartChange} />
+            <Dropdown
+              options={chartOptions.filter((option) => option.content !== firstChartName)}
+              onChange={handleSecondChartChange}
+            />
+          </div>
           <button type='button' className={styles.filterBtn} onClick={handleThirdBtnClick}>
             <span>주간</span>
           </button>

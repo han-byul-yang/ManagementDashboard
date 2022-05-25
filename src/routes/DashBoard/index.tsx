@@ -1,24 +1,22 @@
-import { useState } from 'react'
-
 import IntegratedAdManagement from './IntegratedAdManagement'
 import PageHeader from 'components/PageHeader'
 import SelectDate from './IntegratedAdManagement/SelectDate'
 import MediaStatusBoard from './MediaStatusBoard'
 
 import styles from './dashBoard.module.scss'
+import { useRecoilValue } from 'recoil'
+import { pickedDate } from 'store/atoms'
 
 const DashBoard = () => {
-  // TODO: 합쳐서 관리
-  const [startDate, setStartDate] = useState(new Date('2022-03-01'))
-  const [endDate, setEndDate] = useState(new Date('2022-03-11'))
+  const selectDate = useRecoilValue(pickedDate)
   return (
     <div className={styles.container}>
       <div className={styles.head}>
         <PageHeader title='대시보드' />
-        <SelectDate startDate={startDate} setStartDate={setStartDate} endDate={endDate} setEndDate={setEndDate} />
+        <SelectDate />
       </div>
-      <IntegratedAdManagement startDate={startDate} endDate={endDate} />
-      <MediaStatusBoard startDate={startDate} endDate={endDate} />
+      <IntegratedAdManagement startDate={selectDate.start} endDate={selectDate.end} />
+      <MediaStatusBoard startDate={selectDate.start} endDate={selectDate.end} />
     </div>
   )
 }

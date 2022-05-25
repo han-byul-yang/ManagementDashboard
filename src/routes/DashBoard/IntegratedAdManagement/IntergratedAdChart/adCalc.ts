@@ -10,7 +10,7 @@ export const newChartData = (data: IStatusData[], category: string) => {
     list = data.map((item) => ({ x: item.date, y: item.convValue }))
   } else if (category === '매출') {
     list = data.map((item) => ({ x: item.date, y: Math.floor((item.roas * item.cost) / 100) }))
-  } else if (category === 'roas') {
+  } else if (category === 'ROAS') {
     list = data.map((item) => ({ x: item.date, y: item.roas }))
   } else if (category === '노출 수') {
     list = data.map((item) => ({ x: item.date, y: Math.floor((item.click / item.ctr) * 100) }))

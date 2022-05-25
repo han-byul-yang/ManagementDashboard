@@ -22,7 +22,7 @@ const StatusItem = ({ item }: { item: IStatusItem }) => {
 
       <div className={styles.rate}>
         <div className={styles.rateText}>
-          {item.isPositive ? <UpRedIcon /> : <DownGreenIcon />}
+          {!item.isPositive ? <UpRedIcon /> : <DownGreenIcon />}
           {item.difference}
           {item.unit}
         </div>
