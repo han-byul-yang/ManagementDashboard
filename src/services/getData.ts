@@ -22,3 +22,11 @@ export const getMedias = async () => {
 
   return data
 }
+
+export const getTrendData = async () => {
+  await sleep(1000)
+
+  const res = await axios.get('data/trendData.json')
+
+  return res.data.report.daily
+}

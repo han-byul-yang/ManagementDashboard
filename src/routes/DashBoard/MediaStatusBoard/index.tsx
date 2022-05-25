@@ -15,8 +15,8 @@ const MediaStatusBoard = () => {
   const { google, facebook, naver, kakao } = sumMediaCategory('2022-02-01', '2022-04-20', mediaDataList)
   const { isLoading } = useQuery('medias', getMedias, {
     retry: 1,
-    staleTime: 60 * 60 * 1000,
-    cacheTime: 60 * 60 * 1000,
+    // staleTime: 60 * 60 * 1000,
+    // cacheTime: 60 * 60 * 1000,
     onSuccess: async (res) => {
       setMediaDataList(res.data)
     },
