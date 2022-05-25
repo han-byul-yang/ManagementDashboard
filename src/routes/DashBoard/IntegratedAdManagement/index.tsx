@@ -3,14 +3,14 @@ import axios from 'axios'
 import cx from 'classnames'
 import dayjs from 'dayjs'
 
-import Item from './Item'
 import { IData } from 'types/types'
 import IntergratedAdChart from './IntergratedAdChart'
-import { compactNumber } from 'utils/compactNumber'
 import Dropdown from 'components/Dropdown'
+import IntergratedAdStatus from './IntergratedAdStatus'
 
-import styles from './integratedAdManagement.module.scss'
 import 'react-datepicker/dist/react-datepicker.css'
+import styles from './integratedAdManagement.module.scss'
+import { chartOptions } from './IntergratedAdStatus/status'
 
 interface Props {
   pickStartDate: Date
@@ -18,42 +18,9 @@ interface Props {
 }
 
 const IntegratedAdManagement = (props: Props) => {
-  const chartOptions = [
-    {
-      value: 'roas',
-      content: 'ROAS',
-      unit: '%',
-    },
-    {
-      value: 'cost',
-      content: '광고비',
-      unit: '원',
-    },
-    {
-      value: 'cpc',
-      content: '노출 수',
-      unit: '회',
-    },
-    {
-      value: 'click',
-      content: '클릭 수',
-      unit: '회',
-    },
-    {
-      value: 'conv',
-      content: '전환 수',
-      unit: '회',
-    },
-    {
-      value: 'convValue',
-      content: '매출',
-      unit: '원',
-    },
-  ]
-
   const { pickStartDate, pickEndDate } = props
-  const [firstChartName, setFirstChartName] = useState(chartOptions[0].value)
-  const [secondChartName, setSecondChartName] = useState(chartOptions[1].value)
+  const [firstChartName, setFirstChartName] = useState('roas')
+  const [secondChartName, setSecondChartName] = useState('cost')
   const [isLoading, setIsLoading] = useState(false)
   const [data, setData] = useState<IData[]>([])
   const [isThirdSelectOpen, setIsThirdSelectOpen] = useState(false)
@@ -84,65 +51,6 @@ const IntegratedAdManagement = (props: Props) => {
 
   if (isLoading) return <div>로딩중...</div>
 
-  const convValueArray = data.map((item) => {
-    return item.convValue
-  })
-  const totalConvValue = convValueArray.reduce((a, b) => a + b, 0)
-  const costArray = data.map((item) => {
-    return item.cost
-  })
-  // 광고비 : totalCost
-  const totalCost = costArray.reduce((a, b) => a + b, 0)
-  // ROAS
-  const roas = (totalConvValue / totalCost) * 100
-
-  // 노출수
-  const impArray = data.map((item) => {
-    return item.imp
-  })
-  const totalImp = impArray.reduce((a, b) => a + b, 0)
-
-  // 클릭수
-  const clickArray = data.map((item) => {
-    return item.click
-  })
-  const totalClick = clickArray.reduce((a, b) => a + b, 0)
-
-  // 전환 수 : totalClick x totalCvr
-  const cvrArray = data.map((item) => {
-    return item.cvr
-  })
-  const totalCvr = cvrArray.reduce((a, b) => a + b, 0)
-  const conversion = totalClick * totalCvr
-
-  const items = chartOptions.map((item) => {
-    let value = '0'
-    switch (item.content) {
-      case 'ROAS':
-        value = String(Math.round(roas))
-        break
-      case '광고비':
-        value = compactNumber(totalCost)
-        break
-      case '노출 수':
-        value = compactNumber(totalImp)
-        break
-      case '클릭수':
-        value = compactNumber(totalClick)
-        break
-      case '전환 수':
-        value = compactNumber(conversion)
-        break
-      case '매출':
-        value = compactNumber(totalConvValue)
-        break
-    }
-    return {
-      ...item,
-      value,
-    }
-  })
-
   const handleFirstChartChange = (e: ChangeEvent<HTMLSelectElement>) => {
     setFirstChartName(e.target.value)
   }
@@ -160,11 +68,7 @@ const IntegratedAdManagement = (props: Props) => {
       <h2 className={styles.sectionTitle}>통합 광고 현황</h2>
 
       <div className={styles.wrapper}>
-        <ul className={styles.group}>
-          {items.map((item) => {
-            return <Item key={`chart-${item.value}`} item={item} />
-          })}
-        </ul>
+        <IntergratedAdStatus data={data} />
 
         <div className={styles.selectBtnGroup}>
           <Dropdown options={chartOptions} onChange={handleFirstChartChange} />
