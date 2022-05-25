@@ -20,8 +20,8 @@ interface Props {
 
 const IntegratedAdManagement = (props: Props) => {
   const { startDate, endDate } = props
-  const [firstChartName, setFirstChartName] = useState('roas')
-  const [secondChartName, setSecondChartName] = useState('cost')
+  const [firstChartName, setFirstChartName] = useState('ROAS')
+  const [secondChartName, setSecondChartName] = useState('')
   const [statusData, setStatusData] = useState<IStatusData[]>([])
   const [pastStatusData, setPastStatusData] = useState<IStatusData[]>([])
   const [isThirdSelectOpen, setIsThirdSelectOpen] = useState(false)
@@ -92,7 +92,7 @@ const IntegratedAdManagement = (props: Props) => {
         <div className={styles.selectBtnGroup}>
           <Dropdown options={chartOptions} onChange={handleFirstChartChange} />
           <Dropdown
-            options={chartOptions.filter((option) => option.value !== firstChartName)}
+            options={chartOptions.filter((option) => option.content !== firstChartName)}
             onChange={handleSecondChartChange}
           />
           <button type='button' className={styles.filterBtn} onClick={handleThirdBtnClick}>

@@ -1,31 +1,31 @@
 export const chartOptions = [
   {
-    value: 'roas',
+    value: 'ROAS',
     content: 'ROAS',
     unit: '%',
   },
   {
-    value: 'cost',
+    value: '광고비',
     content: '광고비',
     unit: '원',
   },
   {
-    value: 'cpc',
+    value: '노출 수',
     content: '노출 수',
     unit: '회',
   },
   {
-    value: 'click',
+    value: '클릭 수',
     content: '클릭 수',
     unit: '회',
   },
   {
-    value: 'conv',
+    value: '전환 수',
     content: '전환 수',
     unit: '회',
   },
   {
-    value: 'convValue',
+    value: '매출',
     content: '매출',
     unit: '원',
   },
