@@ -1,14 +1,16 @@
 import { IMediaChannelData } from 'types/types'
-import { sumMediaCategory } from 'utils/sumMediaCategory'
+import { sumDataByCategory } from 'routes/DashBoard/MediaStatusBoard/utils/sumDataByCategory'
 
 import styles from './mediaStatusBoard.module.scss'
 
-interface IChartTable {
+interface IMediaChartTable {
+  pickStartDate: Date
+  pickEndDate: Date
   mediaDataList: IMediaChannelData[] | undefined
 }
 
-const ChartTable = ({ mediaDataList }: IChartTable) => {
-  const { google, facebook, naver, kakao, all } = sumMediaCategory('2022-02-01', '2022-04-20', mediaDataList)
+const MediaChartTable = ({ pickStartDate, pickEndDate, mediaDataList }: IMediaChartTable) => {
+  const { google, facebook, naver, kakao, all } = sumDataByCategory(pickStartDate, pickEndDate, mediaDataList)
 
   const filterCategry = (media: { value: number; category: string }[]) => {
     return [
@@ -51,7 +53,7 @@ const ChartTable = ({ mediaDataList }: IChartTable) => {
           <th className={styles.tableColumn}>카카오</th>
           {kakaoData.map((data, i) => (
             <td className={styles.tableColumn} key={data!.category}>
-              {(data!.value * allData[i]!.value).toFixed(2)}
+              {((data!.value * allData[i]!.value) / 100).toFixed(2)}
             </td>
           ))}
         </tr>
@@ -59,7 +61,7 @@ const ChartTable = ({ mediaDataList }: IChartTable) => {
           <th className={styles.tableColumn}>페이스북</th>
           {facebookData.map((data, i) => (
             <td className={styles.tableColumn} key={data!.category}>
-              {(data!.value * allData[i]!.value).toFixed(2)}
+              {((data!.value * allData[i]!.value) / 100).toFixed(2)}
             </td>
           ))}
         </tr>
@@ -67,7 +69,7 @@ const ChartTable = ({ mediaDataList }: IChartTable) => {
           <th className={styles.tableColumn}>네이버</th>
           {naverData.map((data, i) => (
             <td className={styles.tableColumn} key={data!.category}>
-              {(data!.value * allData[i]!.value).toFixed(2)}
+              {((data!.value * allData[i]!.value) / 100).toFixed(2)}
             </td>
           ))}
         </tr>
@@ -75,14 +77,14 @@ const ChartTable = ({ mediaDataList }: IChartTable) => {
           <th className={styles.tableColumn}>구글</th>
           {googleData.map((data, i) => (
             <td className={styles.tableColumn} key={data!.category}>
-              {(data!.value * allData[i]!.value).toFixed(2)}
+              {((data!.value * allData[i]!.value) / 100).toFixed(2)}
             </td>
           ))}
         </tr>
         <tr className={styles.tableRow}>
-          <th className={styles.tableColumn}>총계</th>
+          <th className={styles.tableTotal}>총계</th>
           {allData.map((data) => (
-            <td className={styles.tableColumn} key={data!.category}>
+            <td className={styles.tableTotal} key={data!.category}>
               {data?.value.toFixed(2)}
             </td>
           ))}
@@ -92,4 +94,4 @@ const ChartTable = ({ mediaDataList }: IChartTable) => {
   )
 }
 
-export default ChartTable
+export default MediaChartTable

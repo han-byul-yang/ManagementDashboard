@@ -1,7 +1,7 @@
 import dayjs from 'dayjs'
 import { IMediaChannelData } from 'types/types.d'
 
-export const mediaDataByDate = (startDate: string, endDate: string, mediaDataList: IMediaChannelData[] | undefined) => {
+export const mediaDataByDate = (startDate: Date, endDate: Date, mediaDataList: IMediaChannelData[] | undefined) => {
   const start = dayjs(startDate)
   const end = dayjs(endDate)
 
