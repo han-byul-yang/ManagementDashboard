@@ -19,13 +19,13 @@ import chartStyle from './chartStyle'
 import styles from './mediaStatusBoard.module.scss'
 
 interface IMediaStatusBoard {
-  pickStartDate: Date
-  pickEndDate: Date
+  startDate: Date
+  endDate: Date
 }
 
-const MediaStatusBoard = ({ pickStartDate, pickEndDate }: IMediaStatusBoard) => {
+const MediaStatusBoard = ({ startDate, endDate }: IMediaStatusBoard) => {
   const [mediaDataList, setMediaDataList] = useState<IMediaChannelData[]>()
-  const { google, facebook, naver, kakao } = sumDataByCategory(pickStartDate, pickEndDate, mediaDataList)
+  const { google, facebook, naver, kakao } = sumDataByCategory(startDate, endDate, mediaDataList)
   const { isLoading } = useQuery('medias', getMedias, {
     onSuccess: (res) => {
       setMediaDataList(res.data)
@@ -134,7 +134,7 @@ const MediaStatusBoard = ({ pickStartDate, pickEndDate }: IMediaStatusBoard) => 
           </VictoryChart>
         </div>
         <div className={styles.tableBox}>
-          <MediaChartTable pickStartDate={pickStartDate} pickEndDate={pickEndDate} mediaDataList={mediaDataList} />
+          <MediaChartTable startDate={startDate} endDate={endDate} mediaDataList={mediaDataList} />
         </div>
       </div>
     </div>

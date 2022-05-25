@@ -14,12 +14,12 @@ import 'react-datepicker/dist/react-datepicker.css'
 import styles from './integratedAdManagement.module.scss'
 
 interface Props {
-  pickStartDate: Date
-  pickEndDate: Date
+  startDate: Date
+  endDate: Date
 }
 
 const IntegratedAdManagement = (props: Props) => {
-  const { pickStartDate, pickEndDate } = props
+  const { startDate, endDate } = props
   const [firstChartName, setFirstChartName] = useState('roas')
   const [secondChartName, setSecondChartName] = useState('cost')
   const [data, setData] = useState<IData[]>([])
@@ -33,8 +33,8 @@ const IntegratedAdManagement = (props: Props) => {
       setData(
         res.filter(
           (item: IData) =>
-            dayjs(pickStartDate).subtract(1, 'day').unix() <= dayjs(item.date).unix() &&
-            dayjs(pickEndDate).unix() >= dayjs(item.date).unix() &&
+            dayjs(startDate).subtract(1, 'day').unix() <= dayjs(item.date).unix() &&
+            dayjs(endDate).unix() >= dayjs(item.date).unix() &&
             item
         )
       )
@@ -45,12 +45,12 @@ const IntegratedAdManagement = (props: Props) => {
     setData((prev) =>
       prev.filter(
         (item: IData) =>
-          dayjs(pickStartDate).subtract(1, 'day').unix() <= dayjs(item.date).unix() &&
-          dayjs(pickEndDate).unix() >= dayjs(item.date).unix() &&
+          dayjs(startDate).subtract(1, 'day').unix() <= dayjs(item.date).unix() &&
+          dayjs(endDate).unix() >= dayjs(item.date).unix() &&
           item
       )
     )
-  }, [pickEndDate, pickStartDate])
+  }, [endDate, startDate])
 
   if (isLoading) {
     return <div className={styles.container}>...loading</div>

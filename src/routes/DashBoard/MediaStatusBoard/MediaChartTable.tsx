@@ -4,13 +4,13 @@ import { sumDataByCategory } from 'routes/DashBoard/MediaStatusBoard/utils/sumDa
 import styles from './mediaStatusBoard.module.scss'
 
 interface IMediaChartTable {
-  pickStartDate: Date
-  pickEndDate: Date
+  startDate: Date
+  endDate: Date
   mediaDataList: IMediaChannelData[] | undefined
 }
 
-const MediaChartTable = ({ pickStartDate, pickEndDate, mediaDataList }: IMediaChartTable) => {
-  const { google, facebook, naver, kakao, all } = sumDataByCategory(pickStartDate, pickEndDate, mediaDataList)
+const MediaChartTable = ({ startDate, endDate, mediaDataList }: IMediaChartTable) => {
+  const { google, facebook, naver, kakao, all } = sumDataByCategory(startDate, endDate, mediaDataList)
 
   const filterCategry = (media: { value: number; category: string }[]) => {
     return [
