@@ -82,9 +82,9 @@ const MediaChartTable = ({ pickStartDate, pickEndDate, mediaDataList }: IMediaCh
           ))}
         </tr>
         <tr className={styles.tableRow}>
-          <th className={styles.tableColumn}>총계</th>
+          <th className={styles.tableTotal}>총계</th>
           {allData.map((data) => (
-            <td className={styles.tableColumn} key={data!.category}>
+            <td className={styles.tableTotal} key={data!.category}>
               {data?.value.toFixed(2)}
             </td>
           ))}

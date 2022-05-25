@@ -3,7 +3,7 @@ const chartStyle = {
     style: {
       data: { stroke: '#FFFFFF', strokeWidth: 1 },
     },
-    barWidth: 36,
+    barWidth: 37,
     x: 'category',
     y: 'value',
   },

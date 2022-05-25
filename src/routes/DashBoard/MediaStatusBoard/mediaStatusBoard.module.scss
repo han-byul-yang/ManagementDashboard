@@ -6,7 +6,7 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 550px;
+  height: 718px;
   background: colors.$WHITE;
   border-radius: 20px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 4%);
@@ -16,7 +16,7 @@
   position: relative;
   box-sizing: border-box;
   width: 100%;
-  min-height: 743px;
+  margin-bottom: 98px;
   background: colors.$BG_G;
 }
 
@@ -32,16 +32,15 @@
   box-sizing: border-box;
   width: 100%;
   height: 220px;
-  margin: 0 30px;
+  margin: 80px 30px 0;
 }
 
 .tableBox {
   box-sizing: border-box;
   width: 100%;
-  max-width: 1200px;
   height: 300px;
-  padding: 0 50px;
-  margin: 60px 0 0;
+  padding: 0 40px;
+  margin: 80px 0 0;
   overflow-x: auto;
   font-size: 14px;
 }
@@ -59,19 +58,34 @@
 .tableHead {
   min-width: 100px;
   height: 33px;
-  padding-right: 40px;
+  padding: 16px 40px 16px 0;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 14px;
+  color: colors.$GRAY_300;
 }
 
 .tableRow {
-  min-width: 80px;
-  height: 33px;
+  min-width: 120px;
+  height: 40px;
+  color: colors.$GRAY_800;
   text-align: end;
   border-top: 2px solid colors.$GRAY_50;
 }
 
 .tableColumn {
-  min-width: 100px;
-  height: 33px;
-  padding-right: 40px;
+  min-width: 120px;
+  height: 40px;
+  padding: 16px 40px 16px 0;
+  color: colors.$GRAY_800;
   text-align: end;
+}
+
+.tableTotal {
+  min-width: 120px;
+  height: 40px;
+  padding: 16px 40px 16px 0;
+  color: colors.$GRAPH_01 !important;
+  text-align: end;
+  border-bottom: 2px solid colors.$GRAY_50;
 }

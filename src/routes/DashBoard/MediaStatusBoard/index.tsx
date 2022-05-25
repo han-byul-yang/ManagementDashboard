@@ -71,16 +71,16 @@ const MediaStatusBoard = ({ pickStartDate, pickEndDate }: IMediaStatusBoard) => 
           <VictoryChart
             theme={VictoryTheme.material}
             domain={{ y: [0, 100] }}
-            domainPadding={{ x: 50 }}
-            width={1500}
+            domainPadding={{ x: 160 }}
+            width={1900}
             height={300}
           >
             <VictoryAxis
               tickValues={tickFormat}
               scale={{ x: 'time' }}
               style={{
-                axis: { stroke: 'black', strokeWidth: 0.3 },
-                tickLabels: { fill: '#757a79' },
+                axis: { stroke: '#EDEFF1', strokeWidth: 0.5 },
+                tickLabels: { fontSize: 12, padding: 10, fill: '#94A2AD', fontWeight: 500 },
                 ticks: { size: 0 },
               }}
             />
@@ -89,9 +89,9 @@ const MediaStatusBoard = ({ pickStartDate, pickEndDate }: IMediaStatusBoard) => 
               tickFormat={(y) => `${y}%`}
               style={{
                 axis: { stroke: 'transparent' },
-                tickLabels: { fill: '#757a79' },
                 ticks: { size: 0 },
-                grid: { strokeDasharray: 0, stroke: '#cccccc', strokeWidth: 0.3 },
+                tickLabels: { fontSize: 12, padding: 10, fill: '#94A2AD', fontWeight: 500 },
+                grid: { strokeDasharray: 0, stroke: '#EDEFF1', strokeWidth: 0.3 },
               }}
             />
             <VictoryStack colorScale={['#AC8AF8', '#85DA47', '#4FADF7', '#FFEB00']}>
@@ -122,16 +122,16 @@ const MediaStatusBoard = ({ pickStartDate, pickEndDate }: IMediaStatusBoard) => 
               />
             </VictoryStack>
             <VictoryLegend
-              x={1140}
+              x={1500}
               y={283}
               orientation='horizontal'
               gutter={50}
               style={{ title: { fontSize: 20 } }}
               data={[
-                { name: '카카오', symbol: { fill: '#FFEB00' } },
-                { name: '페이스북', symbol: { fill: '#4FADF7' } },
-                { name: '네이버', symbol: { fill: '#85DA47' } },
-                { name: '구글', symbol: { fill: '#AC8AF8' } },
+                { name: '카카오', symbol: { fill: '#FFEB00' }, labels: { fill: '#3a474e' } },
+                { name: '페이스북', symbol: { fill: '#4FADF7' }, labels: { fill: '#3a474e' } },
+                { name: '네이버', symbol: { fill: '#85DA47' }, labels: { fill: '#3a474e' } },
+                { name: '구글', symbol: { fill: '#AC8AF8' }, labels: { fill: '#3a474e' } },
               ]}
             />
           </VictoryChart>
