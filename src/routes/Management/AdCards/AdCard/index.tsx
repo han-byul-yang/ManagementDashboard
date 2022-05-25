@@ -4,12 +4,12 @@ import cx from 'classnames'
 import dayjs from 'dayjs'
 
 import { adListState } from 'store/atoms'
-import { processBudget } from './utils'
+import { processBudget } from '../../utils'
 import { IAdCard } from 'types/ad'
 import EditableBox from './EditableBox'
 import { EditIcon } from 'assets/svgs'
 
-import styles from './Management.module.scss'
+import styles from './adCard.module.scss'
 
 const AdCard = ({ ad }: { ad: IAdCard }) => {
   const setAdList = useSetRecoilState<IAdCard[]>(adListState)
