@@ -5,7 +5,8 @@
 광고 관련 데이터를 받아 시각화하는 관리자 페이지입니다.
 ## Deploy
 
-배포 주소
+
+[배포 주소](https://stellar-platypus-819a1e.netlify.app/)
 
 ## Project Tree
 
