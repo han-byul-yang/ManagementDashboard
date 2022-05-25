@@ -1,14 +1,14 @@
 import { IMediaChannelData } from 'types/types'
-import { sumMediaCategory } from 'routes/DashBoard/MediaStatusBoard/utils/sumMediaCategory'
+import { sumDataByCategory } from 'routes/DashBoard/MediaStatusBoard/utils/sumMediaCategory'
 
 import styles from './mediaStatusBoard.module.scss'
 
-interface IChartTable {
+interface IMediaChartTable {
   mediaDataList: IMediaChannelData[] | undefined
 }
 
-const ChartTable = ({ mediaDataList }: IChartTable) => {
-  const { google, facebook, naver, kakao, all } = sumMediaCategory('2022-02-01', '2022-04-20', mediaDataList)
+const MediaChartTable = ({ mediaDataList }: IMediaChartTable) => {
+  const { google, facebook, naver, kakao, all } = sumDataByCategory('2022-02-01', '2022-04-20', mediaDataList)
 
   const filterCategry = (media: { value: number; category: string }[]) => {
     return [
@@ -92,4 +92,4 @@ const ChartTable = ({ mediaDataList }: IChartTable) => {
   )
 }
 
-export default ChartTable
+export default MediaChartTable
