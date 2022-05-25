@@ -1,3 +1,4 @@
+import { DownGreenIcon, UpRedIcon } from 'assets/svgs'
 import styles from './statusItem.module.scss'
 
 interface IStatusItem {
@@ -5,6 +6,7 @@ interface IStatusItem {
   content: string
   unit: string
   difference: string
+  isPositive: boolean
 }
 
 const StatusItem = ({ item }: { item: IStatusItem }) => {
@@ -19,10 +21,11 @@ const StatusItem = ({ item }: { item: IStatusItem }) => {
       </dl>
 
       <div className={styles.rate}>
-        <span className={styles.rateText}>
+        <div className={styles.rateText}>
+          {item.isPositive ? <UpRedIcon /> : <DownGreenIcon />}
           {item.difference}
           {item.unit}
-        </span>
+        </div>
       </div>
     </li>
   )
