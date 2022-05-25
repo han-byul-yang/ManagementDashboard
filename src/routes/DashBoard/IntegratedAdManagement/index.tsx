@@ -40,18 +40,18 @@ const IntegratedAdManagement = (props: Props) => {
         )
       )
 
-      // const dayDifference = dayjs(endDate).diff(dayjs(startDate), 'day')
+      const dayDifference = dayjs(endDate).diff(dayjs(startDate), 'day')
 
-      // setPastStatusData(
-      //   res.filter(
-      //     (item: IStatusData) =>
-      //       dayjs(startDate)
-      //         .subtract(1 + dayDifference, 'day')
-      //         .unix() <= dayjs(item.date).unix() &&
-      //       dayjs(endDate).subtract(dayDifference, 'day').unix() >= dayjs(item.date).unix() &&
-      //       item
-      //   )
-      // )
+      setPastStatusData(
+        res.filter(
+          (item: IStatusData) =>
+            dayjs(startDate)
+              .subtract(1 + dayDifference, 'day')
+              .unix() <= dayjs(item.date).unix() &&
+            dayjs(endDate).subtract(dayDifference, 'day').unix() >= dayjs(item.date).unix() &&
+            item
+        )
+      )
     },
   })
 
@@ -61,6 +61,19 @@ const IntegratedAdManagement = (props: Props) => {
         (item: IStatusData) =>
           dayjs(startDate).subtract(1, 'day').unix() <= dayjs(item.date).unix() &&
           dayjs(endDate).unix() >= dayjs(item.date).unix() &&
+          item
+      )
+    )
+
+    const dayDifference = dayjs(endDate).diff(dayjs(startDate), 'day')
+
+    setPastStatusData((prev) =>
+      prev.filter(
+        (item: IStatusData) =>
+          dayjs(startDate)
+            .subtract(1 + dayDifference, 'day')
+            .unix() <= dayjs(item.date).unix() &&
+          dayjs(endDate).subtract(dayDifference, 'day').unix() >= dayjs(item.date).unix() &&
           item
       )
     )
