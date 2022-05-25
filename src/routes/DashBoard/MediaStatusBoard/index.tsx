@@ -1,13 +1,34 @@
+import { useState } from 'react'
 import { VictoryAxis, VictoryBar, VictoryChart, VictoryStack, VictoryTheme, VictoryLegend } from 'victory'
+import { useQuery } from 'react-query'
 
-import { sumMediaCategory } from '../../../utils/sumMediaCategory'
+import { sumMediaCategory } from 'utils/sumMediaCategory'
+import { getMedias } from 'services/getData'
+import { IMediaChannelData } from 'types/types.d'
 
 import ChartTable from './ChartTable'
 import chartStyle from './chartStyle'
 import styles from './mediaStatusBoard.module.scss'
 
 const MediaStatusBoard = () => {
-  const { google, facebook, naver, kakao } = sumMediaCategory('2022-04-01', '2022-04-20')
+  const [mediaDataList, setMediaDataList] = useState<IMediaChannelData[]>()
+  const { google, facebook, naver, kakao } = sumMediaCategory('2022-02-01', '2022-04-20', mediaDataList)
+  const { isLoading } = useQuery('medias', getMedias, {
+    retry: 1,
+    staleTime: 60 * 60 * 1000,
+    cacheTime: 60 * 60 * 1000,
+    onSuccess: async (res) => {
+      setMediaDataList(res.data)
+    },
+  })
+
+  if (isLoading) {
+    return (
+      <div className={styles.container}>
+        <div className={styles.background} />
+      </div>
+    )
+  }
 
   const filterCategry = (media: { value: number; category: string }[]) => {
     return [
@@ -54,10 +75,10 @@ const MediaStatusBoard = () => {
               dependentAxis
               tickFormat={(y) => `${y}%`}
               style={{
-                grid: { strokeDasharray: 0, stroke: '#cccccc', strokeWidth: 0.3 },
                 axis: { stroke: 'transparent' },
                 tickLabels: { fill: '#757a79' },
                 ticks: { size: 0 },
+                grid: { strokeDasharray: 0, stroke: '#cccccc', strokeWidth: 0.3 },
               }}
             />
             <VictoryStack colorScale={['#AC8AF8', '#85DA47', '#4FADF7', '#FFEB00']}>
@@ -82,7 +103,7 @@ const MediaStatusBoard = () => {
           </VictoryChart>
         </div>
         <div className={styles.tableBox}>
-          <ChartTable />
+          <ChartTable mediaDataList={mediaDataList} />
         </div>
       </div>
     </div>

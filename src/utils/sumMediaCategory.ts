@@ -1,7 +1,12 @@
+import { IMediaChannelData } from 'types/types'
 import { mediaDataByDate } from './mediaDataByDate'
 
-export const sumMediaCategory = (startDate: string, endDate: string) => {
-  const selectedMediaData = mediaDataByDate(startDate, endDate)
+export const sumMediaCategory = (
+  startDate: string,
+  endDate: string,
+  mediaDataList: IMediaChannelData[] | undefined
+) => {
+  const selectedMediaData = mediaDataByDate(startDate, endDate, mediaDataList)
   const { google, facebook, naver, kakao } = selectedMediaData
   const selectedAllData = [...google, ...facebook, ...naver, ...kakao]
 
@@ -46,21 +51,24 @@ export const sumMediaCategory = (startDate: string, endDate: string) => {
     const click = selectedMediaData[media].reduce((acc, cur) => {
       return cur.click + acc
     }, 0)
-    const cvr = selectedMediaData[media].reduce((acc, cur) => {
-      return cur.cvr + acc
-    }, 0)
     const ctr = selectedMediaData[media].reduce((acc, cur) => {
       return cur.ctr + acc
     }, 0)
     const cpc = selectedMediaData[media].reduce((acc, cur) => {
       return cur.cpc + acc
     }, 0)
+    const sales = selectedMediaData[media].reduce((acc, cur) => {
+      return cur.roas * cur.cost + acc
+    }, 0)
+    const conversion = selectedMediaData[media].reduce((acc, cur) => {
+      return cur.click * cur.cvr + acc
+    }, 0)
     return [
       { value: (cost / allCost) * 100, category: '광고비' },
-      { value: ((roas * cost) / allSales) * 100, category: '매출' },
+      { value: (sales / allSales) * 100, category: '매출' },
       { value: (imp / allImp) * 100, category: '노출 수' },
       { value: (click / allClick) * 100, category: '클릭 수' },
-      { value: ((click * cvr) / allConversion) * 100, category: '전환 수' },
+      { value: (conversion / allConversion) * 100, category: '전환 수' },
       { value: (roas / allRoas) * 100, category: 'ROAS' },
       { value: (ctr / allCtr) * 100, category: '클릭률(CTR)' },
       { value: (cpc / allCpc) * 100, category: '클릭당비용(CPC)' },
