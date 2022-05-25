@@ -10,10 +10,11 @@ import styles from './intergratedAdStatus.module.scss'
 
 interface Props {
   data: IData[]
+  pastData: IData[]
 }
 
 const IntergratedAdStatus = (props: Props) => {
-  const { data } = props
+  const { data, pastData } = props
   const { totalCost, totalImp, totalSales, roas, totalClick, totalConv } = getAdStatus(data)
 
   const items = chartOptions.map((item) => {

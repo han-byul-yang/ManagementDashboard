@@ -23,6 +23,7 @@ const IntegratedAdManagement = (props: Props) => {
   const [firstChartName, setFirstChartName] = useState('roas')
   const [secondChartName, setSecondChartName] = useState('cost')
   const [data, setData] = useState<IData[]>([])
+  const [pastData, setPastData] = useState<IData[]>([])
   const [isThirdSelectOpen, setIsThirdSelectOpen] = useState(false)
 
   const { isLoading } = useQuery<IData[], Error>('trendData', getTrendData, {
@@ -35,6 +36,19 @@ const IntegratedAdManagement = (props: Props) => {
           (item: IData) =>
             dayjs(startDate).subtract(1, 'day').unix() <= dayjs(item.date).unix() &&
             dayjs(endDate).unix() >= dayjs(item.date).unix() &&
+            item
+        )
+      )
+
+      const dayDifference = dayjs(endDate).diff(dayjs(startDate), 'day')
+
+      setPastData(
+        res.filter(
+          (item: IData) =>
+            dayjs(startDate)
+              .subtract(1 + dayDifference, 'day')
+              .unix() <= dayjs(item.date).unix() &&
+            dayjs(endDate).subtract(dayDifference, 'day').unix() >= dayjs(item.date).unix() &&
             item
         )
       )
@@ -73,7 +87,7 @@ const IntegratedAdManagement = (props: Props) => {
       <h2 className={styles.sectionTitle}>통합 광고 현황</h2>
 
       <div className={styles.wrapper}>
-        <IntergratedAdStatus data={data} />
+        <IntergratedAdStatus data={data} pastData={pastData} />
 
         <div className={styles.selectBtnGroup}>
           <Dropdown options={chartOptions} onChange={handleFirstChartChange} />
