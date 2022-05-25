@@ -9,6 +9,7 @@
 .sectionTitle {
   width: 97px;
   height: 19px;
+  margin: 21px 0;
   font-size: 16px;
   font-style: normal;
   font-weight: 700;
@@ -59,6 +60,14 @@
 
     + .selectBtn {
       margin-left: 10px;
+    }
+  }
+
+  .selectBtnBox {
+    display: flex;
+
+    div:first-child {
+      margin-right: 10px;
     }
   }
 

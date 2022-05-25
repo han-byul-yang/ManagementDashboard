@@ -40,18 +40,18 @@ const IntegratedAdManagement = (props: Props) => {
         )
       )
 
-      const dayDifference = dayjs(endDate).diff(dayjs(startDate), 'day')
+      // const dayDifference = dayjs(endDate).diff(dayjs(startDate), 'day')
 
-      setPastStatusData(
-        res.filter(
-          (item: IStatusData) =>
-            dayjs(startDate)
-              .subtract(1 + dayDifference, 'day')
-              .unix() <= dayjs(item.date).unix() &&
-            dayjs(endDate).subtract(dayDifference, 'day').unix() >= dayjs(item.date).unix() &&
-            item
-        )
-      )
+      // setPastStatusData(
+      //   res.filter(
+      //     (item: IStatusData) =>
+      //       dayjs(startDate)
+      //         .subtract(1 + dayDifference, 'day')
+      //         .unix() <= dayjs(item.date).unix() &&
+      //       dayjs(endDate).subtract(dayDifference, 'day').unix() >= dayjs(item.date).unix() &&
+      //       item
+      //   )
+      // )
     },
   })
 
@@ -90,11 +90,13 @@ const IntegratedAdManagement = (props: Props) => {
         <IntergratedAdStatus data={statusData} pastData={pastStatusData} />
 
         <div className={styles.selectBtnGroup}>
-          <Dropdown options={chartOptions} onChange={handleFirstChartChange} />
-          <Dropdown
-            options={chartOptions.filter((option) => option.content !== firstChartName)}
-            onChange={handleSecondChartChange}
-          />
+          <div className={styles.selectBtnBox}>
+            <Dropdown options={chartOptions} onChange={handleFirstChartChange} />
+            <Dropdown
+              options={chartOptions.filter((option) => option.content !== firstChartName)}
+              onChange={handleSecondChartChange}
+            />
+          </div>
           <button type='button' className={styles.filterBtn} onClick={handleThirdBtnClick}>
             <span>주간</span>
           </button>
