@@ -7,6 +7,7 @@ import styles from './dropdown.module.scss'
 interface IOption {
   value: string
   content: string
+  unit?: string
 }
 
 interface IDropdown {
