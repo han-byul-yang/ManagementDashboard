@@ -65,25 +65,29 @@ const IntergratedAdChart = (props: Props) => {
         }}
         data={firstChartData}
       />
-      <VictoryAxis
-        dependentAxis
-        offsetX={1000}
-        tickFormat={(value: number) => {
-          return compactNumber(value)
-        }}
-        style={{
-          axis: { stroke: 'transparent' },
-          tickLabels: { fontSize: 12, padding: 10, fill: '#cccccc' },
-          ticks: { stroke: '#eeeeee', size: 0 },
-          grid: { stroke: '#eeeeee' },
-        }}
-      />
-      <VictoryLine
-        style={{
-          data: { stroke: '#85DA47' },
-        }}
-        data={secondChartData}
-      />
+      {secondData !== '' && (
+        <VictoryAxis
+          dependentAxis
+          offsetX={1000}
+          tickFormat={(value: number) => {
+            return compactNumber(value)
+          }}
+          style={{
+            axis: { stroke: 'transparent' },
+            tickLabels: { fontSize: 12, padding: 10, fill: '#cccccc' },
+            ticks: { stroke: '#eeeeee', size: 0 },
+            grid: { stroke: '#eeeeee' },
+          }}
+        />
+      )}
+      {secondData !== '' && (
+        <VictoryLine
+          style={{
+            data: { stroke: '#85DA47' },
+          }}
+          data={secondChartData}
+        />
+      )}
     </VictoryChart>
   )
 }
