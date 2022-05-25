@@ -45,7 +45,7 @@ const IntergratedAdStatus = (props: Props) => {
     }
   })
 
-  const Status = useMemo(() => items.map((item) => <Item key={`chart-${item.content}`} item={item} />), [items])
+  const Status = useMemo(() => items.map((item) => <Item key={`${item.content}-status`} item={item} />), [items])
 
   return <ul className={styles.group}>{Status}</ul>
 }
