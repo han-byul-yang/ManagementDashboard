@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 
-import { IData } from 'types/types'
+import { IStatusData } from 'types/types'
 import { compactNumber } from 'utils/compactNumber'
 import { getAdStatus } from 'routes/DashBoard/utils/adClac'
 import StatusItem from '../StatusItem'
@@ -9,8 +9,8 @@ import { chartOptions } from './status'
 import styles from './intergratedAdStatus.module.scss'
 
 interface Props {
-  data: IData[]
-  pastData: IData[]
+  data: IStatusData[]
+  pastData: IStatusData[]
 }
 
 const IntergratedAdStatus = (props: Props) => {

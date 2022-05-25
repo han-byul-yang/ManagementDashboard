@@ -4,7 +4,7 @@ import cx from 'classnames'
 import dayjs from 'dayjs'
 
 import { getTrendData } from 'services/getData'
-import { IData } from 'types/types'
+import { IStatusData } from 'types/types'
 import IntergratedAdChart from './IntergratedAdChart'
 import IntergratedAdStatus from './IntergratedAdStatus'
 import { chartOptions } from './IntergratedAdStatus/status'
@@ -22,18 +22,18 @@ const IntegratedAdManagement = (props: Props) => {
   const { startDate, endDate } = props
   const [firstChartName, setFirstChartName] = useState('roas')
   const [secondChartName, setSecondChartName] = useState('cost')
-  const [data, setData] = useState<IData[]>([])
-  const [pastData, setPastData] = useState<IData[]>([])
+  const [data, setData] = useState<IStatusData[]>([])
+  const [pastData, setPastData] = useState<IStatusData[]>([])
   const [isThirdSelectOpen, setIsThirdSelectOpen] = useState(false)
 
-  const { isLoading } = useQuery<IData[], Error>('trendData', getTrendData, {
+  const { isLoading } = useQuery<IStatusData[], Error>('trendData', getTrendData, {
     retry: 1,
     // staleTime: 60 * 60 * 1000,
     // cacheTime: 60 * 60 * 1000,
     onSuccess: (res) => {
       setData(
         res.filter(
-          (item: IData) =>
+          (item: IStatusData) =>
             dayjs(startDate).subtract(1, 'day').unix() <= dayjs(item.date).unix() &&
             dayjs(endDate).unix() >= dayjs(item.date).unix() &&
             item
@@ -44,7 +44,7 @@ const IntegratedAdManagement = (props: Props) => {
 
       setPastData(
         res.filter(
-          (item: IData) =>
+          (item: IStatusData) =>
             dayjs(startDate)
               .subtract(1 + dayDifference, 'day')
               .unix() <= dayjs(item.date).unix() &&
@@ -58,7 +58,7 @@ const IntegratedAdManagement = (props: Props) => {
   useEffect(() => {
     setData((prev) =>
       prev.filter(
-        (item: IData) =>
+        (item: IStatusData) =>
           dayjs(startDate).subtract(1, 'day').unix() <= dayjs(item.date).unix() &&
           dayjs(endDate).unix() >= dayjs(item.date).unix() &&
           item

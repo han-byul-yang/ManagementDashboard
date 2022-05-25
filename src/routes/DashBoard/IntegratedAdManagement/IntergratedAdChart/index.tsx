@@ -3,10 +3,10 @@ import { VictoryChart, VictoryLine, VictoryAxis, VictoryVoronoiContainer } from 
 import dayjs from 'dayjs'
 
 import { compactNumber } from 'utils/compactNumber'
-import { IData } from 'types/types'
+import { IStatusData } from 'types/types'
 
 interface Props {
-  data: IData[]
+  data: IStatusData[]
   firstData: string
   secondData: string
 }

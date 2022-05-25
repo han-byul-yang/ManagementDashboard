@@ -15,6 +15,6 @@ export interface IMediaChannelData extends ICommonAdData {
   channel: string
 }
 
-export interface IData extends ICommonAdData {
+export interface IStatusData extends ICommonAdData {
   conv: number
 }
