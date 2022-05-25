@@ -1,12 +1,8 @@
 import { IMediaChannelData } from 'types/types'
 import { mediaDataByDate } from './mediaDataByDate'
 
-export const sumDataByCategory = (
-  pickStartDate: Date,
-  pickEndDate: Date,
-  mediaDataList: IMediaChannelData[] | undefined
-) => {
-  const selectedMediaData = mediaDataByDate(pickStartDate, pickEndDate, mediaDataList)
+export const sumDataByCategory = (startDate: Date, endDate: Date, mediaDataList: IMediaChannelData[] | undefined) => {
+  const selectedMediaData = mediaDataByDate(startDate, endDate, mediaDataList)
   const { google, facebook, naver, kakao } = selectedMediaData
   const selectedAllData = [...google, ...facebook, ...naver, ...kakao]
 
