@@ -1,17 +1,21 @@
 import { NavLink } from 'react-router-dom'
 import cx from 'classnames'
-
-import { DashboardIcon, LightIcon, LogoIcon, ManagementIcon } from 'assets/svgs'
-
-import styles from './openNavBar.module.scss'
 import Dropdown from 'components/Dropdown'
+import { DashboardIcon, LightIcon, LogoIcon, ManagementIcon } from 'assets/svgs'
+import styles from './openNavBar.module.scss'
+import { Dispatch, SetStateAction } from 'react'
 
-const OpenNavBar = () => {
+interface Props {
+  isOpen: boolean
+  setIsOpen: Dispatch<SetStateAction<boolean>>
+}
+
+const OpenNavBar = (props: Props) => {
+  const { isOpen, setIsOpen } = props
   const dropdownOptions = [
     { value: 'madup', content: '매드업' },
     { value: 'plus', content: '서비스 추가하기' },
   ]
-
   return (
     <>
       <div className={cx(styles.logo)}>
@@ -23,11 +27,23 @@ const OpenNavBar = () => {
       </div>
       <nav className={styles.nav}>
         <div>광고 센터</div>
-        <NavLink to='/' className={({ isActive }) => `${styles.navLink} ${isActive ? styles.active : ''}`}>
+        <NavLink
+          to='/'
+          className={({ isActive }) => `${styles.navLink} ${isActive ? styles.active : ''}`}
+          onClick={() => {
+            !isOpen && setIsOpen(false)
+          }}
+        >
           <DashboardIcon />
           <span>대시보드</span>
         </NavLink>
-        <NavLink to='management' className={({ isActive }) => `${styles.navLink} ${isActive ? styles.active : ''}`}>
+        <NavLink
+          to='management'
+          className={({ isActive }) => `${styles.navLink} ${isActive ? styles.active : ''}`}
+          onClick={() => {
+            !isOpen && setIsOpen(false)
+          }}
+        >
           <ManagementIcon />
           <span>광고관리</span>
         </NavLink>

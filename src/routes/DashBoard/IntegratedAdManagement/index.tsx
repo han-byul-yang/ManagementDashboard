@@ -4,7 +4,7 @@ import cx from 'classnames'
 import dayjs from 'dayjs'
 
 import { getTrendData } from 'services/getData'
-import { IData } from 'types/types'
+import { IStatusData } from 'types/types'
 import IntergratedAdChart from './IntergratedAdChart'
 import IntergratedAdStatus from './IntergratedAdStatus'
 import { chartOptions } from './IntergratedAdStatus/status'
@@ -14,27 +14,41 @@ import 'react-datepicker/dist/react-datepicker.css'
 import styles from './integratedAdManagement.module.scss'
 
 interface Props {
-  pickStartDate: Date
-  pickEndDate: Date
+  startDate: Date
+  endDate: Date
 }
 
 const IntegratedAdManagement = (props: Props) => {
-  const { pickStartDate, pickEndDate } = props
-  const [firstChartName, setFirstChartName] = useState('roas')
-  const [secondChartName, setSecondChartName] = useState('cost')
-  const [data, setData] = useState<IData[]>([])
+  const { startDate, endDate } = props
+  const [firstChartName, setFirstChartName] = useState('ROAS')
+  const [secondChartName, setSecondChartName] = useState('')
+  const [statusData, setStatusData] = useState<IStatusData[]>([])
+  const [pastStatusData, setPastStatusData] = useState<IStatusData[]>([])
   const [isThirdSelectOpen, setIsThirdSelectOpen] = useState(false)
 
-  const { isLoading } = useQuery<IData[], Error>('trendData', getTrendData, {
+  const { isLoading } = useQuery<IStatusData[], Error>('trendData', getTrendData, {
     retry: 1,
     // staleTime: 60 * 60 * 1000,
     // cacheTime: 60 * 60 * 1000,
     onSuccess: (res) => {
-      setData(
+      setStatusData(
         res.filter(
-          (item: IData) =>
-            dayjs(pickStartDate).subtract(1, 'day').unix() <= dayjs(item.date).unix() &&
-            dayjs(pickEndDate).unix() >= dayjs(item.date).unix() &&
+          (item: IStatusData) =>
+            dayjs(startDate).subtract(1, 'day').unix() <= dayjs(item.date).unix() &&
+            dayjs(endDate).unix() >= dayjs(item.date).unix() &&
+            item
+        )
+      )
+
+      const dayDifference = dayjs(endDate).diff(dayjs(startDate), 'day')
+
+      setPastStatusData(
+        res.filter(
+          (item: IStatusData) =>
+            dayjs(startDate)
+              .subtract(1 + dayDifference, 'day')
+              .unix() <= dayjs(item.date).unix() &&
+            dayjs(endDate).subtract(dayDifference, 'day').unix() >= dayjs(item.date).unix() &&
             item
         )
       )
@@ -42,15 +56,15 @@ const IntegratedAdManagement = (props: Props) => {
   })
 
   useEffect(() => {
-    setData((prev) =>
+    setStatusData((prev) =>
       prev.filter(
-        (item: IData) =>
-          dayjs(pickStartDate).subtract(1, 'day').unix() <= dayjs(item.date).unix() &&
-          dayjs(pickEndDate).unix() >= dayjs(item.date).unix() &&
+        (item: IStatusData) =>
+          dayjs(startDate).subtract(1, 'day').unix() <= dayjs(item.date).unix() &&
+          dayjs(endDate).unix() >= dayjs(item.date).unix() &&
           item
       )
     )
-  }, [pickEndDate, pickStartDate])
+  }, [endDate, startDate])
 
   if (isLoading) {
     return <div className={styles.container}>...loading</div>
@@ -73,12 +87,12 @@ const IntegratedAdManagement = (props: Props) => {
       <h2 className={styles.sectionTitle}>통합 광고 현황</h2>
 
       <div className={styles.wrapper}>
-        <IntergratedAdStatus data={data} />
+        <IntergratedAdStatus data={statusData} pastData={pastStatusData} />
 
         <div className={styles.selectBtnGroup}>
           <Dropdown options={chartOptions} onChange={handleFirstChartChange} />
           <Dropdown
-            options={chartOptions.filter((option) => option.value !== firstChartName)}
+            options={chartOptions.filter((option) => option.content !== firstChartName)}
             onChange={handleSecondChartChange}
           />
           <button type='button' className={styles.filterBtn} onClick={handleThirdBtnClick}>
@@ -91,7 +105,7 @@ const IntegratedAdManagement = (props: Props) => {
           </div>
         </div>
 
-        <IntergratedAdChart data={data} firstData={firstChartName} secondData={secondChartName} />
+        <IntergratedAdChart data={statusData} firstData={firstChartName} secondData={secondChartName} />
       </div>
     </section>
   )

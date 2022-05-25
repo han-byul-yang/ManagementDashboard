@@ -1,14 +1,14 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import cx from 'classnames'
 
-import styles from './navBar.module.scss'
 import CloseNavBar from './CloseNavBar'
 import OpenNavBar from './OpenNavBar'
+
+import styles from './navBar.module.scss'
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(true)
   const nav = useRef<HTMLDivElement | null>(null)
-
   useEffect(() => {
     const handelOutsideClick = (event: MouseEvent | TouchEvent) => {
       if (!nav.current || nav.current.contains(event.target as Node)) return
@@ -25,7 +25,10 @@ const NavBar = () => {
     }
   }, [nav])
 
-  const FullNavBar = useMemo(() => (isOpen ? <OpenNavBar /> : <CloseNavBar setIsOpen={setIsOpen} />), [isOpen])
+  const FullNavBar = useMemo(
+    () => (isOpen ? <OpenNavBar isOpen={isOpen} setIsOpen={setIsOpen} /> : <CloseNavBar setIsOpen={setIsOpen} />),
+    [isOpen]
+  )
 
   return (
     <aside className={cx(styles.navBar, { [styles.closeBar]: !isOpen })} ref={nav}>
@@ -33,5 +36,4 @@ const NavBar = () => {
     </aside>
   )
 }
-
 export default NavBar

@@ -1,6 +1,5 @@
 import { IMediaChannelData } from 'types/types'
 import { mediaDataByDate } from './mediaDataByDate'
-import { getMediaStatus } from 'routes/DashBoard/utils/adClac'
 
 export const sumDataByCategory = (
   pickStartDate: Date,
