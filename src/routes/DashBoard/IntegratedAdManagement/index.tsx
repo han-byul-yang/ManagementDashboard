@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import cx from 'classnames'
 import dayjs from 'dayjs'
-import DatePicker from 'react-datepicker'
 
 import Item from './Item'
 import { IData } from 'types/types'
@@ -11,6 +10,7 @@ import { compactNumber } from 'utils/compactNumber'
 
 import styles from './integratedAdManagement.module.scss'
 import 'react-datepicker/dist/react-datepicker.css'
+import SelectDate from './SelectDate'
 
 const ITEMS = [
   {
@@ -45,11 +45,16 @@ const ITEMS = [
   },
 ]
 
-const IntegratedAdManagement = () => {
+interface Props {
+  pickStartDate: Date
+  pickEndDate: Date
+}
+
+const IntegratedAdManagement = (props: Props) => {
+  const { pickStartDate, pickEndDate } = props
   const [isLoading, setIsLoading] = useState(false)
   const [data, setData] = useState<IData[]>([])
-  const [pickStartDate, setPickStartDate] = useState(new Date('2022-03-01'))
-  const [pickEndDate, setPickEndDate] = useState(new Date('2022-03-11'))
+
   const [isFirstSelectOpen, setIsFirstSelectOpen] = useState(false)
   const [isSecondSelectOpen, setIsSecondSelectOpen] = useState(false)
   const [isThirdSelectOpen, setIsThirdSelectOpen] = useState(false)
@@ -153,27 +158,7 @@ const IntegratedAdManagement = () => {
 
   return (
     <section className={styles.container}>
-      <div className={styles.header}>
-        <h2 className={styles.sectionTitle}>통합 광고 현황</h2>
-        <div className={styles.selectDate}>
-          <DatePicker
-            selected={pickStartDate}
-            dateFormat='yyyy년 MM월 dd일'
-            onChange={(date: Date) => setPickStartDate(date)}
-            customInput={<input type='text' style={{ width: '120px' }} />}
-          />
-          <div>~</div>
-          <DatePicker
-            selected={pickEndDate}
-            dateFormat='yyyy년 MM월 dd일'
-            onChange={(date: Date) => setPickEndDate(date)}
-            customInput={
-              // 날짜 뜨는 인풋 커스텀
-              <input type='text' style={{ width: '120px', marginLeft: '5px' }} />
-            }
-          />
-        </div>
-      </div>
+      <h2 className={styles.sectionTitle}>통합 광고 현황</h2>
 
       <div className={styles.wrapper}>
         <ul className={styles.group}>

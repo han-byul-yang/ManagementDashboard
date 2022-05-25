@@ -6,12 +6,6 @@
   width: 100%;
 }
 
-.header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
 .sectionTitle {
   width: 97px;
   height: 19px;
@@ -20,16 +14,6 @@
   font-weight: 700;
   line-height: 19px;
   color: colors.$GRAY_800;
-}
-
-.selectDate {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  input {
-    cursor: pointer;
-  }
 }
 
 .wrapper {
