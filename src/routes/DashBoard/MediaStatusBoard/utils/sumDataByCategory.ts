@@ -1,7 +1,7 @@
 import { IMediaChannelData } from 'types/types'
 import { mediaDataByDate } from './mediaDataByDate'
 
-export const sumMediaCategory = (
+export const sumDataByCategory = (
   startDate: string,
   endDate: string,
   mediaDataList: IMediaChannelData[] | undefined

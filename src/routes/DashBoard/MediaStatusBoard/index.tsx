@@ -2,22 +2,22 @@ import { useState } from 'react'
 import { VictoryAxis, VictoryBar, VictoryChart, VictoryStack, VictoryTheme, VictoryLegend } from 'victory'
 import { useQuery } from 'react-query'
 
-import { sumMediaCategory } from 'routes/DashBoard/MediaStatusBoard/utils/sumMediaCategory'
+import { sumDataByCategory } from 'routes/DashBoard/MediaStatusBoard/utils/sumDataByCategory'
 import { getMedias } from 'services/getData'
 import { IMediaChannelData } from 'types/types.d'
 
-import ChartTable from './ChartTable'
+import MediaChartTable from './MediaChartTable'
 import chartStyle from './chartStyle'
 import styles from './mediaStatusBoard.module.scss'
 
 const MediaStatusBoard = () => {
   const [mediaDataList, setMediaDataList] = useState<IMediaChannelData[]>()
-  const { google, facebook, naver, kakao } = sumMediaCategory('2022-02-01', '2022-04-20', mediaDataList)
+  const { google, facebook, naver, kakao } = sumDataByCategory('2022-02-01', '2022-04-20', mediaDataList)
   const { isLoading } = useQuery('medias', getMedias, {
     retry: 1,
     staleTime: 60 * 60 * 1000,
     cacheTime: 60 * 60 * 1000,
-    onSuccess: async (res) => {
+    onSuccess: (res) => {
       setMediaDataList(res.data)
     },
   })
@@ -25,7 +25,7 @@ const MediaStatusBoard = () => {
   if (isLoading) {
     return (
       <div className={styles.container}>
-        <div className={styles.background} />
+        <div className={styles.section} />
       </div>
     )
   }
@@ -53,7 +53,7 @@ const MediaStatusBoard = () => {
   return (
     <div className={styles.container}>
       <div className={styles.title}>매체 현황</div>
-      <div className={styles.background}>
+      <div className={styles.section}>
         <div className={styles.chartBox}>
           <VictoryChart
             theme={VictoryTheme.material}
@@ -103,7 +103,7 @@ const MediaStatusBoard = () => {
           </VictoryChart>
         </div>
         <div className={styles.tableBox}>
-          <ChartTable mediaDataList={mediaDataList} />
+          <MediaChartTable mediaDataList={mediaDataList} />
         </div>
       </div>
     </div>
