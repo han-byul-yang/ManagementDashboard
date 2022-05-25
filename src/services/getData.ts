@@ -14,3 +14,11 @@ export const getAds = async () => {
 
   return ads
 }
+
+export const getMedias = async () => {
+  await sleep(1000)
+
+  const data = await axios.get('data/mediaChannelData.json')
+
+  return data
+}

@@ -1,9 +1,14 @@
-import { sumMediaCategory } from '../../../utils/sumMediaCategory'
+import { IMediaChannelData } from 'types/types'
+import { sumMediaCategory } from 'utils/sumMediaCategory'
 
 import styles from './mediaStatusBoard.module.scss'
 
-const ChartTable = () => {
-  const { google, facebook, naver, kakao, all } = sumMediaCategory('2022-04-01', '2022-04-20')
+interface IChartTable {
+  mediaDataList: IMediaChannelData[] | undefined
+}
+
+const ChartTable = ({ mediaDataList }: IChartTable) => {
+  const { google, facebook, naver, kakao, all } = sumMediaCategory('2022-02-01', '2022-04-20', mediaDataList)
 
   const filterCategry = (media: { value: number; category: string }[]) => {
     return [
@@ -35,7 +40,9 @@ const ChartTable = () => {
         <tr className={styles.tableRow}>
           <td />
           {tableHeadList.map((column) => (
-            <th key={column}>{column}</th>
+            <th className={styles.tableHead} key={column}>
+              {column}
+            </th>
           ))}
         </tr>
       </thead>
@@ -43,39 +50,39 @@ const ChartTable = () => {
         <tr className={styles.tableRow}>
           <th className={styles.tableColumn}>카카오</th>
           {kakaoData.map((data, i) => (
-            <td className={styles.tableColumn} key={data?.category}>
-              {data?.value.toFixed(2)}
+            <td className={styles.tableColumn} key={data!.category}>
+              {(data!.value * allData[i]!.value).toFixed(2)}
             </td>
           ))}
         </tr>
         <tr className={styles.tableRow}>
           <th className={styles.tableColumn}>페이스북</th>
           {facebookData.map((data, i) => (
-            <td className={styles.tableColumn} key={data?.category}>
-              {data?.value.toFixed(2)}
+            <td className={styles.tableColumn} key={data!.category}>
+              {(data!.value * allData[i]!.value).toFixed(2)}
             </td>
           ))}
         </tr>
         <tr className={styles.tableRow}>
           <th className={styles.tableColumn}>네이버</th>
           {naverData.map((data, i) => (
-            <td className={styles.tableColumn} key={data?.category}>
-              {data?.value.toFixed(2)}
+            <td className={styles.tableColumn} key={data!.category}>
+              {(data!.value * allData[i]!.value).toFixed(2)}
             </td>
           ))}
         </tr>
         <tr className={styles.tableRow}>
           <th className={styles.tableColumn}>구글</th>
           {googleData.map((data, i) => (
-            <td className={styles.tableColumn} key={data?.category}>
-              {data?.value.toFixed(2)}
+            <td className={styles.tableColumn} key={data!.category}>
+              {(data!.value * allData[i]!.value).toFixed(2)}
             </td>
           ))}
         </tr>
         <tr className={styles.tableRow}>
           <th className={styles.tableColumn}>총계</th>
           {allData.map((data) => (
-            <td className={styles.tableColumn} key={data?.category}>
+            <td className={styles.tableColumn} key={data!.category}>
               {data?.value.toFixed(2)}
             </td>
           ))}
