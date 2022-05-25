@@ -6,7 +6,7 @@ import { IMediaChannelData } from '../types/types'
 
 export const mediaDataByDate = (startDate: string, endDate: string) => {
   /* useEffect(() => {
-     axios.get('/data/mediaChannelData.json').then((response) => response.data)
+    axios.get('/data/mediaChannelData.json').then((response) => response.data)
     console.log(data)
   }) */
   const start = dayjs(startDate)
