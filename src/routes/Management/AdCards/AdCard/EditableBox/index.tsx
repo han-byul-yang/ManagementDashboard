@@ -3,7 +3,7 @@ import cx from 'classnames'
 
 import { EditIcon } from 'assets/svgs'
 
-import styles from './EditableBox.module.scss'
+import styles from './editableBox.module.scss'
 
 interface IEditableBox {
   defaultText: string
@@ -34,7 +34,6 @@ const EditableBox = ({ defaultText, isEditting }: IEditableBox) => {
   }
 
   useEffect(() => {
-    // TODO: 이벤트 리스너 제거
     window.addEventListener('click', handleClickOutside, true)
   })
 

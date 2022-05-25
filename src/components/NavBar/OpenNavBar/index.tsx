@@ -4,9 +4,14 @@ import cx from 'classnames'
 import { DashboardIcon, LightIcon, LogoIcon, ManagementIcon } from 'assets/svgs'
 
 import styles from './openNavBar.module.scss'
-import DropDown from '../DropDown'
+import Dropdown from 'components/Dropdown'
 
 const OpenNavBar = () => {
+  const dropdownOptions = [
+    { value: 'madup', content: '매드업' },
+    { value: 'plus', content: '서비스 추가하기' },
+  ]
+
   return (
     <>
       <div className={cx(styles.logo)}>
@@ -14,9 +19,9 @@ const OpenNavBar = () => {
       </div>
       <div className={styles.service}>
         <div>서비스</div>
-        <DropDown />
+        <Dropdown options={dropdownOptions} />
       </div>
-      <div className={styles.nav}>
+      <nav className={styles.nav}>
         <div>광고 센터</div>
         <NavLink to='/' className={({ isActive }) => `${styles.navLink} ${isActive ? styles.active : ''}`}>
           <DashboardIcon />
@@ -26,7 +31,7 @@ const OpenNavBar = () => {
           <ManagementIcon />
           <span>광고관리</span>
         </NavLink>
-      </div>
+      </nav>
       <div className={styles.footer}>
         <div className={styles.guide}>
           <div className={styles.lightIcon}>

@@ -1,27 +1,15 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import cx from 'classnames'
-import { VictoryChart, VictoryGroup, VictoryLine } from 'victory'
-// import { FaChevronDown } from 'react-icons/fa'
-
-import { numberFormatter } from 'utils/numberFormatter'
+import dayjs from 'dayjs'
 
 import Item from './Item'
-import styles from './integratedAdManagement.module.scss'
+import { IData } from 'types/types'
+import IntergratedAdChart from './IntergratedAdChart'
+import { compactNumber } from 'utils/compactNumber'
 
-interface IData {
-  click: number
-  conv: number
-  convValue: number
-  cost: number
-  cpa: number
-  cpc: number
-  ctr: number
-  cvr: number
-  date: string
-  imp: number
-  roas: number
-}
+import styles from './integratedAdManagement.module.scss'
+import 'react-datepicker/dist/react-datepicker.css'
 
 const ITEMS = [
   {
@@ -56,9 +44,18 @@ const ITEMS = [
   },
 ]
 
-const IntegratedAdManagement = () => {
+interface Props {
+  pickStartDate: Date
+  pickEndDate: Date
+}
+
+const IntegratedAdManagement = (props: Props) => {
+  const { pickStartDate, pickEndDate } = props
+  const [firstChartName, setFirstChartName] = useState('click')
+  const [secondChartName, setSecondChartName] = useState('roas')
   const [isLoading, setIsLoading] = useState(false)
   const [data, setData] = useState<IData[]>([])
+
   const [isFirstSelectOpen, setIsFirstSelectOpen] = useState(false)
   const [isSecondSelectOpen, setIsSecondSelectOpen] = useState(false)
   const [isThirdSelectOpen, setIsThirdSelectOpen] = useState(false)
@@ -72,7 +69,12 @@ const IntegratedAdManagement = () => {
       try {
         setIsLoading(true)
         const res = await getTrendDataApi()
-        setData(res.data.report.daily)
+        const startDate = dayjs(pickStartDate).subtract(1, 'day')
+        const endDate = dayjs(pickEndDate).add(1, 'day')
+        const newData = res.data.report.daily.filter(
+          (item: IData) => startDate.isBefore(dayjs(item.date)) && endDate.isAfter(dayjs(item.date)) && item
+        )
+        setData(newData)
         setIsLoading(false)
       } catch (err) {
         setData([])
@@ -80,7 +82,7 @@ const IntegratedAdManagement = () => {
     }
 
     loadTredData()
-  }, [])
+  }, [pickEndDate, pickStartDate])
 
   if (isLoading) return <div>로딩중...</div>
 
@@ -122,19 +124,19 @@ const IntegratedAdManagement = () => {
         value = String(Math.round(roas))
         break
       case '광고비':
-        value = numberFormatter(totalCost)
+        value = compactNumber(totalCost)
         break
       case '노출 수':
-        value = numberFormatter(totalImp)
+        value = compactNumber(totalImp)
         break
       case '클릭수':
-        value = numberFormatter(totalClick)
+        value = compactNumber(totalClick)
         break
       case '전환 수':
-        value = numberFormatter(conversion)
+        value = compactNumber(conversion)
         break
       case '매출':
-        value = numberFormatter(totalConvValue)
+        value = compactNumber(totalConvValue)
         break
     }
     return {
@@ -216,7 +218,9 @@ const IntegratedAdManagement = () => {
           </div>
         </div>
 
-        <div className={styles.chartWrapper} />
+        {data.length !== 0 && (
+          <IntergratedAdChart data={data} firstData={firstChartName} secondData={secondChartName} />
+        )}
       </div>
     </section>
   )

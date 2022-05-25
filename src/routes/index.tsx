@@ -7,7 +7,7 @@ import ConsoleBar from 'components/ConsoleBar'
 import DashBoard from './DashBoard'
 import Management from './Management'
 
-import styles from './Routes.module.scss'
+import styles from './routes.module.scss'
 
 const App = () => {
   const queryClient = new QueryClient()
