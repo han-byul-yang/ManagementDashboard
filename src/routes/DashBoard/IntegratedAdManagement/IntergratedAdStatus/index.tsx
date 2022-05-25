@@ -3,7 +3,7 @@ import { useMemo } from 'react'
 import { IData } from 'types/types'
 import { compactNumber } from 'utils/compactNumber'
 import { getAdStatus } from 'routes/DashBoard/utils/adClac'
-import Item from '../Item'
+import StatusItem from '../StatusItem'
 import { chartOptions } from './status'
 
 import styles from './intergratedAdStatus.module.scss'
@@ -45,9 +45,12 @@ const IntergratedAdStatus = (props: Props) => {
     }
   })
 
-  const Status = useMemo(() => items.map((item) => <Item key={`${item.content}-status`} item={item} />), [items])
+  const StatusList = useMemo(
+    () => items.map((item) => <StatusItem key={`${item.content}-status`} item={item} />),
+    [items]
+  )
 
-  return <ul className={styles.group}>{Status}</ul>
+  return <ul className={styles.group}>{StatusList}</ul>
 }
 
 export default IntergratedAdStatus
