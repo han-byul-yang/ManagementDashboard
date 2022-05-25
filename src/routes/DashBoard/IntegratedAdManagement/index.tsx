@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
 import axios from 'axios'
 import cx from 'classnames'
 import dayjs from 'dayjs'
@@ -10,6 +10,7 @@ import { compactNumber } from 'utils/compactNumber'
 
 import styles from './integratedAdManagement.module.scss'
 import 'react-datepicker/dist/react-datepicker.css'
+import Dropdown from 'components/Dropdown'
 
 const ITEMS = [
   {
@@ -50,14 +51,38 @@ interface Props {
 }
 
 const IntegratedAdManagement = (props: Props) => {
+  const chartOptions = [
+    {
+      value: 'roas',
+      content: 'ROAS',
+    },
+    {
+      value: 'cost',
+      content: '광고비',
+    },
+    {
+      value: 'cpc',
+      content: '노출 수',
+    },
+    {
+      value: 'click',
+      content: '클릭 수',
+    },
+    {
+      value: 'conv',
+      content: '전환 수',
+    },
+    {
+      value: 'convValue',
+      content: '매출',
+    },
+  ]
+
   const { pickStartDate, pickEndDate } = props
-  const [firstChartName, setFirstChartName] = useState('click')
-  const [secondChartName, setSecondChartName] = useState('roas')
+  const [firstChartName, setFirstChartName] = useState(chartOptions[0].value)
+  const [secondChartName, setSecondChartName] = useState(chartOptions[1].value)
   const [isLoading, setIsLoading] = useState(false)
   const [data, setData] = useState<IData[]>([])
-
-  const [isFirstSelectOpen, setIsFirstSelectOpen] = useState(false)
-  const [isSecondSelectOpen, setIsSecondSelectOpen] = useState(false)
   const [isThirdSelectOpen, setIsThirdSelectOpen] = useState(false)
 
   function getTrendDataApi() {
@@ -145,12 +170,12 @@ const IntegratedAdManagement = (props: Props) => {
     }
   })
 
-  const handleFirstBtnClick = () => {
-    setIsFirstSelectOpen((prev) => !prev)
+  const handleFirstChartChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    setFirstChartName(e.target.value)
   }
 
-  const handleSecondBtnClick = () => {
-    setIsSecondSelectOpen((prev) => !prev)
+  const handleSecondChartChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    setSecondChartName(e.target.value)
   }
 
   const handleThirdBtnClick = () => {
@@ -164,52 +189,18 @@ const IntegratedAdManagement = (props: Props) => {
       <div className={styles.wrapper}>
         <ul className={styles.group}>
           {items.map((item) => {
-            return <Item key={`${item.id}`} item={item} />
+            return <Item key={item.id} item={item} />
           })}
         </ul>
 
         <div className={styles.selectBtnGroup}>
-          <div>
-            <button type='button' className={styles.selectBtn} onClick={handleFirstBtnClick}>
-              <span className={styles.firstCircle} />
-              <span className={styles.firstBtnText}>ROAS</span>
-              {/* <FaChevronDown /> */}
-            </button>
-
-            <button type='button' className={styles.selectBtn} onClick={handleSecondBtnClick}>
-              <span className={styles.secondCircle} />
-              <span className={styles.secondBtnText}>클릭수</span>
-              {/* <FaChevronDown /> */}
-            </button>
-
-            <div className={cx(styles.selectBox, { [styles.first]: true, [styles.hidden]: !isFirstSelectOpen })}>
-              <ul>
-                {ITEMS.map((item) => {
-                  return (
-                    <li key={`select_first_${item.title}`} className={styles.selectItem}>
-                      {item.title}
-                    </li>
-                  )
-                })}
-              </ul>
-            </div>
-
-            <div className={cx(styles.selectBox, { [styles.second]: true, [styles.hidden]: !isSecondSelectOpen })}>
-              <ul>
-                {ITEMS.map((item) => {
-                  return (
-                    <li key={`select_second_${item.title}`} className={styles.selectItem}>
-                      {item.title}
-                    </li>
-                  )
-                })}
-              </ul>
-            </div>
-          </div>
-
+          <Dropdown options={chartOptions} onChange={handleFirstChartChange} />
+          <Dropdown
+            options={chartOptions.filter((option) => option.value !== firstChartName)}
+            onChange={handleSecondChartChange}
+          />
           <button type='button' className={styles.filterBtn} onClick={handleThirdBtnClick}>
             <span>주간</span>
-            {/* <FaChevronDown /> */}
           </button>
           <div className={cx(styles.filterBox, { [styles.hidden]: !isThirdSelectOpen })}>
             <button type='button' className={cx(styles.filterBtn, { [styles.daily]: true })}>
