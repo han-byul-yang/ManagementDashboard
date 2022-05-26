@@ -2,7 +2,7 @@ import { useMemo } from 'react'
 
 import { IStatusData } from 'types/types'
 import { compactNumber } from 'utils/compactNumber'
-import { getAdStatusTotals } from 'routes/DashBoard/utils/adClac'
+import { getAdStatusTotals } from 'routes/DashBoard/utils/adCalc'
 import { chartOptions } from './status'
 import StatusItem from '../StatusItem'
 

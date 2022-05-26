@@ -1,6 +1,7 @@
 import { IStatusData } from 'types/types'
 
 export const getAdStatusTotals = (data: IStatusData[]) => {
+  // 광고비
   const totalCost = data.reduce((acc, cur) => acc + cur.cost, 0)
   // 노출수
   const totalImp = data.reduce((acc, cur) => acc + cur.imp, 0)

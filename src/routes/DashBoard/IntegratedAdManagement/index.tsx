@@ -2,7 +2,7 @@ import { ChangeEvent, useEffect, useState } from 'react'
 import { useRecoilState, useRecoilValue } from 'recoil'
 import { integratedAdData, pickedDate } from 'store/atoms'
 import { useQuery } from 'react-query'
-import cx from 'classnames'
+// import cx from 'classnames'
 import dayjs from 'dayjs'
 
 import { getTrendData } from 'services/getData'
@@ -26,7 +26,7 @@ const IntegratedAdManagement = () => {
     { click: 0, conv: 0, convValue: 0, cost: 0, cpa: 0, cpc: 0, ctr: 0, cvr: 0, date: '2022-03-01', imp: 0, roas: 0 },
   ])
   const [pastStatusData, setPastStatusData] = useState<IStatusData[]>([])
-  const [isThirdSelectOpen, setIsThirdSelectOpen] = useState(false)
+  // const [isThirdSelectOpen, setIsThirdSelectOpen] = useState(false)
 
   const { isLoading } = useQuery<IStatusData[], Error>('trendData', getTrendData, {
     retry: 1,
@@ -94,9 +94,9 @@ const IntegratedAdManagement = () => {
     setSecondChartName(e.target.value)
   }
 
-  const handleThirdBtnClick = () => {
-    setIsThirdSelectOpen((prev) => !prev)
-  }
+  // const handleThirdBtnClick = () => {
+  //   setIsThirdSelectOpen((prev) => !prev)
+  // }
 
   return (
     <section className={styles.container}>
@@ -107,7 +107,10 @@ const IntegratedAdManagement = () => {
 
         <div className={styles.selectBtnGroup}>
           <div className={styles.selectBtnBox}>
+            <div className={styles.firstCircle} />
             <Dropdown options={chartOptions} onChange={handleFirstChartChange} />
+            <div className={styles.secondCircle} />
+
             <Dropdown
               options={chartOptions.filter((option) => option.content !== firstChartName)}
               onChange={handleSecondChartChange}

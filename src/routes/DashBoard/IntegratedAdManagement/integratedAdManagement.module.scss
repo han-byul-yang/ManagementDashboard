@@ -65,10 +65,8 @@
 
   .selectBtnBox {
     display: flex;
-
-    div:first-child {
-      margin-right: 10px;
-    }
+    align-items: center;
+    justify-content: space-between;
   }
 
   .filterBtn {
@@ -104,6 +102,13 @@
   z-index: levels.$KEYWORDFORM;
 }
 
+.firstChartColor {
+  width: 10px;
+  height: 10px;
+  background-color: colors.$GRAPH_01;
+  border-radius: 50%;
+}
+
 .chartWrapper {
   min-height: 354px;
   padding: 40px 39px 40px 40px;
@@ -114,6 +119,7 @@
   display: inline-block;
   width: 10px;
   height: 10px;
+  margin: 0 10px;
   background: colors.$GRAPH_01;
   border-radius: 50%;
 }
