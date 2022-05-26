@@ -1,4 +1,6 @@
 import { ChangeEvent, useEffect, useState } from 'react'
+import { useRecoilState, useRecoilValue } from 'recoil'
+import { integratedAdData, pickedDate } from 'store/atoms'
 import { useQuery } from 'react-query'
 import cx from 'classnames'
 import dayjs from 'dayjs'
@@ -13,13 +15,11 @@ import Dropdown from 'components/Dropdown'
 import 'react-datepicker/dist/react-datepicker.css'
 import styles from './integratedAdManagement.module.scss'
 
-interface Props {
-  startDate: Date
-  endDate: Date
-}
-
-const IntegratedAdManagement = (props: Props) => {
-  const { startDate, endDate } = props
+const IntegratedAdManagement = () => {
+  const selectDate = useRecoilValue(pickedDate)
+  const [chartData, setChartData] = useRecoilState(integratedAdData)
+  const startDate = selectDate.start
+  const endDate = selectDate.end
   const [firstChartName, setFirstChartName] = useState('ROAS')
   const [secondChartName, setSecondChartName] = useState('')
   const [statusData, setStatusData] = useState<IStatusData[]>([])
@@ -31,6 +31,7 @@ const IntegratedAdManagement = (props: Props) => {
     // staleTime: 60 * 60 * 1000,
     // cacheTime: 60 * 60 * 1000,
     onSuccess: (res) => {
+      setChartData(res)
       setStatusData(
         res.filter(
           (item: IStatusData) =>
@@ -56,8 +57,8 @@ const IntegratedAdManagement = (props: Props) => {
   })
 
   useEffect(() => {
-    setStatusData((prev) =>
-      prev.filter(
+    setStatusData(
+      chartData.filter(
         (item: IStatusData) =>
           dayjs(startDate).subtract(1, 'day').unix() <= dayjs(item.date).unix() &&
           dayjs(endDate).unix() >= dayjs(item.date).unix() &&
@@ -67,8 +68,8 @@ const IntegratedAdManagement = (props: Props) => {
 
     const dayDifference = dayjs(endDate).diff(dayjs(startDate), 'day')
 
-    setPastStatusData((prev) =>
-      prev.filter(
+    setPastStatusData(
+      chartData.filter(
         (item: IStatusData) =>
           dayjs(startDate)
             .subtract(1 + dayDifference, 'day')
