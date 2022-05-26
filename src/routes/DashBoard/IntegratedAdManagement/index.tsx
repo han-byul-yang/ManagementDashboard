@@ -22,7 +22,9 @@ const IntegratedAdManagement = () => {
   const endDate = selectDate.end
   const [firstChartName, setFirstChartName] = useState('ROAS')
   const [secondChartName, setSecondChartName] = useState('')
-  const [statusData, setStatusData] = useState<IStatusData[]>([])
+  const [statusData, setStatusData] = useState<IStatusData[]>([
+    { click: 0, conv: 0, convValue: 0, cost: 0, cpa: 0, cpc: 0, ctr: 0, cvr: 0, date: '2022-03-01', imp: 0, roas: 0 },
+  ])
   const [pastStatusData, setPastStatusData] = useState<IStatusData[]>([])
   const [isThirdSelectOpen, setIsThirdSelectOpen] = useState(false)
 

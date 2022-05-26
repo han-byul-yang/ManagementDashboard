@@ -18,8 +18,9 @@ interface ChartData {
 
 const IntergratedAdChart = (props: Props) => {
   const { data, firstData, secondData } = props
-  const [firstChartData, setFirstChartData] = useState<ChartData[] | undefined>([{ x: '', y: 0 }])
-  const [secondChartData, setSecondChartData] = useState<ChartData[] | undefined>([{ x: '', y: 0 }])
+
+  const [firstChartData, setFirstChartData] = useState<ChartData[] | undefined>([{ x: 'ROAS', y: 0 }])
+  const [secondChartData, setSecondChartData] = useState<ChartData[] | undefined>([{ x: 'ROAS', y: 0 }])
   useEffect(() => {
     setFirstChartData(newChartData(data, firstData))
     setSecondChartData(newChartData(data, secondData))
