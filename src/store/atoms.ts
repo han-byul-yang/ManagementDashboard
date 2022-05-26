@@ -1,14 +1,9 @@
 import { atom } from 'recoil'
 import { IAdCard } from 'types/ad'
-import { IMediaChannelData, IStatusData } from 'types/types'
+import { IStatusData } from 'types/types'
 
 export const adListState = atom<IAdCard[]>({
   key: 'adList',
-  default: [],
-})
-
-export const mediaListState = atom<IMediaChannelData[]>({
-  key: 'mediaList',
   default: [],
 })
 

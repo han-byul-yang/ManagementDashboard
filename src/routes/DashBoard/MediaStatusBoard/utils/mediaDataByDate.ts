@@ -8,10 +8,66 @@ export const mediaDataByDate = (selectDate: PickedDate, mediaDataList: IMediaCha
   const endDate = dayjs(end)
 
   const selectedMediaData: Record<string, IMediaChannelData[]> = {
-    google: [],
-    facebook: [],
-    naver: [],
-    kakao: [],
+    google: [
+      {
+        channel: 'google',
+        click: 245,
+        convValue: 12,
+        cost: 265968,
+        cpa: 22164,
+        cpc: 1085.5837,
+        ctr: 0.9778,
+        cvr: 4.898,
+        date: '2022-03-02',
+        imp: 25057,
+        roas: 702.7011,
+      },
+    ],
+    facebook: [
+      {
+        channel: 'facebook',
+        click: 245,
+        convValue: 12,
+        cost: 265968,
+        cpa: 22164,
+        cpc: 1085.5837,
+        ctr: 0.9778,
+        cvr: 4.898,
+        date: '2022-03-02',
+        imp: 25057,
+        roas: 702.7011,
+      },
+    ],
+    naver: [
+      {
+        channel: 'naver',
+        click: 245,
+        convValue: 12,
+        cost: 265968,
+        cpa: 22164,
+        cpc: 1085.5837,
+        ctr: 0.9778,
+        cvr: 4.898,
+        date: '2022-03-02',
+        imp: 25057,
+        roas: 702.7011,
+      },
+    ],
+    kakao: [
+      {
+        channel: 'kakao',
+        click: 245,
+        convValue: 12,
+        cost: 265968,
+        cpa: 22164,
+        cpc: 1085.5837,
+        ctr: 0.9778,
+        cvr: 4.898,
+        date: '2022-03-02',
+        imp: 25057,
+        roas: 702.7011,
+      },
+    ],
   }
 
   mediaDataList?.forEach((mediaData) => {

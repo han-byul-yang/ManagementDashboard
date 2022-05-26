@@ -13,11 +13,24 @@ import chartStyle from './chartStyle'
 import styles from './mediaStatusBoard.module.scss'
 
 const MediaStatusBoard = () => {
-  const [mediaDataList, setMediaDataList] = useState<IMediaChannelData[]>()
+  const [mediaDataList, setMediaDataList] = useState<IMediaChannelData[]>([
+    {
+      channel: 'google',
+      click: 7,
+      convValue: 0,
+      cost: 2098,
+      cpa: 0,
+      cpc: 299.7143,
+      ctr: 14,
+      cvr: 0,
+      date: '2022-02-01',
+      imp: 50,
+      roas: 0,
+    },
+  ])
   const selectDate = useRecoilValue(pickedDate)
 
   const { google, facebook, naver, kakao } = sumDataByCategory(selectDate, mediaDataList)
-
   const { isLoading } = useQuery('medias', getMedias, {
     onSuccess: (res) => {
       setMediaDataList(res.data)

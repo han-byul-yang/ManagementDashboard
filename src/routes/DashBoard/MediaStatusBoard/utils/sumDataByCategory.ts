@@ -17,11 +17,51 @@ export const sumDataByCategory = (selectDate: PickedDate, mediaDataList: IMediaC
   let allCpc: number = 0
 
   const sumMediaValueData: Record<string, { value: number; category: string }[]> = {
-    google: [],
-    facebook: [],
-    naver: [],
-    kakao: [],
-    all: [],
+    google: [
+      { value: 0, category: '광고비' },
+      { value: 0, category: '매출' },
+      { value: 0, category: 'ROAS' },
+      { value: 0, category: '노출 수' },
+      { value: 0, category: '클릭 수' },
+      { value: 0, category: '클릭률(CTR)' },
+      { value: 0, category: '클릭당비용(CPC)' },
+    ],
+    facebook: [
+      { value: 0, category: '광고비' },
+      { value: 0, category: '매출' },
+      { value: 0, category: 'ROAS' },
+      { value: 0, category: '노출 수' },
+      { value: 0, category: '클릭 수' },
+      { value: 0, category: '클릭률(CTR)' },
+      { value: 0, category: '클릭당비용(CPC)' },
+    ],
+    naver: [
+      { value: 0, category: '광고비' },
+      { value: 0, category: '매출' },
+      { value: 0, category: 'ROAS' },
+      { value: 0, category: '노출 수' },
+      { value: 0, category: '클릭 수' },
+      { value: 0, category: '클릭률(CTR)' },
+      { value: 0, category: '클릭당비용(CPC)' },
+    ],
+    kakao: [
+      { value: 0, category: '광고비' },
+      { value: 0, category: '매출' },
+      { value: 0, category: 'ROAS' },
+      { value: 0, category: '노출 수' },
+      { value: 0, category: '클릭 수' },
+      { value: 0, category: '클릭률(CTR)' },
+      { value: 0, category: '클릭당비용(CPC)' },
+    ],
+    all: [
+      { value: 0, category: '광고비' },
+      { value: 0, category: '매출' },
+      { value: 0, category: 'ROAS' },
+      { value: 0, category: '노출 수' },
+      { value: 0, category: '클릭 수' },
+      { value: 0, category: '클릭률(CTR)' },
+      { value: 0, category: '클릭당비용(CPC)' },
+    ],
   }
 
   selectedAllData.forEach((media) => {
