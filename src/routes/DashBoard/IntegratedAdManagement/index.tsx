@@ -113,14 +113,14 @@ const IntegratedAdManagement = () => {
               onChange={handleSecondChartChange}
             />
           </div>
-          <button type='button' className={styles.filterBtn} onClick={handleThirdBtnClick}>
+          {/* <button type='button' className={styles.filterBtn} onClick={handleThirdBtnClick}>
             <span>주간</span>
           </button>
           <div className={cx(styles.filterBox, { [styles.hidden]: !isThirdSelectOpen })}>
             <button type='button' className={cx(styles.filterBtn, { [styles.daily]: true })}>
               <span>일간</span>
             </button>
-          </div>
+          </div> */}
         </div>
 
         <IntergratedAdChart data={statusData} firstData={firstChartName} secondData={secondChartName} />
