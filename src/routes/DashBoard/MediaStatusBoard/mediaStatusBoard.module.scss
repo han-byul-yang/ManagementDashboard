@@ -1,0 +1,98 @@
+@use 'styles/constants/colors';
+
+.container {
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-top: 107px;
+  background: colors.$BG_G;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 10px 0;
+  padding: 0 20px;
+  margin-bottom: 20px;
+  background: colors.$WHITE;
+  border-radius: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 4%);
+}
+
+.title {
+  display: flex;
+  width: 100%;
+  margin-bottom: 25px;
+
+  h2 {
+    font-size: 16px;
+    font-weight: 600;
+  }
+}
+
+.tableBox {
+  box-sizing: border-box;
+  width: 100%;
+  height: 600px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  font-size: 14px;
+
+  &::-webkit-scrollbar {
+    display: block;
+    height: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: colors.$GRAY_100;
+    border-radius: 8px;
+  }
+}
+
+.table {
+  width: 100%;
+  margin: 0;
+}
+
+.tableHead {
+  min-width: 100px;
+  height: 33px;
+  padding: 16px 40px 16px 0;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 14px;
+  color: colors.$GRAY_300;
+}
+
+.tableRow {
+  min-width: 120px;
+  height: 40px;
+  color: colors.$GRAY_800;
+  text-align: end;
+  border-top: 2px solid colors.$GRAY_50;
+}
+
+.tableColumn {
+  min-width: 120px;
+  height: 40px;
+  padding: 16px 40px 16px 0;
+  color: colors.$GRAY_800;
+  text-align: end;
+}
+
+.tableTotal {
+  min-width: 120px;
+  height: 40px;
+  padding: 16px 40px 16px 0;
+  color: colors.$GRAPH_01 !important;
+  text-align: end;
+  border-bottom: 2px solid colors.$GRAY_50;
+}

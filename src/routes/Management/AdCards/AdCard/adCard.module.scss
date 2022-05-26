@@ -1,0 +1,77 @@
+@use 'styles/constants/colors';
+@use 'styles/mixins/typo';
+
+.cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  margin-top: 40px;
+}
+
+@media screen and (min-width: 900px) {
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (min-width: 1680px) {
+  .cards {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.card {
+  padding: 20px;
+  border: 1px solid colors.$GRAY_100;
+  border-radius: 10px;
+
+  .adTypeBtn {
+    position: absolute;
+  }
+
+  h4 {
+    @include typo.head16;
+    margin: 40px 0;
+  }
+
+  li {
+    display: flex;
+    padding: 12px 0;
+    border-bottom: 1px solid colors.$GRAY_50;
+
+    &:first-child {
+      border-top: 1px solid colors.$GRAY_50;
+    }
+
+    .itemName {
+      @include typo.body12 ;
+      width: 40%;
+      color: colors.$GRAY_300;
+    }
+
+    .itemContent {
+      @include typo.body12bold;
+      display: flex;
+      gap: 4px;
+    }
+  }
+
+  &.isEditting {
+    border: 1px colors.$PRIMARY solid;
+    animation: blink 1s step-end 1;
+  }
+
+  .editBtn {
+    @include typo.body14bold;
+    padding: 12px 20px;
+    margin-top: 20px;
+    border: 1px solid colors.$GRAY_100;
+    border-radius: 10px;
+  }
+}

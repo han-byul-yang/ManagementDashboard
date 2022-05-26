@@ -1,0 +1,8 @@
+@use 'styles/constants/colors';
+@use 'styles/mixins/typo';
+
+.pageHeader {
+  @include typo.head26;
+  padding: 25px 0 0;
+  color: colors.$GRAY_800;
+}
