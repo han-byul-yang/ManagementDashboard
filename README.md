@@ -119,7 +119,7 @@
 
 ## 화면 예시
 ### 통합 광고 현황
-![image](https://user-images.githubusercontent.com/67466789/170396354-f35a995d-ca9f-404c-9d1b-8d8895bcc2ad.png)
+![image](https://user-images.githubusercontent.com/67466789/170403152-4e94a5a0-90b0-41fc-a7b6-eca4c6848385.png)
 
 드롭다운을 통해 선택한 두 카테고리의 통합 값을 각각의 꺾은 선 그래프로 그려줍니다. 
 
@@ -129,7 +129,7 @@
 미디어에 따른 광고 현황을 카테고리 별로 막대 그래프로 그려주고, 통합 수치를 테이블로 나타내줍니다. 
 
 ### 날짜 선택
-![image](https://user-images.githubusercontent.com/67466789/170396995-67219418-bfb4-449a-8fa8-4a4afd497b21.png)
+![image](https://user-images.githubusercontent.com/67466789/170402995-f1c09650-33c1-4158-9e7d-611105eb3c55.png)
 
 날짜의 범위를 선택하면 해당 날짜 범위의 통합 광고 현황과 매체 현황의 차트를 그려줍니다.
 
