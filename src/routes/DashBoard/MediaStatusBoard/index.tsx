@@ -20,11 +20,6 @@ import MediaChartTable from './MediaChartTable'
 import chartStyle from './chartStyle'
 import styles from './mediaStatusBoard.module.scss'
 
-interface IMediaStatusBoard {
-  startDate: Date
-  endDate: Date
-}
-
 const MediaStatusBoard = () => {
   const [mediaDataList, setMediaDataList] = useState<IMediaChannelData[]>()
   const selectDate = useRecoilValue(pickedDate)

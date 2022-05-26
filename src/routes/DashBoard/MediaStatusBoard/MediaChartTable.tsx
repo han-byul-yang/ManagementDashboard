@@ -51,17 +51,21 @@ const MediaChartTable = ({ mediaDataList }: IMediaChartTable) => {
       <thead>
         <tr className={styles.tableRow}>
           <td />
-          {tableHeadList.map((column) => (
-            <th className={styles.tableHead} key={column}>
-              {column}
-            </th>
-          ))}
+          {tableHeadList.map((column, index) => {
+            const key = `tableHead${index}`
+            return (
+              <th className={styles.tableHead} key={key}>
+                {column}
+              </th>
+            )
+          })}
         </tr>
       </thead>
       <tbody>
         {mediaDataForTable.map((media, index) => {
+          const key = `mediaDataForTable${index}`
           return (
-            <tr key={`media-${index}`} className={styles.tableRow}>
+            <tr key={key} className={styles.tableRow}>
               <th className={styles.tableColumn}>{media.name}</th>
               {media.value.map((data, i) => (
                 <td className={styles.tableColumn} key={data!.category}>
