@@ -78,7 +78,7 @@ const IntegratedAdManagement = () => {
           item
       )
     )
-  }, [endDate, startDate])
+  }, [chartData, endDate, startDate])
 
   if (isLoading) {
     return <div className={styles.container}>...loading</div>
