@@ -9,7 +9,9 @@ import {
   VictoryTooltip,
 } from 'victory'
 import { useQuery } from 'react-query'
+import { useRecoilValue } from 'recoil'
 
+import { pickedDate } from 'store/atoms'
 import { sumDataByCategory } from 'routes/DashBoard/MediaStatusBoard/utils/sumDataByCategory'
 import { getMedias } from 'services/getData'
 import { IMediaChannelData } from 'types/types.d'
@@ -23,10 +25,11 @@ interface IMediaStatusBoard {
   endDate: Date
 }
 
-const MediaStatusBoard = ({ startDate, endDate }: IMediaStatusBoard) => {
+const MediaStatusBoard = () => {
   const [mediaDataList, setMediaDataList] = useState<IMediaChannelData[]>()
+  const selectDate = useRecoilValue(pickedDate)
 
-  const { google, facebook, naver, kakao } = sumDataByCategory(startDate, endDate, mediaDataList)
+  const { google, facebook, naver, kakao } = sumDataByCategory(selectDate, mediaDataList)
 
   const { isLoading } = useQuery('medias', getMedias, {
     onSuccess: (res) => {
@@ -123,7 +126,7 @@ const MediaStatusBoard = ({ startDate, endDate }: IMediaStatusBoard) => {
           </VictoryChart>
         </div>
         <div className={styles.tableBox}>
-          <MediaChartTable startDate={startDate} endDate={endDate} mediaDataList={mediaDataList} />
+          <MediaChartTable mediaDataList={mediaDataList} />
         </div>
       </div>
     </div>

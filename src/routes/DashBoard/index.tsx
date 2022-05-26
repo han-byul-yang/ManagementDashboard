@@ -16,7 +16,7 @@ const DashBoard = () => {
         <SelectDate />
       </div>
       <IntegratedAdManagement startDate={selectDate.start} endDate={selectDate.end} />
-      <MediaStatusBoard startDate={selectDate.start} endDate={selectDate.end} />
+      <MediaStatusBoard />
     </div>
   )
 }

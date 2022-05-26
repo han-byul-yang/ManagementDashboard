@@ -1,16 +1,19 @@
 import { IMediaChannelData } from 'types/types'
 import { sumDataByCategory } from 'routes/DashBoard/MediaStatusBoard/utils/sumDataByCategory'
+import { useRecoilValue } from 'recoil'
+
+import { pickedDate } from 'store/atoms'
 
 import styles from './mediaStatusBoard.module.scss'
 
 interface IMediaChartTable {
-  startDate: Date
-  endDate: Date
   mediaDataList: IMediaChannelData[] | undefined
 }
 
-const MediaChartTable = ({ startDate, endDate, mediaDataList }: IMediaChartTable) => {
-  const { google, facebook, naver, kakao, all } = sumDataByCategory(startDate, endDate, mediaDataList)
+const MediaChartTable = ({ mediaDataList }: IMediaChartTable) => {
+  const selectDate = useRecoilValue(pickedDate)
+
+  const { google, facebook, naver, kakao, all } = sumDataByCategory(selectDate, mediaDataList)
 
   const filterCategry = (media: { value: number; category: string }[]) => {
     return [

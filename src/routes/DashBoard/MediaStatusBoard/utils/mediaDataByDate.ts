@@ -1,9 +1,11 @@
 import dayjs from 'dayjs'
 import { IMediaChannelData } from 'types/types.d'
+import { PickedDate } from 'store/atoms'
 
-export const mediaDataByDate = (startDate: Date, endDate: Date, mediaDataList: IMediaChannelData[] | undefined) => {
-  const start = dayjs(startDate)
-  const end = dayjs(endDate)
+export const mediaDataByDate = (selectDate: PickedDate, mediaDataList: IMediaChannelData[] | undefined) => {
+  const { start, end } = selectDate
+  const startDate = dayjs(start)
+  const endDate = dayjs(end)
 
   const selectedMediaData: Record<string, IMediaChannelData[]> = {
     google: [],
@@ -13,7 +15,7 @@ export const mediaDataByDate = (startDate: Date, endDate: Date, mediaDataList: I
   }
 
   mediaDataList?.forEach((mediaData) => {
-    if (dayjs(mediaData.date).unix() < start.unix() || dayjs(mediaData.date).unix() > end.unix()) return
+    if (dayjs(mediaData.date).unix() < startDate.unix() || dayjs(mediaData.date).unix() > endDate.unix()) return
     if (mediaData.channel === 'google') {
       selectedMediaData.google.push(mediaData)
     }

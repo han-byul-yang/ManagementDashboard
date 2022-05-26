@@ -1,8 +1,9 @@
+import { PickedDate } from 'store/atoms'
 import { IMediaChannelData } from 'types/types'
 import { mediaDataByDate } from './mediaDataByDate'
 
-export const sumDataByCategory = (startDate: Date, endDate: Date, mediaDataList: IMediaChannelData[] | undefined) => {
-  const selectedMediaData = mediaDataByDate(startDate, endDate, mediaDataList)
+export const sumDataByCategory = (selectDate: PickedDate, mediaDataList: IMediaChannelData[] | undefined) => {
+  const selectedMediaData = mediaDataByDate(selectDate, mediaDataList)
   const { google, facebook, naver, kakao } = selectedMediaData
   const selectedAllData = [...google, ...facebook, ...naver, ...kakao]
 

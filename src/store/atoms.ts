@@ -12,7 +12,7 @@ export const mediaListState = atom<IMediaChannelData[]>({
   default: [],
 })
 
-interface PickedDate {
+export interface PickedDate {
   start: Date
   end: Date
 }
