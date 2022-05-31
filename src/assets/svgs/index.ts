@@ -1,0 +1,7 @@
+export { ReactComponent as HomeIcon } from './home3.svg'
+export { ReactComponent as ListIcon } from './list.svg'
+export { ReactComponent as XIcon } from './x.svg'
+export { ReactComponent as PlusIcon } from './plus.svg'
+export { ReactComponent as ClockIcon } from './clock.svg'
+export { ReactComponent as ImageIcon } from './image.svg'
+export { ReactComponent as TextIcon } from './filetext.svg'
