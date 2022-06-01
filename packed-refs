@@ -1,0 +1,12 @@
+# pack-refs with: peeled fully-peeled sorted 
+adcc0117148e00d94c3553d27ca04eeed3620da7 refs/remotes/origin/dev
+d3d82104947a52fec84fbbfd219b05e5241b1eb5 refs/remotes/origin/feat/adstatus
+83d12fa5dd02ecc001429958b1543b657d976e92 refs/remotes/origin/feat/chartdata
+2bd5991c4643664445054d5a6c0392e5eaa4a367 refs/remotes/origin/feat/dashboardchart
+cb9e184a59472a5428847e19a3802c7ac4c1047c refs/remotes/origin/feat/datestate
+7ef90a9da8bd852cc60afaf06e7e435fee1ecfa8 refs/remotes/origin/feat/fix-dashboard
+95d538b63a972c82b1af4b879b1c64c06921e8e4 refs/remotes/origin/feat/integratedAd-refactor
+95c6e1491c6eb0639fa4514422046d66e0a61a3c refs/remotes/origin/feat/managementPage
+500497e3ed694357168e0a13cf59e38d559a9bb7 refs/remotes/origin/feat/mediaStatus
+9291581f931838a33fa1eb82312123af9eeae02f refs/remotes/origin/feat/navbar
+29a47fa259fb94016b75073d06d62c625e16d243 refs/remotes/origin/main

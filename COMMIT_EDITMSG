@@ -1,0 +1,52 @@
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# On branch feat/taskManagement
+# Changes to be committed:
+#	deleted:    .env.development
+#	deleted:    .env.production
+#	deleted:    .eslintignore
+#	deleted:    .eslintrc.json
+#	deleted:    .gitignore
+#	deleted:    .prettierignore
+#	deleted:    .prettierrc.yml
+#	deleted:    .stylelintrc.json
+#	deleted:    README.md
+#	deleted:    package-lock.json
+#	deleted:    package.json
+#	deleted:    public/diseaseList.json
+#	deleted:    public/favicon.svg
+#	deleted:    public/index.html
+#	deleted:    public/logo192.png
+#	deleted:    public/logo512.png
+#	deleted:    public/manifest.json
+#	deleted:    public/robots.txt
+#	deleted:    src/assets/svgs/index.tsx
+#	deleted:    src/assets/svgs/search.svg
+#	deleted:    src/components/ConsoleBar/ConsoleBar.module.scss
+#	deleted:    src/components/ConsoleBar/index.tsx
+#	deleted:    src/components/NavBar/NavBar.module.scss
+#	deleted:    src/components/NavBar/index.tsx
+#	deleted:    src/index.tsx
+#	deleted:    src/react-app-env.d.ts
+#	deleted:    src/reportWebVitals.ts
+#	deleted:    src/routes/DashBoard/DashBoard.module.scss
+#	deleted:    src/routes/DashBoard/index.tsx
+#	deleted:    src/routes/Management/Management.module.scss
+#	deleted:    src/routes/Management/index.tsx
+#	deleted:    src/routes/Routes.module.scss
+#	deleted:    src/routes/index.tsx
+#	deleted:    src/styles/base/_fonts.scss
+#	deleted:    src/styles/base/_more.scss
+#	deleted:    src/styles/base/_reset.scss
+#	deleted:    src/styles/constants/_colors.scss
+#	deleted:    src/styles/constants/_levels.scss
+#	deleted:    src/styles/constants/_sizes.scss
+#	deleted:    src/styles/index.js
+#	deleted:    src/styles/index.scss
+#	deleted:    tsconfig.json
+#
+# Untracked files:
+#	node_modules/
+#
